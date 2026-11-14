@@ -1,7 +1,9 @@
-"""Tasks `tnmsc` and `rmsc` (scrape.json): list pages and documents of a state medical services corporation.
+"""Tasks `tnmsc`, `rmsc`, `hmscl` and `bmsicl` (scrape.json): list pages and documents of a state medical services corporation.
 
     python corp_task.py tnmsc        (tnmsc.tn.gov.in, Tamil Nadu)
     python corp_task.py rmsc         (rmsc.health.rajasthan.gov.in, Rajasthan)
+    python corp_task.py hmscl        (hmscl.org.in, Haryana)
+    python corp_task.py bmsicl       (bmsicl.gov.in, Bihar; HTTP only)
 
 Queue items (family.py) have one of two kinds:
   page  {"site": "tnmsc", "page": "blacklist", "arg": null, "round": "2026-11"}
@@ -21,6 +23,7 @@ import gzip
 import hashlib
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime, timezone
@@ -29,11 +32,13 @@ import requests
 from scrape_hub_client import HubClient, LocalHub, ca_bundle, stop_flag, timed_get
 
 import docs
+import bmsicl
+import hmscl
 import htmltables
 import rmsc
 import tnmsc
 
-SITES = {"tnmsc": tnmsc, "rmsc": rmsc}
+SITES = {"tnmsc": tnmsc, "rmsc": rmsc, "hmscl": hmscl, "bmsicl": bmsicl}
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
 DEADLINE = time.time() + float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600 - 180
 UA = "s1d-labs scraper (https://github.com/s1d-labs)"
@@ -111,32 +116,65 @@ def do_docs(hub, s, item):
     for url in mine:
         if STOP.is_set() or time.time() > DEADLINE:
             return None, "time up before the shard finished"
-        uid = hashlib.sha1(url.encode()).hexdigest()[:12]
-        file = url.rsplit("/", 1)[-1]
         r = timed_get(hub, s, url, timeout=120, allow_redirects=True)
         pause(hub)
         if r is None:
             errors += 1
             hub.failure("doc-error", url[:200], "no answer", group=group)
             continue
-        body = r.content
-        if r.status_code != 200 or (len(body) < 4000 and docs.kind_of(body) == "html"):
-            hub.record(f"missing:{uid}:{rnd}", {"kind": "missing", "site": site, "url": url, "group": group, "file": file,
-                                                "status": r.status_code, "rows": links[url], "round": rnd, "checked_at": now()})
-            hub.failure("doc-missing", url[:200], f"HTTP {r.status_code}", group=group)
-            stored += 1
+        if hasattr(mod, "attachments") and r.status_code == 200 and docs.kind_of(r.content) == "html":
+            # a post page (BMSICL): its order files are the documents
+            subs = mod.attachments(url, r.text)
+            if not subs:
+                hub.failure("doc-missing", url[:200], "post page has no attachment", group=group)
+            for sub in subs:
+                if STOP.is_set() or time.time() > DEADLINE:
+                    return None, "time up before the shard finished"
+                rs = timed_get(hub, s, sub, timeout=120, allow_redirects=True)
+                pause(hub)
+                if rs is None:
+                    errors += 1
+                    hub.failure("doc-error", sub[:200], "no answer", group=group)
+                    continue
+                stored += store_doc(hub, mod, site, group, sub, rs, links[url], rnd, post_url=url)
             continue
-        info, txt = docs.inspect(body, r.headers.get("content-type", ""), file)
-        files, fields = docs.uploads(info, body, txt, group)
-        up = hub.upload_many(files)
-        hub.record(f"doc:{uid}:{info['sha256'][:16]}", {
-            "kind": "doc", "site": site, "url": url, "group": group, "file": file, "rows": links[url], "round": rnd,
-            "fetched_at": now(), "last_modified": r.headers.get("last-modified"), "etag": r.headers.get("etag"),
-            "content_type": r.headers.get("content-type"), **info, **fields, "bucket_key": up[0]["key"] if up else None})
-        stored += 1
+        stored += store_doc(hub, mod, site, group, url, r, links[url], rnd)
     if mine and errors > len(mine) // 2:
         return None, f"{errors} of {len(mine)} documents did not answer"
     return stored, None
+
+
+def store_doc(hub, mod, site, group, url, r, row_ids, rnd, post_url=None):
+    """Store one downloaded document (or a "missing" record); rows parsed from it (rate contract files) become records too."""
+    uid = hashlib.sha1(url.encode()).hexdigest()[:12]
+    file = _file_name(url, r)
+    body = r.content
+    if r.status_code != 200 or (len(body) < 4000 and docs.kind_of(body) == "html"):
+        hub.record(f"missing:{uid}:{rnd}", {"kind": "missing", "site": site, "url": url, "group": group, "file": file,
+                                            "status": r.status_code, "rows": row_ids, "post_url": post_url, "round": rnd,
+                                            "checked_at": now()})
+        hub.failure("doc-missing", url[:200], f"HTTP {r.status_code}", group=group)
+        return 1
+    info, txt = docs.inspect(body, r.headers.get("content-type", ""), file)
+    files, fields = docs.uploads(info, body, txt, group)
+    up = hub.upload_many(files)
+    hub.record(f"doc:{uid}:{info['sha256'][:16]}", {
+        "kind": "doc", "site": site, "url": url, "group": group, "file": file, "rows": row_ids, "post_url": post_url,
+        "round": rnd, "fetched_at": now(), "last_modified": r.headers.get("last-modified"), "etag": r.headers.get("etag"),
+        "content_type": r.headers.get("content-type"), **info, **fields, "bucket_key": up[0]["key"] if up else None})
+    if hasattr(mod, "parse_doc"):
+        seen = now()
+        for r_id, row in mod.parse_doc(url, body, txt):
+            hub.record(r_id, {**row, "site": site, "round": rnd, "seen_at": seen, "source_doc": url,
+                              "doc_sha256": info["sha256"]})
+    return 1
+
+
+def _file_name(url, r):
+    """The file name from Content-Disposition when the URL has none (download.php?id=...), else the last URL segment."""
+    cd = r.headers.get("content-disposition") or ""
+    m = re.search(r'filename\*?=(?:UTF-8\'\')?"?([^";]+)"?', cd, re.I)
+    return m.group(1).strip() if m else url.rsplit("/", 1)[-1]
 
 
 HANDLERS = {"page": do_page, "docs": do_docs}

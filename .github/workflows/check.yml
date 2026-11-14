@@ -35,6 +35,7 @@ jobs:
         run: |
           scrape-check --items 1 --no-rerun --project medical-procurement-rmsc --timeout 200 || true
           scrape-check --items 1 --no-rerun --project medical-procurement-tnmsc --timeout 200
+      # hmscl.org.in and bmsicl.gov.in did not answer GitHub's runners either (2026-11-14, 40 s timeouts): they run with proxy="IN".
       - uses: actions/upload-artifact@v6
         if: ${{ always() }}
         with:

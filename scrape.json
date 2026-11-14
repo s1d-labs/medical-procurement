@@ -9,6 +9,8 @@
     "wayback": ["python", "wayback_task.py"],
     "mpphscl": ["python", "mpphscl_task.py"],
     "tnmsc": ["python", "corp_task.py", "tnmsc"],
-    "rmsc": ["python", "corp_task.py", "rmsc"]
+    "rmsc": ["python", "corp_task.py", "rmsc"],
+    "hmscl": ["python", "corp_task.py", "hmscl"],
+    "bmsicl": ["python", "corp_task.py", "bmsicl"]
   }
 }

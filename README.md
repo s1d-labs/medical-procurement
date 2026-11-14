@@ -2,7 +2,7 @@
 
 This family scrapes the tenders, notices and documents of the state medical services corporations of India (planned source P17,
 with the blacklists of D04). The first site is the West Bengal Medical Services Corporation Ltd. (WBMSC, www.wbmsc.gov.in).
-Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in this repo.
+Other corporations (TNMSC, RMSCL, MPPHSCL, HMSCL, BMSICL) are in this repo too; more follow.
 
 ## Projects
 
@@ -13,6 +13,8 @@ Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in 
 | `medical-procurement-mpphscl` | `mpphscl` | mpphscl.mp.gov.in | One record for each tender (with all its documents) and each blacklist entry (firm, product, laboratory). One record for each version of each linked document. Raw pages and documents go to the bucket. |
 | `medical-procurement-tnmsc` | `tnmsc` | tnmsc.tn.gov.in | Tamil Nadu: blacklists, drug and equipment rate contracts with tenderers and rates, contracts awarded, notifications. The award and notification PDFs go to the bucket. |
 | `medical-procurement-rmsc` | `rmsc` | rmsc.health.rajasthan.gov.in | Rajasthan: drug rate contracts, banned firms and products, drug, equipment and finance tenders. The order and tender PDFs go to the bucket. |
+| `medical-procurement-hmscl` | `hmscl` | hmscl.org.in | Haryana: drug and equipment rate contracts (item, vendor, rate, validity), banned firms with their order PDFs. |
+| `medical-procurement-bmsicl` | `bmsicl` | bmsicl.gov.in | Bihar: rate contract files (drug, reagent, surgical, equipment; one record per row), blacklist posts with their order files. |
 
 ## Facts about the MPPHSCL site (2026-11-14)
 
@@ -33,6 +35,20 @@ Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in 
 - The Wayback Machine has copies of 821 of these overwritten files, made before the overwrite.
 - The award list has 3 notices, all from 2011. The site does not show who won a tender.
 - The site has no robots.txt and no page with terms of use.
+
+## Facts about HMSCL and BMSICL (2026-11-14)
+
+- HMSCL: 428 drug rate contracts and 58 equipment rate contracts (rate without GST, vendor, valid from, valid till). The task reads
+  the "Export to Excel" link: it is one HTML table with all rows. The normal page shows 25 rows and ignores `pageSize`.
+- HMSCL ban list: 6 firms (2023-2029). Three are for quality failure (NSQ). Tenders and awards are on etenders.hry.nic.in
+  (hub project `gepnic-etenders-hry`).
+- Use the bare host `hmscl.org.in`. The certificate of `www.hmscl.org.in` is not valid.
+- BMSICL answers on HTTP only. The rate contract files are XLSX (2024: 578 drug rows, 84 reagent, 201 surgical, 85 equipment;
+  2025: 120 surgical) and one text PDF (2025: 437 drug rows). Other suppliers of a drug have an empty drug cell; the task
+  copies the drug from the row above (`alternate_supplier`).
+- BMSICL blacklist: 83 drug posts (2018-2026, 9 pages) and 4 equipment posts. Each post links one order file through
+  `module_6/download.php`. Most orders are scans (`ocr-needed/`). Product, period and reason are only in the orders.
+- Neither site publishes a batch-level NSQ list.
 
 ## Facts about TNMSC and RMSC (2026-11-14)
 
@@ -73,7 +89,9 @@ The analysis joins them in the `ws_trideep` database by the NIT number (`nit`) a
 | `award:CA<n>`, `notification:NF<n>` | TNMSC: one contract awarded, one tender notification (the site's own numbers). |
 | `equipmentrc:<hash>` | TNMSC: one equipment rate contract row. A break-up row points to its item (`breakup_of`). |
 | `drugrc:<hash>`, `banned-company:<hash>`, `banned-product:<hash>`, `<kind>-tenders:<hash>` | RMSC: one row of a list. |
-| `doc:<sha1(url)[:12]>:<sha256[:16]>` | TNMSC and RMSC: one version of a linked file. |
+| `drugrc:<hash>`, `equipmentrc:<hash>`, `banned:<hash>` | HMSCL: one row of a list. |
+| `blacklist:<hash>`, `equipment-blacklist:<hash>`, `rcfile:<hash>`, `rc:<hash>` | BMSICL: one blacklist post, one rate contract file link, one row of a rate contract file. |
+| `doc:<sha1(url)[:12]>:<sha256[:16]>` | TNMSC, RMSC, HMSCL and BMSICL: one version of a linked file. |
 
 Bucket paths (in the project folder): `pages/<round>/`, `docs/<section>/<sha256>.<ext>`, `text/<sha256>.txt.gz`, and
 `ocr-needed/<section>/<sha256>.pdf` for scans with no text layer. OCR is off.
@@ -82,7 +100,7 @@ Bucket paths (in the project folder): `pages/<round>/`, `docs/<section>/<sha256>
 
 To get new tenders and changed documents, change `ROUND` in `family.py`, merge, and run the **setup** workflow.
 
-TNMSC and RMSC have their own pilot sets (`"pilot"` in `corps.py`). After the first pool run looks right, set `"pilot": None`,
+TNMSC, RMSC, HMSCL and BMSICL have their own pilot sets (`"pilot"` in `corps.py`). After the first pool run looks right, set `"pilot": None`,
 merge, and run the **setup** workflow.
 
 ## Check
