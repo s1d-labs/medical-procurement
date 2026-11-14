@@ -40,7 +40,7 @@ DEADLINE = time.time() + float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600 -
 UA = "s1d-labs scraper (https://github.com/s1d-labs)"
 STOP = stop_flag(install=False)
 GROUPS = {"tender": [mpphscl.TENDERS], "blacklist": list(mpphscl.BLACKLISTS.values())}
-_pages = {}               # page -> (fetched at, bytes): the 11.5 MB tender list is fetched once per hour per process
+_pages = {}               # page -> (fetched at, bytes): the 11.5 MB tender list is fetched once per process (the site blocks heavy fetching)
 
 
 def now():
@@ -80,7 +80,7 @@ def get(hub, s, url, timeout=120, **kw):
 
 def page_bytes(hub, s, page, cache=False):
     hit = _pages.get(page)
-    if cache and hit and time.time() - hit[0] < 3600:
+    if cache and hit:                                  # kept for the whole process: the list changes at most daily
         return hit[1]
     r = get(hub, s, f"{SITE}/{page}")
     if r is None or r.status_code != 200 or len(r.content) < 2000:

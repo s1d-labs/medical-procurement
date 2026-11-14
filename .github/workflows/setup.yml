@@ -25,7 +25,7 @@ jobs:
         if: github.event_name == 'schedule'
         run: |
           echo "ROUND=$(date -u +%G-W%V)" >> "$GITHUB_ENV"
-          echo "SINCE=$(date -u -d '8 days ago' '+%a, %d %b %Y 00:00:00 GMT')" >> "$GITHUB_ENV"
+          echo "SINCE=$(date -u -d '35 days ago' '+%a, %d %b %Y 00:00:00 GMT')" >> "$GITHUB_ENV"
       - run: python setup_family.py
         env:
           SCRAPE_HUB_URL: https://scrape.s1d.me
