@@ -27,6 +27,11 @@ jobs:
         run: python -m pytest tests -q
       - name: scrape-check (local stand-in hub, 2 real items)
         run: scrape-check --items 2
+      # MPPHSCL is a small state server that sometimes refuses requests (HTTP 403/500 for some hours). Its parsing is tested
+      # above; this run shows whether GitHub's runners reach it, without blocking a merge when the site is down.
+      - name: scrape-check MPPHSCL (2 real items, does not block)
+        continue-on-error: true
+        run: scrape-check --items 2 --project medical-procurement-mpphscl --dir .
       - uses: actions/upload-artifact@v6
         if: ${{ always() }}
         with:
