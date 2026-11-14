@@ -182,7 +182,7 @@ def parse_blacklist(pages, kind):
     return out
 
 
-def parse_doc(url, data, link_rows):
+def parse_doc(url, data, txt, link_rows):
     """Records from a linked document (bytes), by the kind of the row that links it. [] for kinds that are only stored."""
     kind = next((r.get("doc_kind") for r in link_rows if r.get("doc_kind")), "other")
     if kind not in ("rc-medicines", "rc-surgical", "blacklist-firms", "blacklist-products") or not data.startswith(b"%PDF"):

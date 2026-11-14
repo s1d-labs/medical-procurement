@@ -15,6 +15,8 @@ Other corporations (TNMSC, RMSCL, MPPHSCL, HMSCL, BMSICL) are in this repo too; 
 | `medical-procurement-rmsc` | `rmsc` | rmsc.health.rajasthan.gov.in | Rajasthan: drug rate contracts, banned firms and products, drug, equipment and finance tenders. The order and tender PDFs go to the bucket. |
 | `medical-procurement-hmscl` | `hmscl` | hmscl.org.in | Haryana: drug and equipment rate contracts (item, vendor, rate, validity), banned firms with their order PDFs. |
 | `medical-procurement-bmsicl` | `bmsicl` | bmsicl.gov.in | Bihar: rate contract files (drug, reagent, surgical, equipment; one record per row), blacklist posts with their order files. |
+| `medical-procurement-tgmsidc` | `tgmsidc` | tgmsidc.telangana.gov.in | Telangana: the rate contracts of medicines and surgical items (item, rate, firm, tender, validity) and the blacklists of firms and products, one record for each row of the PDFs. The PDFs go to the bucket. |
+| `medical-procurement-upmscl` | `upmscl` | upmsc.in | Uttar Pradesh: the NSQ blacklist, all tenders with their documents, and the L1 and matched L1 rate lists (firm, item, rate, quantity, contract value, RC type), one record for each row. The order scans and result PDFs go to the bucket. |
 
 ## Facts about the MPPHSCL site (2026-11-14)
 

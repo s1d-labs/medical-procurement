@@ -199,7 +199,7 @@ def parse_rate_list(pages, title=""):
     return out
 
 
-def parse_doc(url, data, link_rows):
+def parse_doc(url, data, txt, link_rows):
     """Records from a rate list PDF with a text layer; [] for other documents (they are only stored)."""
     files = [f for r in link_rows for f in r.get("files", []) if f.get("url") == url]
     if not files or files[0]["kind"] != "rate-list" or not data.startswith(b"%PDF"):
