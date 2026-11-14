@@ -40,7 +40,7 @@ DEADLINE = time.time() + float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600 -
 UA = "s1d-labs scraper (https://github.com/s1d-labs)"
 STOP = stop_flag(install=False)
 GROUPS = {"tender": [mpphscl.TENDERS], "blacklist": list(mpphscl.BLACKLISTS.values())}
-_pages = {}               # page -> (fetched at, bytes): the 11.5 MB tender list is fetched once per hour per process
+_pages = {}               # page -> (fetched at, bytes): the 11.5 MB tender list is fetched once per process (the site blocks heavy fetching)
 
 
 def now():
@@ -74,13 +74,13 @@ def pause(hub):
     time.sleep(max(1.0, hub.settings.get("delay_ms", 0) / 1000))
 
 
-def get(hub, s, url, timeout=120):
-    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True)
+def get(hub, s, url, timeout=120, **kw):
+    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True, **kw)
 
 
 def page_bytes(hub, s, page, cache=False):
     hit = _pages.get(page)
-    if cache and hit and time.time() - hit[0] < 3600:
+    if cache and hit:                                  # kept for the whole process: the list changes at most daily
         return hit[1]
     r = get(hub, s, f"{SITE}/{page}")
     if r is None or r.status_code != 200 or len(r.content) < 2000:
@@ -129,16 +129,20 @@ def do_docs(hub, s, item):
     links = mpphscl.doc_urls(rows)
     mine = sorted(u for u in links if mpphscl.shard_of(u, shards) == shard)
     stored = errors = 0
+    hdr = {"If-Modified-Since": p["since"]} if p.get("since") else None   # weekly rounds: unchanged files answer 304
     for url in mine:
         if STOP.is_set() or time.time() > DEADLINE:
             return None, "time up before the shard finished"
         file = mpphscl.file_of(url)
         uid = hashlib.sha1(url.encode()).hexdigest()[:12]
-        r = get(hub, s, url)
+        r = get(hub, s, url, headers=hdr)
         pause(hub)
         if r is None:
             errors += 1
             hub.failure("doc-error", url[:200], "no answer", group=group)
+            continue
+        if r.status_code == 304:
+            stored += 1
             continue
         body = r.content
         info, txt = docs.inspect(body, r.headers.get("content-type", ""), file)

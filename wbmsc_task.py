@@ -56,9 +56,9 @@ def pause(hub):
     time.sleep(max(0.5, hub.settings.get("delay_ms", 0) / 1000))
 
 
-def get(hub, s, url, timeout=90):
+def get(hub, s, url, timeout=90, **kw):
     """The response (any status), or None when the site did not answer. Counts the hub's request metrics."""
-    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True)
+    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True, **kw)
 
 
 def page_bytes(hub, s, page):
@@ -109,22 +109,26 @@ def do_docs(hub, s, item):
     links = wbmsc.doc_urls(rows)
     mine = sorted(u for u in links if wbmsc.shard_of(u, shards) == shard)
     stored = errors = 0
+    hdr = {"If-Modified-Since": p["since"]} if p.get("since") else None   # weekly rounds: unchanged files answer 304
     for url in mine:
         if STOP.is_set() or time.time() > DEADLINE:
             return None, "time up before the shard finished"
         file = url.rsplit("/", 1)[-1]
-        r = get(hub, s, url)
+        r = get(hub, s, url, headers=hdr)
         pause(hub)
         for wait in RETRY_WAITS:                       # the server sometimes drops a connection: try again after a pause
             if r is not None or STOP.is_set():
                 break
             time.sleep(wait)
-            r = get(hub, s, url)
+            r = get(hub, s, url, headers=hdr)
         if r is None:
             errors += 1
             hub.failure("doc-error", url, "no answer", section=section)
             continue
         hub.clear_failure("doc-error", url)
+        if r.status_code == 304:
+            stored += 1
+            continue
         body = r.content
         if r.status_code != 200 or docs.is_not_found_page(body):
             hub.record(f"missing:{section}/{file}:{rnd}", {"kind": "missing", "url": url, "section": section, "file": file,
