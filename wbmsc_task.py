@@ -29,7 +29,10 @@ import wbmsc
 
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
 SITE = os.environ.get("SITE", wbmsc.SITE)
-DEADLINE = time.time() + float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600 - 180
+BUDGET_S = float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600
+DEADLINE = time.time() + BUDGET_S - 180
+# a shard takes up to ~50 min: do not claim one that cannot finish (a retry starts the shard again from the start)
+CLAIM_MARGIN_S = 50 * 60 if BUDGET_S > 3 * 50 * 60 else 0
 UA = "s1d-labs scraper (https://github.com/s1d-labs)"
 STOP = stop_flag(install=False)
 _listings = {}            # section -> (fetched at, bytes): a worker that claims several shards fetches the 3 MB listing once
@@ -153,6 +156,8 @@ def run(hub):
             if hub.settings.get("paused"):
                 time.sleep(30)                         # the hub holds us (site down, or the owner paused the project)
                 continue
+            if DEADLINE - time.time() < CLAIM_MARGIN_S:
+                break                                  # too little time left for a whole shard: leave it to a fresh worker
             items = hub.claim(1, steal=True, retry_failed=True)
             if not items:
                 break
