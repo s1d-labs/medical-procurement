@@ -10,6 +10,18 @@ Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in 
 |---|---|---|---|
 | `medical-procurement-wbmsc` | `wbmsc` | www.wbmsc.gov.in | One record for each row of the tender, notice, award and recruitment lists. One record for each version of each linked document. Raw pages and documents go to the bucket. |
 | `medical-procurement-wbmsc-wayback` | `wayback` | web.archive.org | Old versions of the WBMSC pages and documents from the Wayback Machine. |
+| `medical-procurement-mpphscl` | `mpphscl` | mpphscl.mp.gov.in | One record for each tender (with all its documents) and each blacklist entry (firm, product, laboratory). One record for each version of each linked document. Raw pages and documents go to the bucket. |
+
+## Facts about the MPPHSCL site (2026-11-14)
+
+- The tender list (TenderALL.aspx) is one page of 11.5 MB. It has 1,187 tenders since 2014 and links 13,321 documents.
+- The documents include comparative statements, rate lists and final status sheets. These give the bidder, the rate and the rank.
+- The three blacklist pages have 140 firms, 236 products and 2 laboratories. Each entry links the order copy.
+- The server needs the legacy TLS renegotiation option. The task sets it. Certificate verification stays on.
+- The site does not answer GitHub's runners. The project uses an Indian proxy (`proxy="IN"`).
+- The project has no health check, because a standard probe cannot open the site.
+- The site has no rate contract list with firm and price. The public "EDL Rate Contract Report" on mpaushadhi.mp.gov.in shows the item, tender and dates only.
+- The site has no list of NSQ (not of standard quality) results. The blacklisted products with "Quality Failure" are the nearest list.
 
 ## Facts about the WBMSC site (2026-11-14)
 
@@ -54,6 +66,8 @@ python -m pytest tests -q
 scrape-check --items 2
 python wbmsc_task.py --local docs tender 0 400 /tmp/out        # one small shard, no hub
 python wayback_task.py --local 'wbmsc.gov.in/*' 0 400 /tmp/out
+python mpphscl_task.py --local page BlackListFirm.aspx
+myproxy run scrape-check --items 2 --project medical-procurement-mpphscl   # India only
 ```
 
 The full scraper reference is in `CLAUDE.md`.
