@@ -25,26 +25,20 @@ import os
 import ssl
 import sys
 import time
-from datetime import datetime, timezone
 
 import requests
 from requests.adapters import HTTPAdapter
-from scrape_hub_client import HubClient, LocalHub, ca_bundle, stop_flag, timed_get
+from scrape_hub_client import HubClient, LocalHub, ca_bundle, stop_flag
 
 import docs
+import taskrun
+from taskrun import UA, now, pause, time_up, get
 import mpphscl
 
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
 SITE = os.environ.get("SITE", mpphscl.SITE)
-DEADLINE = time.time() + float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600 - 180
-UA = "s1d-labs scraper (https://github.com/s1d-labs)"
-STOP = stop_flag(install=False)
 GROUPS = {"tender": [mpphscl.TENDERS], "blacklist": list(mpphscl.BLACKLISTS.values())}
 _pages = {}               # page -> (fetched at, bytes): the 11.5 MB tender list is fetched once per process (the site blocks heavy fetching)
-
-
-def now():
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
 class LegacyTLS(HTTPAdapter):
@@ -68,14 +62,6 @@ def session():
     s.headers["User-Agent"] = UA
     s.mount("https://", LegacyTLS())
     return s
-
-
-def pause(hub):
-    time.sleep(max(1.0, hub.settings.get("delay_ms", 0) / 1000))
-
-
-def get(hub, s, url, timeout=120, **kw):
-    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True, **kw)
 
 
 def page_bytes(hub, s, page, cache=False):
@@ -131,7 +117,7 @@ def do_docs(hub, s, item):
     stored = errors = 0
     hdr = {"If-Modified-Since": p["since"]} if p.get("since") else None   # weekly rounds: unchanged files answer 304
     for url in mine:
-        if STOP.is_set() or time.time() > DEADLINE:
+        if time_up():
             return None, "time up before the shard finished"
         file = mpphscl.file_of(url)
         uid = hashlib.sha1(url.encode()).hexdigest()[:12]
@@ -170,33 +156,7 @@ HANDLERS = {"page": do_page, "docs": do_docs}
 
 
 def run(hub):
-    s = session()
-    try:
-        while time.time() < DEADLINE and not STOP.is_set():
-            if hub.settings.get("paused"):
-                time.sleep(30)
-                continue
-            items = hub.claim(1, steal=True, retry_failed=True)
-            if not items:
-                break
-            item = items[0]
-            kind = item["payload"].get("kind")
-            if kind not in HANDLERS:
-                hub.complete([item["key"]], "failed", error=f"unknown item kind {kind!r}")
-                continue
-            n, err = HANDLERS[kind](hub, s, item)
-            if err:
-                hub.complete([item["key"]], "failed", error=err[:200])
-            else:
-                hub.complete([item["key"]], "done", fetched=n)
-            pause(hub)
-        if STOP.is_set():
-            hub.close("failed", "stopped by signal")
-        else:
-            hub.close()
-    except BaseException as e:
-        hub.close("failed", f"{type(e).__name__}: {e}"[:200])
-        raise
+    taskrun.run(hub, session(), HANDLERS, margin_min=0)
 
 
 def local(argv):
