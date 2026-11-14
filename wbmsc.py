@@ -108,6 +108,7 @@ def parse_listing(page, section):
 
 
 def shard_of(key, shards):
+    # not htmltables.shard_of: this one hashes 8 hex digits, and WBMSC shard keys are already seeded with it
     return int(hashlib.sha1(key.encode()).hexdigest()[:8], 16) % shards
 
 
