@@ -45,7 +45,7 @@ PROJECTS = [
         "probe": f"{FAMILY}:www.wbmsc.gov.in",
         "unit_label": "page or document shard", "record_label": "row or document",
         "threads": 1, "delay_ms": 1000, "max_workers": 4,
-        "proxy": "",          # direct; set "IN" if GitHub's runners time out on the site
+        "proxy": "",          # direct: GitHub's runners reached the site (check workflow, 2026-11-14, 1.2 s per request)
         "items": wbmsc_items(),
     },
     {
@@ -63,6 +63,17 @@ PROJECTS = [
                   for k in range(WAYBACK_SHARDS)],
     },
 ]
+
+# First pool run (scraper guide): seed only these items, watch scrape.s1d.me -> Runs, then set PILOT = False and run Setup again.
+PILOT = True
+PILOT_KEYS = {f"{ROUND}/page/tender.php", f"{ROUND}/page/notice.php", f"{ROUND}/docs/award-00-of-1", f"{ROUND}/docs/tender-00-of-48",
+              "wbmsc/00-of-24", "wbmsc/01-of-24"}
+
+
+def queue(project):
+    """The items Setup seeds for a project now (all of them, or the pilot ones)."""
+    return [i for i in project["items"] if not PILOT or i["key"] in PILOT_KEYS]
+
 
 # health checks the hub runs every minute; a project's work holds while its probe fails. Light pages only.
 PROBES = [

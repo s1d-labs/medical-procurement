@@ -103,3 +103,9 @@ def test_wayback_units():
     assert wayback_task.section_of("wbmsc.gov.in/tender/A.pdf") == "tender"
     assert wayback_task.section_of("wbmsc.gov.in/tender.php") == "pages"
     assert not wayback_task.units([["2020", "http://www.wbmsc.gov.in/images/x.gif", "200", "D", "1", "image/gif"]])
+
+
+def test_pilot_keys_exist():
+    keys = {i["key"] for p in family.PROJECTS for i in p["items"]}
+    assert family.PILOT_KEYS <= keys
+    assert all(family.queue(p) for p in family.PROJECTS)
