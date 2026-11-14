@@ -89,7 +89,9 @@ PROJECTS = [
         "probe": None,
         "unit_label": "page or document shard", "record_label": "tender, blacklist entry or document",
         "threads": 1, "delay_ms": 1500, "max_workers": 2,
-        "proxy": "",
+        # India only: GitHub's runners got no answer (check workflow, 2026-11-14: both items timed out); the box in Mumbai and an
+        # Indian proxy reached it. The task's TLS context also works through HTTPS_PROXY.
+        "proxy": "IN",
         "items": mpphscl_items(),
     },
 ]

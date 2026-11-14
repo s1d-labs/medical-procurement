@@ -18,6 +18,7 @@ Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in 
 - The documents include comparative statements, rate lists and final status sheets. These give the bidder, the rate and the rank.
 - The three blacklist pages have 140 firms, 236 products and 2 laboratories. Each entry links the order copy.
 - The server needs the legacy TLS renegotiation option. The task sets it. Certificate verification stays on.
+- The site does not answer GitHub's runners. The project uses an Indian proxy (`proxy="IN"`).
 - The project has no health check, because a standard probe cannot open the site.
 - The site has no rate contract list with firm and price. The public "EDL Rate Contract Report" on mpaushadhi.mp.gov.in shows the item, tender and dates only.
 - The site has no list of NSQ (not of standard quality) results. The blacklisted products with "Quality Failure" are the nearest list.
@@ -66,7 +67,7 @@ scrape-check --items 2
 python wbmsc_task.py --local docs tender 0 400 /tmp/out        # one small shard, no hub
 python wayback_task.py --local 'wbmsc.gov.in/*' 0 400 /tmp/out
 python mpphscl_task.py --local page BlackListFirm.aspx
-scrape-check --items 2 --project medical-procurement-mpphscl
+myproxy run scrape-check --items 2 --project medical-procurement-mpphscl   # India only
 ```
 
 The full scraper reference is in `CLAUDE.md`.
