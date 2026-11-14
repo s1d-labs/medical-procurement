@@ -19,33 +19,19 @@ import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
 
-import requests
 from scrape_hub_client import HubClient, LocalHub, stop_flag, timed_get
 
 import docs
+import taskrun
+from taskrun import now, pause, time_up
 import wbmsc
 
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
-BUDGET_S = float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600
-DEADLINE = time.time() + BUDGET_S - 180
-# a shard takes up to ~30 min: do not claim one that cannot finish (a retry starts the shard again from the start)
-CLAIM_MARGIN_S = 30 * 60 if BUDGET_S > 3 * 30 * 60 else 0
-UA = "s1d-labs scraper (https://github.com/s1d-labs)"
 CDX = "https://web.archive.org/cdx/search/cdx"
-STOP = stop_flag(install=False)
 SKIP_MIME = re.compile(r"^(image/|text/css|application/(x-)?javascript|text/javascript|font/|application/font)", re.I)
 SKIP_PATH = re.compile(r"\.(gif|png|jpe?g|ico|css|js|svg|woff2?|ttf|eot)$", re.I)
 _cdx = {}
-
-
-def now():
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
-
-
-def pause(hub, floor=1.0):
-    time.sleep(max(floor, hub.settings.get("delay_ms", 0) / 1000))
 
 
 def norm_path(original):
@@ -148,7 +134,7 @@ def do_shard(hub, s, item):
                   key=lambda u: u["path"])
     ok = bad = 0
     for u in mine:
-        if STOP.is_set() or time.time() > DEADLINE:
+        if time_up():
             return None, "time up before the shard finished"
         if do_unit(hub, s, u, p.get("site", "")):
             ok += 1
@@ -160,31 +146,7 @@ def do_shard(hub, s, item):
 
 
 def run(hub):
-    s = requests.Session()
-    s.headers["User-Agent"] = UA
-    try:
-        while time.time() < DEADLINE and not STOP.is_set():
-            if hub.settings.get("paused"):
-                time.sleep(30)
-                continue
-            if DEADLINE - time.time() < CLAIM_MARGIN_S:
-                break                                  # too little time left for a whole shard: leave it to a fresh worker
-            items = hub.claim(1, steal=True, retry_failed=True)
-            if not items:
-                break
-            item = items[0]
-            n, err = do_shard(hub, s, item)
-            if err:
-                hub.complete([item["key"]], "failed", error=err[:200])
-            else:
-                hub.complete([item["key"]], "done", fetched=n)
-        if STOP.is_set():
-            hub.close("failed", "stopped by signal")
-        else:
-            hub.close()
-    except BaseException as e:
-        hub.close("failed", f"{type(e).__name__}: {e}"[:200])
-        raise
+    taskrun.run(hub, taskrun.session(), {None: do_shard}, margin_min=30)
 
 
 def local(argv):

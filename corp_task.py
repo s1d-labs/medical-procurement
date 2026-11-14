@@ -31,12 +31,12 @@ import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
 
-import requests
-from scrape_hub_client import HubClient, LocalHub, ca_bundle, stop_flag, timed_get
+from scrape_hub_client import HubClient, LocalHub, stop_flag, timed_get
 
 import docs
+import taskrun
+from taskrun import now, pause, time_up, session
 import bmsicl
 import hmscl
 import htmltables
@@ -47,25 +47,7 @@ import upmscl
 
 SITES = {"tnmsc": tnmsc, "rmsc": rmsc, "hmscl": hmscl, "bmsicl": bmsicl, "tgmsidc": tgmsidc, "upmscl": upmscl}
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
-DEADLINE = time.time() + float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600 - 180
-UA = "s1d-labs scraper (https://github.com/s1d-labs)"
-STOP = stop_flag(install=False)
 _pages = {}                # (site, page, arg) -> (fetched at, text): a worker with several doc shards fetches each list once
-
-
-def now():
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
-
-
-def session():
-    s = requests.Session()
-    s.headers["User-Agent"] = UA
-    s.verify = ca_bundle()
-    return s
-
-
-def pause(hub):
-    time.sleep(max(1.0, hub.settings.get("delay_ms", 0) / 1000))
 
 
 def fetch_page(hub, s, site, page, arg, cache=True):
@@ -123,7 +105,7 @@ def do_docs(hub, s, item):
     stored = errors = 0
     hdr = {"If-Modified-Since": p["since"]} if p.get("since") else None   # weekly rounds: unchanged files answer 304
     for url in mine:
-        if STOP.is_set() or time.time() > DEADLINE:
+        if time_up():
             return None, "time up before the shard finished"
         r = timed_get(hub, s, url, timeout=120, allow_redirects=True, headers=hdr)
         pause(hub)
@@ -140,7 +122,7 @@ def do_docs(hub, s, item):
             if not subs:
                 hub.failure("doc-missing", url[:200], "post page has no attachment", group=group)
             for sub in subs:
-                if STOP.is_set() or time.time() > DEADLINE:
+                if time_up():
                     return None, "time up before the shard finished"
                 rs = timed_get(hub, s, sub, timeout=120, allow_redirects=True)
                 pause(hub)
@@ -203,33 +185,7 @@ HANDLERS = {"page": do_page, "docs": do_docs}
 
 
 def run(hub):
-    s = session()
-    try:
-        while time.time() < DEADLINE and not STOP.is_set():
-            if hub.settings.get("paused"):
-                time.sleep(30)
-                continue
-            items = hub.claim(1, steal=True, retry_failed=True)
-            if not items:
-                break
-            item = items[0]
-            kind = item["payload"].get("kind")
-            if kind not in HANDLERS or item["payload"].get("site") not in SITES:
-                hub.complete([item["key"]], "failed", error=f"unknown item {kind!r} / {item['payload'].get('site')!r}")
-                continue
-            n, err = HANDLERS[kind](hub, s, item)
-            if err:
-                hub.complete([item["key"]], "failed", error=err[:200])
-            else:
-                hub.complete([item["key"]], "done", fetched=n)
-            pause(hub)
-        if STOP.is_set():
-            hub.close("failed", "stopped by signal")
-        else:
-            hub.close()
-    except BaseException as e:
-        hub.close("failed", f"{type(e).__name__}: {e}"[:200])
-        raise
+    taskrun.run(hub, session(), HANDLERS, margin_min=0)
 
 
 def local(site, argv):

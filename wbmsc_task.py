@@ -19,46 +19,20 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
 
-import requests
-from scrape_hub_client import HubClient, LocalHub, ca_bundle, stop_flag, timed_get
+from scrape_hub_client import HubClient, LocalHub, stop_flag
 
 import docs
+import taskrun
+from taskrun import STOP, now, pause, time_up, session, get
 import wbmsc
 
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
 SITE = os.environ.get("SITE", wbmsc.SITE)
-BUDGET_S = float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600
-DEADLINE = time.time() + BUDGET_S - 180
-# a shard takes up to ~50 min: do not claim one that cannot finish (a retry starts the shard again from the start)
-CLAIM_MARGIN_S = 50 * 60 if BUDGET_S > 3 * 50 * 60 else 0
-UA = "s1d-labs scraper (https://github.com/s1d-labs)"
-STOP = stop_flag(install=False)
 _listings = {}            # section -> (fetched at, bytes): a worker that claims several shards fetches the 3 MB listing once
 
 
-def now():
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
-
-
-def session():
-    s = requests.Session()
-    s.headers["User-Agent"] = UA
-    s.verify = ca_bundle()
-    return s
-
-
 RETRY_WAITS = (10, 30)   # seconds before the 2nd and 3rd try of a document that did not answer
-
-
-def pause(hub):
-    time.sleep(max(0.5, hub.settings.get("delay_ms", 0) / 1000))
-
-
-def get(hub, s, url, timeout=90, **kw):
-    """The response (any status), or None when the site did not answer. Counts the hub's request metrics."""
-    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True, **kw)
 
 
 def page_bytes(hub, s, page):
@@ -111,7 +85,7 @@ def do_docs(hub, s, item):
     stored = errors = 0
     hdr = {"If-Modified-Since": p["since"]} if p.get("since") else None   # weekly rounds: unchanged files answer 304
     for url in mine:
-        if STOP.is_set() or time.time() > DEADLINE:
+        if time_up():
             return None, "time up before the shard finished"
         file = url.rsplit("/", 1)[-1]
         r = get(hub, s, url, headers=hdr)
@@ -154,35 +128,7 @@ HANDLERS = {"page": do_page, "docs": do_docs}
 
 
 def run(hub):
-    s = session()
-    try:
-        while time.time() < DEADLINE and not STOP.is_set():
-            if hub.settings.get("paused"):
-                time.sleep(30)                         # the hub holds us (site down, or the owner paused the project)
-                continue
-            if DEADLINE - time.time() < CLAIM_MARGIN_S:
-                break                                  # too little time left for a whole shard: leave it to a fresh worker
-            items = hub.claim(1, steal=True, retry_failed=True)
-            if not items:
-                break
-            item = items[0]
-            kind = item["payload"].get("kind")
-            if kind not in HANDLERS:
-                hub.complete([item["key"]], "failed", error=f"unknown item kind {kind!r}")
-                continue
-            n, err = HANDLERS[kind](hub, s, item)
-            if err:
-                hub.complete([item["key"]], "failed", error=err[:200])
-            else:
-                hub.complete([item["key"]], "done", fetched=n)
-            pause(hub)
-        if STOP.is_set():
-            hub.close("failed", "stopped by signal")
-        else:
-            hub.close()
-    except BaseException as e:
-        hub.close("failed", f"{type(e).__name__}: {e}"[:200])
-        raise
+    taskrun.run(hub, session(), HANDLERS, margin_min=50)
 
 
 def local(argv):

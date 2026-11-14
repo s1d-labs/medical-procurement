@@ -16,6 +16,8 @@ import re
 from datetime import datetime
 from urllib.parse import quote
 
+from htmltables import shard_of  # noqa: F401  (re-exported: mpphscl_task uses mpphscl.shard_of)
+
 SITE = "https://mpphscl.mp.gov.in"
 TENDERS = "TenderALL.aspx"
 BLACKLISTS = {"firm": "BlackListFirm.aspx", "product": "BlackListProduct.aspx", "lab": "BlackListLabs.aspx"}
@@ -144,8 +146,6 @@ def doc_urls(rows):
     return out
 
 
-def shard_of(key, shards):
-    return int(hashlib.sha1(key.encode()).hexdigest(), 16) % shards
 
 
 def gepnic_ids(txt):
