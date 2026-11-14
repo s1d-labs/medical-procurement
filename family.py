@@ -33,6 +33,22 @@ def wbmsc_items():
     return items
 
 
+MPPHSCL = "https://mpphscl.mp.gov.in"
+# documents linked on 2026-11-14 and their shards (about 110 per shard): tender list 13,321; the three blacklists 378
+MP_DOCS = {"blacklist": (378, 4), "tender": (13321, 120)}
+MP_ROWS = {"TenderALL.aspx": 1187, "BlackListFirm.aspx": 140, "BlackListProduct.aspx": 236, "BlackListLabs.aspx": 2}
+
+
+def mpphscl_items():
+    items = [{"key": f"{ROUND}/page/{p}", "payload": {"kind": "page", "page": p, "round": ROUND, "expected": n + 1}}
+             for p, n in MP_ROWS.items()]
+    for group, (n, shards) in MP_DOCS.items():
+        items += [{"key": f"{ROUND}/docs/{group}-{k:03d}-of-{shards}",
+                   "payload": {"kind": "docs", "group": group, "shard": k, "shards": shards, "round": ROUND,
+                               "expected": max(1, round(n / shards))}} for k in range(shards)]
+    return items
+
+
 WAYBACK_SHARDS = 24       # ~5,100 distinct archived contents of wbmsc.gov.in (CDX, 2026-11-14)
 
 PROJECTS = [
@@ -62,17 +78,45 @@ PROJECTS = [
                    "payload": {"prefix": "wbmsc.gov.in/*", "site": "wbmsc", "shard": k, "shards": WAYBACK_SHARDS, "expected": 210}}
                   for k in range(WAYBACK_SHARDS)],
     },
+    {
+        "name": f"{FAMILY}-mpphscl",
+        "title": "MPPHSCL (Madhya Pradesh Public Health Services Corporation): tenders, documents, blacklists",
+        "task": "mpphscl",
+        "target": "mpphscl.mp.gov.in",
+        "env": {"SITE": MPPHSCL},
+        # no health check: the server needs legacy TLS renegotiation, which a standard probe client refuses, so a probe would
+        # report the site down and hold the work. The task fails its items when the site does not answer.
+        "probe": None,
+        "unit_label": "page or document shard", "record_label": "tender, blacklist entry or document",
+        "threads": 1, "delay_ms": 1500, "max_workers": 2,
+        "proxy": "",
+        "items": mpphscl_items(),
+    },
 ]
 
-# First pool run (scraper guide): seed only these items, watch scrape.s1d.me -> Runs, then set PILOT = False and run Setup again.
+# First pool run (scraper guide): seed only these items, watch scrape.s1d.me -> Runs, then set the flag to False and run Setup
+# again. Each site has its own flag, so one site can leave its pilot while another stays in it.
 PILOT = False   # pilot of 2026-11-14 passed: rows, documents, missing links and Wayback records looked right
 PILOT_KEYS = {f"{ROUND}/page/tender.php", f"{ROUND}/page/notice.php", f"{ROUND}/docs/award-00-of-1", f"{ROUND}/docs/tender-00-of-48",
               "wbmsc/00-of-24", "wbmsc/01-of-24"}
 
 
+MP_PILOT = True
+MP_PILOT_KEYS = {f"{ROUND}/page/TenderALL.aspx", f"{ROUND}/page/BlackListFirm.aspx", f"{ROUND}/page/BlackListProduct.aspx",
+                 f"{ROUND}/docs/blacklist-000-of-4", f"{ROUND}/docs/tender-000-of-120"}
+
+
+def pilot_keys(project):
+    """The pilot keys of a project while its pilot is on, else None (seed everything)."""
+    if project["name"].endswith("-mpphscl"):
+        return MP_PILOT_KEYS if MP_PILOT else None
+    return PILOT_KEYS if PILOT else None
+
+
 def queue(project):
     """The items Setup seeds for a project now (all of them, or the pilot ones)."""
-    return [i for i in project["items"] if not PILOT or i["key"] in PILOT_KEYS]
+    keys = pilot_keys(project)
+    return [i for i in project["items"] if keys is None or i["key"] in keys]
 
 
 # health checks the hub runs every minute; a project's work holds while its probe fails. Light pages only.
