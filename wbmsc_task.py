@@ -46,6 +46,9 @@ def session():
     return s
 
 
+RETRY_WAITS = (10, 30)   # seconds before the 2nd and 3rd try of a document that did not answer
+
+
 def pause(hub):
     time.sleep(max(0.5, hub.settings.get("delay_ms", 0) / 1000))
 
@@ -109,10 +112,16 @@ def do_docs(hub, s, item):
         file = url.rsplit("/", 1)[-1]
         r = get(hub, s, url)
         pause(hub)
+        for wait in RETRY_WAITS:                       # the server sometimes drops a connection: try again after a pause
+            if r is not None or STOP.is_set():
+                break
+            time.sleep(wait)
+            r = get(hub, s, url)
         if r is None:
             errors += 1
             hub.failure("doc-error", url, "no answer", section=section)
             continue
+        hub.clear_failure("doc-error", url)
         body = r.content
         if r.status_code != 200 or docs.is_not_found_page(body):
             hub.record(f"missing:{section}/{file}:{rnd}", {"kind": "missing", "url": url, "section": section, "file": file,
