@@ -65,7 +65,7 @@ PROJECTS = [
 ]
 
 # First pool run (scraper guide): seed only these items, watch scrape.s1d.me -> Runs, then set PILOT = False and run Setup again.
-PILOT = True
+PILOT = False   # pilot of 2026-11-14 passed: rows, documents, missing links and Wayback records looked right
 PILOT_KEYS = {f"{ROUND}/page/tender.php", f"{ROUND}/page/notice.php", f"{ROUND}/docs/award-00-of-1", f"{ROUND}/docs/tender-00-of-48",
               "wbmsc/00-of-24", "wbmsc/01-of-24"}
 
