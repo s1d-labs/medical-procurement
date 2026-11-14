@@ -1,0 +1,40 @@
+ S.No.  Drug Name  Dosages  Supplier Name  RATE(Per Unit)
+1 Acamprosate Tablet 333 mg Gastro resistant Tablet Gentech Healthcare Pvt Ltd 3.76
+2 Acetazolamide Tab 250 mg Tablet Modern Laboratories 0.95
+3 Acetyl Salicylic Acid (Aspirin) - Tablet 150 mg Gastro Resistant Tablet Unicure India Ltd 0.37
+4 Acetyl Salicylic Acid (Aspirin) -Tablet 75 mg Gastro Resistant Tablet Unicure India Ltd 0.2
+5 Acyclovir    Injection 500 mg Injection Protech Telelinks 16.74
+6 Acyclovir   Ointment 3% Ointment Kras Pharmaceuticals Pvt Ltd 21.4
+7 Acyclovir Tablet 400mg Tablet Unicure India Ltd 1.98
+8 Adrenaline Injection IP - 0.1% w/v (1mg/ml) Injection Nandani Medical Laboratories Pvt. Ltd. 2.74
+9 Albendazole Oral Suspension IP- 10 ml (200 mg/5 ml) Suspension Rampion Laboratory 3.27
+Albendazole Tablets - IP 400 mg. Tablet Concept Pharmaceuticals Limited 0.95
+Albendazole Tablets - IP 400 mg. Tablet Ravenbhel Healthcare Pvt Ltd 0.95
+Albendazole Tablets - IP 400 mg. Tablet Cotec Healthcare Pvt. Ltd 0.95
+11 Allopurinol Tablet- 100 mg Tablet Orison Pharma International 0.56
+12 Amikacin Injection- 100 mg Injection Arion Healthcare 5.49
+13 Amikacin Injection-250 mg Injection Cotec Healthcare Pvt. Ltd 9.1
+14 Amikacin Injection- 500 mg Injection Aster Medicines Pvt Ltd 15.25
+15 Amiodarone Tablet 200 mg Tablet Cipla Ltd 4.78
+16 Amisulpride Tablet 50 mg Tablet Gentech Healthcare Pvt Ltd 0.81
+17 Amitriptyline  Hydrochloride Tablet- 10 mg Tablet Healthy Life Pharma Pvt Ltd 0.19
+18 Amitriptyline Hydrochloride Tablets - 25 mg. Tablet Stallion Laboratories Pvt. Ltd. 0.24
+19 Amlodipine Tablet - 2.5mg Tablet Affy Parenterals 0.11
+20 Amlodipine Tablets - 5mg Tablet Adroit Pharmaceuticals Pvt Ltd 0.11
+21 Amoxicillin (A) + Clavulanic acid (B)- Oral liquid 200 mg (A) + 28.5 mg (B)/5 ml Oral Liquid Affy Parenterals 13.98
+Amoxycillin and Potassium Clavulanate 
+Injection IP - Amoxycillin- 1g, Clavulanic 
+Acid- 200mg.- (1.2 gm vial) Injection
+Protech Telelinks
+27.94
+Amoxycillin and Potassium Clavulanate 
+Injection IP - Amoxycillin- 1g, Clavulanic 
+Acid- 200mg.- (1.2 gm vial) Injection
+Pushkar Pharma
+27.94
+23
+Amoxycillin and Potassium Clavulanate 
+Tablets IP - Amoxycillin 500 mg + Clavulanic 
+Acid 125 mg Tablet
+Orison Pharma International
+4.89
