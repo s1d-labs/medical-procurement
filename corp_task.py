@@ -121,14 +121,18 @@ def do_docs(hub, s, item):
     by_id = dict(rows)
     mine = sorted(u for u in links if htmltables.shard_of(u, shards) == shard)
     stored = errors = 0
+    hdr = {"If-Modified-Since": p["since"]} if p.get("since") else None   # weekly rounds: unchanged files answer 304
     for url in mine:
         if STOP.is_set() or time.time() > DEADLINE:
             return None, "time up before the shard finished"
-        r = timed_get(hub, s, url, timeout=120, allow_redirects=True)
+        r = timed_get(hub, s, url, timeout=120, allow_redirects=True, headers=hdr)
         pause(hub)
         if r is None:
             errors += 1
             hub.failure("doc-error", url[:200], "no answer", group=group)
+            continue
+        if r.status_code == 304:
+            stored += 1
             continue
         if hasattr(mod, "attachments") and r.status_code == 200 and docs.kind_of(r.content) == "html":
             # a post page (BMSICL): its order files are the documents

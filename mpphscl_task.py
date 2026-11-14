@@ -74,8 +74,8 @@ def pause(hub):
     time.sleep(max(1.0, hub.settings.get("delay_ms", 0) / 1000))
 
 
-def get(hub, s, url, timeout=120):
-    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True)
+def get(hub, s, url, timeout=120, **kw):
+    return timed_get(hub, s, url, timeout=timeout, allow_redirects=True, **kw)
 
 
 def page_bytes(hub, s, page, cache=False):
@@ -129,16 +129,20 @@ def do_docs(hub, s, item):
     links = mpphscl.doc_urls(rows)
     mine = sorted(u for u in links if mpphscl.shard_of(u, shards) == shard)
     stored = errors = 0
+    hdr = {"If-Modified-Since": p["since"]} if p.get("since") else None   # weekly rounds: unchanged files answer 304
     for url in mine:
         if STOP.is_set() or time.time() > DEADLINE:
             return None, "time up before the shard finished"
         file = mpphscl.file_of(url)
         uid = hashlib.sha1(url.encode()).hexdigest()[:12]
-        r = get(hub, s, url)
+        r = get(hub, s, url, headers=hdr)
         pause(hub)
         if r is None:
             errors += 1
             hub.failure("doc-error", url[:200], "no answer", group=group)
+            continue
+        if r.status_code == 304:
+            stored += 1
             continue
         body = r.content
         info, txt = docs.inspect(body, r.headers.get("content-type", ""), file)

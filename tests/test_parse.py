@@ -109,3 +109,10 @@ def test_pilot_keys_exist():
     keys = {i["key"] for p in family.PROJECTS for i in p["items"]}
     assert family.PILOT_KEYS <= keys
     assert all(family.queue(p) for p in family.PROJECTS)
+
+
+def test_weekly_round_adds_since_to_doc_items_only(monkeypatch):
+    monkeypatch.setattr(family, "SINCE", "Sat, 07 Nov 2026 00:00:00 GMT")
+    items = [i for p in family.PROJECTS for i in family.queue(p)]
+    assert all(i["payload"].get("since") == family.SINCE for i in items if i["payload"].get("kind") == "docs")
+    assert not any("since" in i["payload"] for i in items if i["payload"].get("kind") == "page")

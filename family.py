@@ -10,12 +10,14 @@ Who won WBMSC's tenders is NOT on www.wbmsc.gov.in (its award page has 3 notices
 This family stores what only the corporation's own site has, and joins the rest in analysis (ws_trideep).
 """
 import json
+import os
 from pathlib import Path
 
 import corps
 
 FAMILY = json.loads((Path(__file__).parent / "scrape.json").read_text())["family"]
-ROUND = "2026-11"
+ROUND = os.environ.get("ROUND") or "2026-11"   # the weekly setup run sets ROUND=<ISO week>
+SINCE = os.environ.get("SINCE")                 # HTTP date of the previous round: document items skip files not changed since
 
 WBMSC = "https://www.wbmsc.gov.in"
 # documents linked from each listing on 2026-11-14, and the shards they are split into (about 110 documents per shard, ~15 minutes on a runner)
@@ -125,7 +127,10 @@ def pilot_keys(project):
 def queue(project):
     """The items Setup seeds for a project now (all of them, or the pilot ones)."""
     keys = pilot_keys(project)
-    return [i for i in project["items"] if keys is None or i["key"] in keys]
+    items = [i for i in project["items"] if keys is None or i["key"] in keys]
+    if SINCE:
+        items = [{**i, "payload": {**i["payload"], "since": SINCE}} if i["payload"].get("kind") == "docs" else i for i in items]
+    return items
 
 
 # health checks the hub runs every minute; a project's work holds while its probe fails. Light pages only.
