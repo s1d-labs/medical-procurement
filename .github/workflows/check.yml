@@ -36,6 +36,15 @@ jobs:
           scrape-check --items 1 --no-rerun --project medical-procurement-rmsc --timeout 200 || true
           scrape-check --items 1 --no-rerun --project medical-procurement-tnmsc --timeout 200
       # hmscl.org.in and bmsicl.gov.in did not answer GitHub's runners either (2026-11-14, 40 s timeouts): they run with proxy="IN".
+      # Reachability of tgmsidc.telangana.gov.in and upmsc.in from GitHub's runners (decides proxy="" or "IN" in corps.py).
+      - name: scrape-check TGMSIDC and UPMSCL (informational)
+        continue-on-error: true
+        run: |
+          for u in https://tgmsidc.telangana.gov.in/drugs-wing/ https://upmsc.in/Home/NSQ; do
+            curl -s -o /dev/null --max-time 30 -w "reach $u %{http_code} %{time_total}s\n" "$u" || echo "reach $u no answer"
+          done
+          scrape-check --items 1 --no-rerun --project medical-procurement-tgmsidc --timeout 200 || true
+          scrape-check --items 1 --no-rerun --project medical-procurement-upmscl --timeout 200
       - uses: actions/upload-artifact@v6
         if: ${{ always() }}
         with:
