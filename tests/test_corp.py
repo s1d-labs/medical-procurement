@@ -100,8 +100,11 @@ def test_corp_projects_and_pilots():
     for name in ("medical-procurement-tnmsc", "medical-procurement-rmsc"):
         p = ps[name]
         keys = [i["key"] for i in p["items"]]
-        assert len(keys) == len(set(keys)) and p["pilot"] <= set(keys)
-        assert {i["key"] for i in family.queue(p)} == p["pilot"]
+        assert len(keys) == len(set(keys))
+        if p["pilot"] is None:                     # pilot passed: Setup seeds everything
+            assert {i["key"] for i in family.queue(p)} == set(keys)
+        else:
+            assert p["pilot"] <= set(keys) and {i["key"] for i in family.queue(p)} == p["pilot"]
         assert p["probe"] in {x["name"] for x in family.PROBES}
         assert p["proxy"] == "IN"                  # neither site answers GitHub's runners
     assert len(ps["medical-procurement-rmsc"]["items"]) == 6 + sum(n for _, n in corps.RJ_DOCS.values())

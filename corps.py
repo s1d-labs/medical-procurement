@@ -39,7 +39,7 @@ def projects(family, rnd):
             "threads": 1, "delay_ms": 1500, "max_workers": 2,
             "proxy": "IN",        # the site did not answer GitHub's runners (check workflow, 2026-11-14); it answers from India
             "items": _items("tnmsc", tnmsc, TN_ROWS, TN_DOCS, rnd),
-            "pilot": {f"{rnd}/page/blacklist", f"{rnd}/page/drugrc-t25048", f"{rnd}/page/awards-2024", f"{rnd}/docs/awards-00-of-2"},
+            "pilot": None,        # pilot of 2026-11-14 passed: 93 blacklist entries, 552 RC rows, 488 bid rows, award PDFs
         },
         {
             "name": f"{family}-rmsc",
