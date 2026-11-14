@@ -11,6 +11,8 @@
     "tnmsc": ["python", "corp_task.py", "tnmsc"],
     "rmsc": ["python", "corp_task.py", "rmsc"],
     "hmscl": ["python", "corp_task.py", "hmscl"],
-    "bmsicl": ["python", "corp_task.py", "bmsicl"]
+    "bmsicl": ["python", "corp_task.py", "bmsicl"],
+    "tgmsidc": ["python", "corp_task.py", "tgmsidc"],
+    "upmscl": ["python", "corp_task.py", "upmscl"]
   }
 }

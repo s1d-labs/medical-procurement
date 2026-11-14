@@ -1,9 +1,12 @@
-"""Tasks `tnmsc`, `rmsc`, `hmscl` and `bmsicl` (scrape.json): list pages and documents of a state medical services corporation.
+"""Tasks `tnmsc`, `rmsc`, `hmscl`, `bmsicl`, `tgmsidc` and `upmscl` (scrape.json): list pages and documents of a state medical
+services corporation.
 
     python corp_task.py tnmsc        (tnmsc.tn.gov.in, Tamil Nadu)
     python corp_task.py rmsc         (rmsc.health.rajasthan.gov.in, Rajasthan)
     python corp_task.py hmscl        (hmscl.org.in, Haryana)
     python corp_task.py bmsicl       (bmsicl.gov.in, Bihar; HTTP only)
+    python corp_task.py tgmsidc      (tgmsidc.telangana.gov.in, Telangana)
+    python corp_task.py upmscl       (upmsc.in, Uttar Pradesh)
 
 Queue items (family.py) have one of two kinds:
   page  {"site": "tnmsc", "page": "blacklist", "arg": null, "round": "2026-11"}
@@ -12,7 +15,8 @@ Queue items (family.py) have one of two kinds:
   docs  {"site": "rmsc", "group": "bans", "shard": 0, "shards": 2, "round": "2026-11"}
         Fetch the group's list pages, take the linked documents of this shard, download each one, store it in the bucket by sha256
         (scans under ocr-needed/, OCR is off) and store one record per version: "doc:<sha1(url)[:12]>:<sha256[:16]>". A link that
-        does not give the file gets "missing:<sha1(url)[:12]>:<round>" and a `doc-missing` failure.
+        does not give the file gets "missing:<sha1(url)[:12]>:<round>" and a `doc-missing` failure. If the site module has
+        parse_doc(url, bytes, rows that link it), the rows of the document (rate contracts, blacklists in PDFs) are stored too.
 
 Try it without the hub:
   python corp_task.py tnmsc --local page blacklist
@@ -21,6 +25,7 @@ Try it without the hub:
 """
 import gzip
 import hashlib
+import inspect
 import json
 import os
 import re
@@ -36,9 +41,11 @@ import bmsicl
 import hmscl
 import htmltables
 import rmsc
+import tgmsidc
 import tnmsc
+import upmscl
 
-SITES = {"tnmsc": tnmsc, "rmsc": rmsc, "hmscl": hmscl, "bmsicl": bmsicl}
+SITES = {"tnmsc": tnmsc, "rmsc": rmsc, "hmscl": hmscl, "bmsicl": bmsicl, "tgmsidc": tgmsidc, "upmscl": upmscl}
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
 DEADLINE = time.time() + float(os.environ.get("SCRAPE_MAX_HOURS", "1")) * 3600 - 180
 UA = "s1d-labs scraper (https://github.com/s1d-labs)"
@@ -111,6 +118,7 @@ def do_docs(hub, s, item):
         rows += mod.parse(page, text, arg)
         pause(hub)
     links = mod.doc_urls(rows)
+    by_id = dict(rows)
     mine = sorted(u for u in links if htmltables.shard_of(u, shards) == shard)
     stored = errors = 0
     for url in mine:
@@ -136,16 +144,20 @@ def do_docs(hub, s, item):
                     errors += 1
                     hub.failure("doc-error", sub[:200], "no answer", group=group)
                     continue
-                stored += store_doc(hub, mod, site, group, sub, rs, links[url], rnd, post_url=url)
+                stored += store_doc(hub, mod, site, group, sub, rs, links[url], rnd, post_url=url,
+                                    link_rows=[by_id[i] for i in links[url] if i in by_id])
             continue
-        stored += store_doc(hub, mod, site, group, url, r, links[url], rnd)
+        stored += store_doc(hub, mod, site, group, url, r, links[url], rnd,
+                            link_rows=[by_id[i] for i in links[url] if i in by_id])
     if mine and errors > len(mine) // 2:
         return None, f"{errors} of {len(mine)} documents did not answer"
     return stored, None
 
 
-def store_doc(hub, mod, site, group, url, r, row_ids, rnd, post_url=None):
-    """Store one downloaded document (or a "missing" record); rows parsed from it (rate contract files) become records too."""
+def store_doc(hub, mod, site, group, url, r, row_ids, rnd, post_url=None, link_rows=None):
+    """Store one downloaded document (or a "missing" record); rows parsed from it (rate contract files) become records too.
+    A site module's parse_doc(url, body, txt[, link_rows]) gets the list rows that link the document when it takes a 4th argument
+    (their title tells which kind of document it is)."""
     uid = hashlib.sha1(url.encode()).hexdigest()[:12]
     file = _file_name(url, r)
     body = r.content
@@ -164,7 +176,13 @@ def store_doc(hub, mod, site, group, url, r, row_ids, rnd, post_url=None):
         "content_type": r.headers.get("content-type"), **info, **fields, "bucket_key": up[0]["key"] if up else None})
     if hasattr(mod, "parse_doc"):
         seen = now()
-        for r_id, row in mod.parse_doc(url, body, txt):
+        args = (url, body, txt, link_rows or []) if len(inspect.signature(mod.parse_doc).parameters) >= 4 else (url, body, txt)
+        try:
+            parsed = mod.parse_doc(*args)
+        except Exception as e:                           # a document that does not parse is still stored
+            hub.failure("doc-parse", url[:200], f"{type(e).__name__}: {e}"[:200], group=group)
+            parsed = []
+        for r_id, row in parsed:
             hub.record(r_id, {**row, "site": site, "round": rnd, "seen_at": seen, "source_doc": url,
                               "doc_sha256": info["sha256"]})
     return 1

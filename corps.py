@@ -1,5 +1,5 @@
-"""Projects of the corporations served by corp_task.py: TNMSC (Tamil Nadu), RMSC (Rajasthan), HMSCL (Haryana) and BMSICL (Bihar).
-family.py adds them to PROJECTS.
+"""Projects of the corporations served by corp_task.py: TNMSC (Tamil Nadu), RMSC (Rajasthan), HMSCL (Haryana), BMSICL (Bihar),
+TGMSIDC (Telangana) and UPMSCL (Uttar Pradesh). family.py adds them to PROJECTS.
 
 Each project has its own pilot list ("pilot"): while it is a set, Setup seeds only those keys. Set it to None after the first pool
 run looks right on scrape.s1d.me -> Runs, then run Setup again.
@@ -7,7 +7,9 @@ run looks right on scrape.s1d.me -> Runs, then run Setup again.
 import bmsicl
 import hmscl
 import rmsc
+import tgmsidc
 import tnmsc
+import upmscl
 from htmltables import page_name
 
 # rows and documents seen on 2026-11-14 (progress and ETAs only)
@@ -20,6 +22,12 @@ HR_ROWS = {"drugrc": 428, "equipmentrc": 58, "banned": 6}
 HR_DOCS = {"orders": (6, 1)}
 BR_ROWS = {"home": 4, "rc-status": 2, "equipment-blacklist": 4, "blacklist": 10}
 BR_DOCS = {"rc": (6, 1), "orders": (87, 2)}         # rc: 6 rate contract files (about 1,600 rows); orders: 87 blacklist posts
+# Telangana: one list page of 7 PDFs; the rate contract and blacklist PDFs give ~1,040 rows (522 medicines, 446 surgical items,
+# 11 firms, 57 products). Uttar Pradesh: 41 NSQ blacklist rows, 858 tender rows; 535 documents (41 order scans, 494 results).
+TG_ROWS = {"drugs-wing": 7}
+TG_DOCS = {"lists": (7 + 1036, 1)}
+UP_ROWS = {"nsq": 41, "tenders": 858}
+UP_DOCS = {"nsq-orders": (41, 1), "results": (494, 5)}
 
 
 # 2026-11-14: neither site answered GitHub's runners (check workflow: no answer in 40 s). HMSCL answers through the Indian
@@ -96,6 +104,34 @@ def projects(family, rnd):
             "items": _items("bmsicl", bmsicl, BR_ROWS, BR_DOCS, rnd, "bmsicl/"),
             "pilot": {f"{rnd}/bmsicl/page/blacklist-1", f"{rnd}/bmsicl/page/rc-status", f"{rnd}/bmsicl/docs/rc-00-of-1"},
         },
+        {
+            "name": f"{family}-tgmsidc",
+            "title": "TGMSIDC (Telangana Medical Services & Infrastructure Development Corporation): rate contracts, blacklists",
+            "task": "tgmsidc",
+            "target": "tgmsidc.telangana.gov.in",
+            "env": {"SITE": tgmsidc.SITE},
+            "probe": f"{family}:tgmsidc.telangana.gov.in",
+            "unit_label": "page or document shard", "record_label": "row or document",
+            "threads": 1, "delay_ms": 1500, "max_workers": 1,
+            "proxy": "",          # direct: GitHub's runners got HTTP 200 in 2.4 s and scrape-check passed (check workflow, 2026-11-14)
+            "items": _items("tgmsidc", tgmsidc, TG_ROWS, TG_DOCS, rnd),
+            "pilot": {f"{rnd}/page/drugs-wing", f"{rnd}/docs/lists-00-of-1"},
+        },
+        {
+            "name": f"{family}-upmscl",
+            "title": "UPMSCL (Uttar Pradesh Medical Supplies Corporation): NSQ blacklist, tenders, results and rate lists",
+            "task": "upmscl",
+            "target": "upmsc.in",
+            "env": {"SITE": upmscl.SITE},
+            "probe": f"{family}:upmsc.in",
+            "unit_label": "page or document shard", "record_label": "row or document",
+            "threads": 1, "delay_ms": 1500, "max_workers": 2,
+            # GitHub's runners got no answer in 30 s (check workflow, 2026-11-14). The team box (Indian IP) gets HTTP 200, but the
+            # proxy in-07 (91.124.42.x) gets "CONNECT 504": lend only the other two ranges (not tested yet; see Runs after setup).
+            "proxy": "IN", "proxy_only": ["191.219.", "95.134.119."],
+            "items": _items("upmscl", upmscl, UP_ROWS, UP_DOCS, rnd),
+            "pilot": {f"{rnd}/page/nsq", f"{rnd}/page/tenders", f"{rnd}/docs/nsq-orders-00-of-1", f"{rnd}/docs/results-00-of-5"},
+        },
     ]
 
 
@@ -107,4 +143,6 @@ def probes(family):
          "expect": "Rajasthan Medical Services Corporation"},
         {"name": f"{family}:hmscl.org.in", "url": hmscl.url_of("banned"), "expect": "Haryana Medical Services Corporation"},
         {"name": f"{family}:bmsicl.gov.in", "url": bmsicl.page_url("rc-status"), "expect": "BMSICL"},
+        {"name": f"{family}:tgmsidc.telangana.gov.in", "url": tgmsidc.page_url("drugs-wing"), "expect": "Rate Contract"},
+        {"name": f"{family}:upmsc.in", "url": upmscl.page_url("nsq"), "expect": "Blacklist"},
     ]

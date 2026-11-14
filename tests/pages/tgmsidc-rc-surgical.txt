@@ -1,0 +1,88 @@
+                                                                     Statement showing the Surgical Rate Contract 448 item list
+S.No.      Item                                                        Item Name                                               Group          Rate                 Unit                                Firm Name                                 Tno               Validity
+             Code
+   1     6739         1/4" Tubing Rolls                                                                                         SC
+   2     6874         10-0 Monofilament Polyamide Suture                                                           SUT
+   3     10952       Braided Coated Polygalactin Absorable Suture  with needle 10-0                  SUT
+   4     7094         2-0 Monofilament Polyamide Black Surgical Needled Suture 110 cm,                                                SUT
+                         needle size, 45 mm.
+   5     7108         3 - Way Extension - 10 Cm                                                                           GC        12                      1Pack                Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+   6     10273       Non Absorablabe Surgical Suture Braided coated polyster 5-0                      SUT      711.2                 1Box                  Healthium Medtech Limited                         2_2024              04-Feb-27
+   7     10404       Braided Coated Polygalactin Absorable Suture  with needle 6-0                    SUT      499.52               1Box                  Ti Medical Private Limited                            2_2024              04-Feb-27
+   8     6877         9-1 Glycolide And Lactide Braided Mid Term Absorbable - 4/0 , 1/2                                               SUT      436.8                 1Box                  Advanced Medtech Solutions Private                                     2_2024              04-Feb-27
+                         Circle Round Body and Cutting  with 12 mm , 16mm Needles                                                                                                                 Limited
+   9     6879         9-1 Glycolide And Lactide Braided Mid Term Absorbable - 5/0 , 1/2                                               SUT      425.6                 1Box                  Advanced Medtech Solutions Private                                     2_2024              04-Feb-27
+                         Circle Round Body and Cutting  with 12 mm , 16mm Needles                                                                                                                 Limited
+  10     5500         Abdominal Drain Kit- 24 FG                                                                         GC
+  11     10330       Abdominal Drain Kit: 20 FG                                                                         GC
+  12     10189       Abdominal Drain Kit: 28 FG                                                                         GC
+  13     10190       Abdominal Drain Kit: 32 FG                                                                         GC
+  14     5681         Absorbable Gelatine Sponge Hemostatic                                                       GC        72.52                 No.                     Mitra Enterprises                                         2_2023              29-Sep-25
+  15     5694         Absorbable Surgical Suture USP Sterilized Surgical Needle Suture Size 6-0  SUT
+
+  16     6696         Absorbant Lint Cloth                                                                                    GC
+  17     1041         Absorbent Cotton Wool IP 500 Grms                                                            GC        218.7                 1                        Ssi                                                               TNo8_2024        03-Mar-27
+  18     5654         AD Syringes Set of all sizes                                                                           GC        3.33                   No.                     Royal Agencies                                             2_2023              29-Sep-25
+  19     5297         Adhesive Plaster Woven Fabric (Size:10Cm X 10Mts)                                    GC
+  20     6650         Adhesive Plaster Woven Fabric (Size:2.5Cm X 10Mts)                                   GC
+  21     5299         Adhesive Plaster Woven Fabric (Size:5Cm X 10Mts)                                      GC
+  22     6651         Adhesive Plaster Woven Fabric (Size:7.5Cm X 10Mts)                                   GC        252                    1Box                  Sanmati Packaging                                       2_2024              04-Feb-27
+  23     6741         Airways Exchange Catheter                                                                          SC
+  24     10329       Ambu S Bag Resuscitation - Neonatal  with Mask 1,0 Sizes                          GC
+  25     874           Ambu S Bag Resuscitation - Paediatric  with Masks                                     GC        685.4                 No.                     Aveli Retail And Trade Services Private                                                      7_2023              12-Mar-26
+                                                                                                                                                                                                  Limited
+  26     5501         Ambus Bag Resuscitation - Adult  with Masks                                             GC
+  27     6743         Anaesthesia Face Mask (Black Rubber)                                                        SC        159                    1No                    Venkatsai Pharma Andsurgicals                   2_2024              04-Feb-27
+  28     10441       Anaesthesia Face Masks (Disposable)                                                           SC        142.8                 1                        Sri Sai Krishnamarketing Associates            2_2024              04-Feb-27
+  29     5690         Antibacterial Triclosan Coated Polyglactine 910 Size 1                                 SUT      612.64               1Box                  Advanced Medtech Solutions Private                                                               2_2024              04-Feb-27
+                                                                                                                                                                                                  Limited
+  30     6898         Antibacterial Triclosan Coated Polyglactine 910 Size 1-0                              SUT      622.72               1Box                  Healthium Medtech Limited                         2_2024              04-Feb-27
+
+
+
+
+                                                                                                                                                     1/14S.No.      Item                                                           Item Name                                               Group          Rate                 Unit                                Firm Name                                 Tno               Validity
+             Code
+ 418      11290       Transparent Film Dressing Sizes 9Cm X 20 Cm                                           GC        49                      1No                    Venkatsai Pharma Andsurgicals                   2_2024              04-Feb-27
+ 419      6726         Two Way Stretch Crepe Bandage 4 Inch , 6 Inch And 8 Inch (10 Cm X 4                                                   GC        31.75                 1No                    Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+                          Mtrs) Non-Sterile Cotton Crepe Bandage BP
+ 420      6727         Two Way Stretch Crepe Bandage 4 Inch , 6 Inch And 8 Inch (15 Cm X 4                                                   GC        40.68                 1No                    Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+                          Mtrs) Non-Sterile Cotton Crepe Bandage BP
+ 421      971           Umbilibal Cord Clamp                                                                                  GC        1.89                   1                        Royal Agencies                                             2_2024              04-Feb-27
+ 422      6728         Umbilical Cotton Tape                                                                                  GC
+ 423      11092       Umbilical Venous Catheter (Uvc) 3.5, 4, 5 FR                                               SC        1294.72             1Pack                Vygon India Pvt. Ltd.                                    2_2024              04-Feb-27
+ 424      6729         Under Water Seal Intercostal Chest Tube (ICD) Bags                                    GC        42.4                   1No                    Royal Agencies                                             2_2024              04-Feb-27
+ 425      6866         Ureteric Catheter 3FR,4FR,5FR                                                                    SD
+ 426      972           Urinary Drainage Bag                                                                                   GC
+ 427      6730         Urinary Drainage Bag  with Urometer                                                           GC        70.5                   1Pack                Royal Agencies                                             2_2024              04-Feb-27
+ 428      6731         Urosac Bag - Neonatal And Paediatric                                                          GC
+ 429      6732         Vaccum Suction Tube Drains  with Bellow Different Sizes - 12, 14, 16, 18   GC        142.68               1Pack                Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+
+ 430      6811         Venous Extension Line 10 Cm                                                                     SC        15.68                 1Pack                Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+ 431      6812         Venous Extension Line 100 Cm                                                                    SC        17.68                 1Pack                Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+ 432      6813         Venous Extension Line 150 Cm                                                                    SC        13.79                 1Pack                Royal Agencies                                             2_2024              04-Feb-27
+ 433      6814         Venous Extension Line 25 Cm                                                                     SC        14.56                 1Pack                Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+ 434      6815         Venous Extension Line 50 Cm                                                                     SC        15.68                 1Pack                Unifranco Life Sciences Pvt Ltd                    2_2024              04-Feb-27
+ 435      11111       Ventilator Circuits - Adult                                                                            SC        126.13               1                        Samhita Medical Devices                              2_2024              04-Feb-27
+ 436      11113       Ventilator Circuits - Neonatal                                                                       SC
+ 437      11112       Ventilator Circuits - Paediatric                                                                     SC        140                    1                        Royal Agencies                                             2_2024              04-Feb-27
+ 438      5647         Weighing Machine (Adult with weight and measurements department                                                       SD
+                          stamping, weighing capacity 125 kg in 500gms intervals and Non-slip
+                          platform surface , Each)
+ 439      1054         White Bed Sheets Size- 58Inch Length 90Inch                                              CTS
+ 440      1055         White Blouse Cloth                                                                                      CTS
+ 441      1056         White Cloth                                                                                                  CTS
+ 442      1057         White Saree  with Blue Border                                                                     CTS
+ 443      1058         White Saree  with Green Border, 2 Ply Border                                              CTS
+ 444      1058.01    White Saree  with Red Border 2 Ply Border                                                   CTS
+ 445      1059         White Terricot Fabric                                                                                    CTS      110                    No.                     Sri Gayathri Associates                                2_2023              29-Sep-25
+ 446      1060         Woollen Blankets                                                                                         CTS
+ 447      978           X-Ray films  10 X 8inchs                                                                              GC
+ 448      6733         Yankauer Suction set                                                                                   GC        57                      1Pack                Royal Agencies                                             2_2024              04-Feb-27
+
+
+
+
+
+
+                                                                                                                                                           14/14
