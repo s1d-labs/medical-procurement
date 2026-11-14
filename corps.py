@@ -76,7 +76,7 @@ def projects(family, rnd):
             "threads": 1, "delay_ms": 1500, "max_workers": 2,
             "proxy": "IN",        # the site did not answer GitHub's runners (check workflow, 2026-11-14); it answers from India
             "items": _items("rmsc", rmsc, RJ_ROWS, RJ_DOCS, rnd),
-            "pilot": {f"{rnd}/page/drugrc", f"{rnd}/page/banned-product", f"{rnd}/page/banned-company", f"{rnd}/docs/bans-00-of-2"},
+            "pilot": None,        # pilot of 2026-11-14 passed: 2,070 RC rows, 109 ban entries, 65 documents; site answers 304
         },
         {
             "name": f"{family}-hmscl",
