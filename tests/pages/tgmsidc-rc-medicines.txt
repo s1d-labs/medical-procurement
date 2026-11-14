@@ -1,0 +1,98 @@
+                                               Statement showing the Medicine Rate Contract 522 item list
+Sl No   drug_code                                 drug_name                                 Category        Rate       Unit                          Firm Name                                 Tno              Validity
+
+   1           2193       Aceclofenac 100mg Tab                                                 AML                   29.23      100 9M India Limited                                            16_2023                   18-Sep-26
+   2             30         Acetazolamide Tablets 250mg                                       EML                  141.12     100 9M India Limited                                            6_2025                     29-Oct-27
+   3           2062       Acetyl Salicylic acid Tab 75mg                                      EML                                  100
+   4           4211       Acetyl Salicylic acid Tab, 150mg ,IP,10 X 10 Or 50 X                               AML                   30.80      100 Eurokem Laboratories Pvt Ltd.                       7_2024                    03-Mar-27
+                             10 Blister With Aluminium Foil Pack
+   5           4146       ACETYLCYSTEINE TAB BP - 600MG                             EML                                  100
+   6           4171       Acyclovir Dispersible Tab IP 200mg                               AML                  136.96     100 Unicure India Pvt. Ltd.                                   6_2025                     29-Oct-27
+   7           1479       Acyclovir Powder for Injection 250 mg                           AML                   14.22          1 Pace Bio Tech                                                 6_2025                     29-Oct-27
+   8           1691       Acyclovir Tablets 400mg                                               AML                  310.24     100 Bajaj Healthcare Limited                                16_2023                   18-Sep-26
+   9           1733       Adenosine Injection 3 mg/ml ,2ml Ampoule 10 X 5                                    AML                   30.24          1 9M India Limited                                            7_2024                    03-Mar-27
+                             ,Type-I Glass
+  10          2229       Adrenaline Injection 1 mg/ml                                       EML                                      1
+  11          1200       Albendazole Suspension                                                EML                     7.35          1 Cyano Pharma Private Limited                        9_2025                     22-Jul-28
+  12           736        Albendazole Tablets IP 400mg                                       EML                  130.32     100 Nestor Pharmaceuticals Ltd                            17_2024                  03-Mar-27
+  13          1734       Allopurinol Tablets IP 100 mg                                       AML                   76.92      100 Unicure India Pvt. Ltd.                                   1_2024                     21-Nov-26
+  14          1705       Alprazolam Tablets IP 0.5 mg                                        EML                   24.64      100 Unicure India Pvt. Ltd.                                   1_2024                     21-Nov-26
+  15       3333.01    ALUMINIUM HYDROXIDE AND MAGNESIUM                                                      EML                   35.19      100 Unicure India Pvt. Ltd.                                   1_2024                     21-Nov-26
+                             TRISILICATE TABLET
+  16          1614       Ambroxal Syrup 60ml 30mg/5ml                                  EML                     7.06          1 Cipco Limited                                                 6_2025                     29-Oct-27
+  17          1188       Amikacin Injection 100mg                                             EML                     6.18          1 Alpa Laboratories Limited                               6_2025                     29-Oct-27
+  18          1189       Amikacin Injection 500mg, 2ml vial                              AML                   16.16          1 Ultra Drugs Private Limited                            6_2025                     29-Oct-27
+  19          4308       AMINOACID INFUSION 100 ML BOTTLE 10%               AML                  336.00         1 Fresenius Kabi India Pvt Ltd                           9_2025                     22-Jul-28
+  20          2202       Aminophylline Inj. 25mg/ml IP, 10ml vial                     AML                     5.97          1 Hindustan Medicines Private Limited              6_2025                     29-Oct-27
+  21          4298       AMISULPRIDE TAB 100 MG                                          AML                  130.00     100 Suzikem Drugs Private Limited                       6_2025                     29-Oct-27
+  22          2064       Amitriptyline Tab. 10mg                                                AML                   24.64      100 Mascot Health Series Pvt Ltd & Concord                                                   6_2025                     29-Oct-27
+                                                                                                                                                           Drugs
+  23          4210       AMLODIPINE + TELMISATRAN (5 MG + 40 MG)            AML                   45.46      100 Leostar Healthcare Pvt Ltd                             7_2024                    03-Mar-27
+  24           737        Amlodipine Tablets  IP 5mg                                           EML                   12.17      100 Super Formulations Pvt. Ltd.                          6_2025                     29-Oct-27
+  25          3260       Amoxicillin (A) + Clavulanic acid (B) (5 ml Dry Syrup                               EML                   37.64          1 Medopharm Private Limited                            7_2024                    03-Mar-27
+                             125 mg (A) + 31.25 (b)/5 ml)Sl No   drug_code                                 drug_name                                 Category        Rate       Unit                          Firm Name                                 Tno              Validity
+
+  26          1340       Amoxicillin (A)500mg + Clavulanic acid (B)125mg                                     EML                                  100
+                             Tablets
+  27             7          Amoxicillin Capsules 500mg                                         EML                  220.53     100 Nestor Pharmaceuticals Limited                     7_2024                    03-Mar-27
+  28          3257       Amoxicillin Oral Liquid  250 mg/5 ml , 60ml                AML                   20.14          1 Nestor Pharmaceuticals Limited                     7_2024                    03-Mar-27
+  29           8.1        Amoxicillin Oral Suspension 125mg/5ml in 30ml         EML                     9.97          1 Nestor Pharmaceuticals Limited                     1_2024                     21-Nov-26
+
+  30          1341       Amoxycillin 250mg + Clavulanic Acid 125mg Tablets    EML                                  100
+
+  31          3258       AMOXYCILLIN AND POTASSIUM CLAVULANATE INJ                                           EML                   29.12          1 Marc Laboratories Ltd.                                   7_2024                    03-Mar-27
+                             POWDER FOR INJECTION 500 MG + 100 MG
+
+
+  32             6          AMOXYCILLIN CAP IP 250 MG                                      EML                  129.91     100 Unicure India Pvt. Ltd.                                   7_2024                    03-Mar-27
+  33       1202.02    Amphotericin B Lipid Emulsion  IP 50mg Inj                 AML               1,102.50         1 Bharat Serums And Vaccines Ltd                   13_2025                  07-Aug-27
+  34          4174       Ampicillin Cap IP 250mg                                               AML                  141.11     100 Unicure India Pvt. Ltd.                                   6_2025                     29-Oct-27
+  35          2083       Antacid Gel / Dried Aluminium Hydroxide Gel 600mg                                   AML                                      1
+                             +Magnesium Hydroxide 300mg +Simethicone 25mg
+                             +Oxetacaine BP 10mg per 5ml syrup , 200ml
+
+
+  36          4281       Apixaban Tab 2.5mg                                                     AML                  175.84     100 Bajaj Healthcare Limited                                6_2025                     29-Oct-27
+  37          4299       Aripiprazole Tab 10mg                                                  AML                   44.80      100 Concord Drugs                                               6_2025                     29-Oct-27
+  38          1832       Artesunate Powder for Injection 60 mg                          EML                   15.75          1 Marc Laboratories Ltd.                                   7_2024                    03-Mar-27
+  39          4103       ARTESUNATE TAB 50 MG                                            EML                  189.00     100 Micron Pharmaceuticals                                 13_2025                  07-Aug-27
+  40            40         Ascorbic acid (Vitamin C) Tab 500mg                            EML                   61.60      100 Bajaj Healthcare Limited                                16_2023                   18-Sep-26
+  41            37         Atenolol Tablet IP 50 mg                                               EML                   22.39      100 Unicure India Pvt. Ltd.                                   6_2025                     29-Oct-27
+  42          2065       Atorvastatin tablet 10mg                                               EML                   32.79      100 Cyano Pharma Private Limited                        16_2023                   18-Sep-26
+  43          1334       Atracurium Injection 25mg                                           EML                   22.33          1 Pace Bio Tech                                                 6_2025                     29-Oct-27
+  44          2066       Atropine  injection 0.6mg/ml amples                            EML                     1.55          1 Hindustan Medicines Private Limited              7_2024                    03-Mar-27
+  45          3352       Atropine Sulphate Eye Drops 1%                                  AML                   14.39          1 Appasamy Ocular Devices (P) Ltd.                   7_2024                    03-Mar-27
+  46          1740       Azathioprine Tablets  50 mg                                          EML                  103.95     100 Micron Pharmaceuticals                                 9_2025                     22-Jul-28
+  47          3269       Azithromycin Liquid/Suspension 200mg/5ml , 30 ml   AML                   25.20          1 9M India Limited                                            7_2024                    03-Mar-27Sl No   drug_code                                 drug_name                                 Category        Rate       Unit                          Firm Name                                 Tno              Validity
+
+ 502         2228      Premixed Insulin Analouge 25% Insulin Lispro                                 AML                                 1
+                          (1 Catridge of 3ml Each )  PEN
+ 503         4144       PROGESTERONE SOFT GELATIN CAPS - 200MG         EML                   59.96      100 Anod Pharma Private Limited                         9_2025                     22-Jul-28
+ 504         4292      PYRIDOSTIGMINE TAB IP 60 MG                         AML                             100
+ 505         4141       RACECADOTRIL 100 MG TAB                                       EML                                  100
+ 506         1930      Ramipril Tablets  5mg                                           EML                             100
+ 507         4305      Sertraline Tab IP 50mg                                         AML                                   69.30      100 Cmg Biotech Pvt.Ltd.                                      7_2025                     02-Feb-28
+ 508         1823      Sodium Chloride Eye drops 5% 10ml                    AML                                             17.85          1 Senses Pharmaceuticals Private Limited         7_2025                     02-Feb-28
+
+ 509         4319      SODIUM CHLORIDE NASAL DROPS                     AML                                 1
+ 510         4320      SODIUM CITRATE AND CITRIC ACID                                               AML                                 1
+                          MONOHYDRATE
+ 511         4229      Sodium Fusidate Cream 2%  10 gm                      AML                                             22.58          1 Bell Pharmaceuticals And Cosmetics Private                    7_2025                     02-Feb-28
+                                                                                                                                              Limited
+ 512         2391      Sodium Valporate Oral liquid 200mg/5ml ,60 ml  AML                                                   19.05          1  Quasar Labs Pvt. Ltd.                                     9_2025                     22-Jul-28
+
+ 513         2140       SODIUM VALPORATE TAB IP 500 MG                          EML                                  100
+ 514         1953       Sodium valporate Tablets 200mg                                  EML                                  100
+ 515        602.02    STREPTOKINASE INJ IP 15 LAKH UNITS 10ml                                       AML                                 1
+                          Vial
+ 516         4288      SURFACTANT BOVINE (INTRA TRACHEAL)                                           AML                 8,658.26           1  Cipla Ltd                                                        9_2025                     22-Jul-28
+                          NATURAL INJ 5 ML
+ 517         1967      Tobramycin Ophthalmic Solution Usp - 0.3%                                    AML                     11.34          1  Brooks Laboratories Limited                           9_2025                     22-Jul-28
+                          W/V
+ 518         4230      TRIAMCINOLONE ACETONIDE OINTMENT -                                           AML                                 1
+                          0.1%
+ 519         4293      VECURONIUM BROMIDE INJ IP 2 ML/ML           AML                                 1
+ 520         3087      Verapamil (Injection 2.5 mg/ml)                           AML                                 1
+ 521         4156       Vitamin-B Complex Inj  (as per Schedule - V,                                EML                     8.56          1 9M India Limited                                            1_2024                     21-Nov-26
+                          Therapuetic)
+ 522         4339       Benzoyl Peroxide Gel IP 5%                                           EML                                      1
