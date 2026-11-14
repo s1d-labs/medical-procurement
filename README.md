@@ -11,6 +11,8 @@ Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in 
 | `medical-procurement-wbmsc` | `wbmsc` | www.wbmsc.gov.in | One record for each row of the tender, notice, award and recruitment lists. One record for each version of each linked document. Raw pages and documents go to the bucket. |
 | `medical-procurement-wbmsc-wayback` | `wayback` | web.archive.org | Old versions of the WBMSC pages and documents from the Wayback Machine. |
 | `medical-procurement-mpphscl` | `mpphscl` | mpphscl.mp.gov.in | One record for each tender (with all its documents) and each blacklist entry (firm, product, laboratory). One record for each version of each linked document. Raw pages and documents go to the bucket. |
+| `medical-procurement-tnmsc` | `tnmsc` | tnmsc.tn.gov.in | Tamil Nadu: blacklists, drug and equipment rate contracts with tenderers and rates, contracts awarded, notifications. The award and notification PDFs go to the bucket. |
+| `medical-procurement-rmsc` | `rmsc` | rmsc.health.rajasthan.gov.in | Rajasthan: drug rate contracts, banned firms and products, drug, equipment and finance tenders. The order and tender PDFs go to the bucket. |
 
 ## Facts about the MPPHSCL site (2026-11-14)
 
@@ -32,6 +34,22 @@ Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in 
 - The award list has 3 notices, all from 2011. The site does not show who won a tender.
 - The site has no robots.txt and no page with terms of use.
 
+## Facts about TNMSC and RMSC (2026-11-14)
+
+- Each list is one HTML page. There is no pagination. A GET gives the full list. No list needs a sign-in.
+- TNMSC blacklist: 93 entries in three tables (drug items 82, drug firms 9, equipment firms 2). 50 entries are for NSQ.
+- TNMSC drug rate contracts: 15 tenders, 5,024 drug rows and 3,332 tenderer rows (firm, rate, L1 or matched, order share).
+- TNMSC equipment rate contracts: 791 rows in four groups (make, model, rate, valid up to).
+- TNMSC contracts awarded: 191 rows (2014, 2015, 2020-2024). The bidders and prices are in the PDFs only.
+- TNMSC notifications: 150 rows. On 2026-11-14 the site gave the 2026-27 list for the years 2024-25 and 2025-26 (a site fault).
+- RMSC drug rate contracts: 2,070 rows (drug, supplier, rate, level, contract dates).
+  The SUPPLIER CONTACT column has names, phones and e-mails of persons. The scraper does not store it.
+- RMSC ban lists: 8 debarred firms and 101 banned products. 62 rows give NSQ as the reason. Most order PDFs are scans (`ocr-needed/`).
+- RMSC tenders: 1,368 drug, 2,588 equipment and 148 finance rows with about 4,000 PDFs.
+- Neither site publishes a list of NSQ batches. The NSQ results show only as the reason of a blacklist or ban entry.
+- Neither site answers the GitHub runners (check workflow, 2026-11-14: every request timed out). Both answer from India.
+  Both projects use an Indian proxy (`proxy="IN"`). The check workflow cannot test them; use `myproxy run scrape-check`.
+
 ## Who won the tenders
 
 The winners are in other projects of the hub. This family does not scrape them again:
@@ -50,6 +68,12 @@ The analysis joins them in the `ws_trideep` database by the NIT number (`nit`) a
 | `missing:<section>/<file>:<round>` | A link that did not give the file. |
 | `page:<round>:<page>` | One snapshot of a page. |
 | `wb:<path>:<digest[:16]>` | One archived content from the Wayback Machine, with all its capture times. |
+| `blacklist:<list>:<BL code>:<hash>` | TNMSC: one blacklist entry. |
+| `drugrc:<tender>:<drug code>`, `drugrc-bid:<tender>:<drug code>:<firm code>` | TNMSC: one drug of a rate contract, and one tenderer of that drug. |
+| `award:CA<n>`, `notification:NF<n>` | TNMSC: one contract awarded, one tender notification (the site's own numbers). |
+| `equipmentrc:<hash>` | TNMSC: one equipment rate contract row. A break-up row points to its item (`breakup_of`). |
+| `drugrc:<hash>`, `banned-company:<hash>`, `banned-product:<hash>`, `<kind>-tenders:<hash>` | RMSC: one row of a list. |
+| `doc:<sha1(url)[:12]>:<sha256[:16]>` | TNMSC and RMSC: one version of a linked file. |
 
 Bucket paths (in the project folder): `pages/<round>/`, `docs/<section>/<sha256>.<ext>`, `text/<sha256>.txt.gz`, and
 `ocr-needed/<section>/<sha256>.pdf` for scans with no text layer. OCR is off.
@@ -57,6 +81,9 @@ Bucket paths (in the project folder): `pages/<round>/`, `docs/<section>/<sha256>
 ## Run again
 
 To get new tenders and changed documents, change `ROUND` in `family.py`, merge, and run the **setup** workflow.
+
+TNMSC and RMSC have their own pilot sets (`"pilot"` in `corps.py`). After the first pool run looks right, set `"pilot": None`,
+merge, and run the **setup** workflow.
 
 ## Check
 
@@ -68,6 +95,8 @@ python wbmsc_task.py --local docs tender 0 400 /tmp/out        # one small shard
 python wayback_task.py --local 'wbmsc.gov.in/*' 0 400 /tmp/out
 python mpphscl_task.py --local page BlackListFirm.aspx
 myproxy run scrape-check --items 2 --project medical-procurement-mpphscl   # India only
+python corp_task.py tnmsc --local page blacklist
+python corp_task.py rmsc --local docs bans 0 2 /tmp/out
 ```
 
 The full scraper reference is in `CLAUDE.md`.

@@ -12,6 +12,8 @@ This family stores what only the corporation's own site has, and joins the rest 
 import json
 from pathlib import Path
 
+import corps
+
 FAMILY = json.loads((Path(__file__).parent / "scrape.json").read_text())["family"]
 ROUND = "2026-11"
 
@@ -96,6 +98,8 @@ PROJECTS = [
     },
 ]
 
+PROJECTS += corps.projects(FAMILY, ROUND)       # TNMSC and RMSC (corp_task.py)
+
 # First pool run (scraper guide): seed only these items, watch scrape.s1d.me -> Runs, then set the flag to False and run Setup
 # again. Each site has its own flag, so one site can leave its pilot while another stays in it.
 PILOT = False   # pilot of 2026-11-14 passed: rows, documents, missing links and Wayback records looked right
@@ -109,7 +113,10 @@ MP_PILOT_KEYS = {f"{ROUND}/page/TenderALL.aspx", f"{ROUND}/page/BlackListFirm.as
 
 
 def pilot_keys(project):
-    """The pilot keys of a project while its pilot is on, else None (seed everything)."""
+    """The pilot keys of a project while its pilot is on, else None (seed everything). TNMSC and RMSC keep theirs in the
+    project itself ("pilot" in corps.py)."""
+    if "pilot" in project:
+        return project["pilot"]
     if project["name"].endswith("-mpphscl"):
         return MP_PILOT_KEYS if MP_PILOT else None
     return PILOT_KEYS if PILOT else None
@@ -125,4 +132,4 @@ def queue(project):
 PROBES = [
     {"name": f"{FAMILY}:www.wbmsc.gov.in", "url": f"{WBMSC}/award-of-work.php", "expect": "West Bengal Medical Services Corporation"},
     {"name": f"{FAMILY}:web.archive.org", "url": "https://web.archive.org/", "expect": "Wayback Machine"},
-]
+] + corps.probes(FAMILY)

@@ -27,6 +27,14 @@ jobs:
         run: python -m pytest tests -q
       - name: scrape-check (local stand-in hub, 2 real items)
         run: scrape-check --items 2
+      # tnmsc.tn.gov.in and rmsc.health.rajasthan.gov.in do not answer GitHub's runners (2026-11-14: every request timed out);
+      # the pool runs them through an Indian proxy (proxy="IN"), which this workflow does not have. These steps show the state
+      # and do not fail the check; on a team box run `myproxy run scrape-check --items 2 --project <project>`.
+      - name: scrape-check TNMSC and RMSC (informational; the sites need an Indian proxy)
+        continue-on-error: true
+        run: |
+          scrape-check --items 1 --no-rerun --project medical-procurement-rmsc --timeout 200 || true
+          scrape-check --items 1 --no-rerun --project medical-procurement-tnmsc --timeout 200
       - uses: actions/upload-artifact@v6
         if: ${{ always() }}
         with:
