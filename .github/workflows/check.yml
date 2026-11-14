@@ -35,12 +35,7 @@ jobs:
         run: |
           scrape-check --items 1 --no-rerun --project medical-procurement-rmsc --timeout 200 || true
           scrape-check --items 1 --no-rerun --project medical-procurement-tnmsc --timeout 200
-      - name: Reachability of HMSCL and BMSICL from GitHub's runners (informational; decides proxy="" or "IN" in corps.py)
-        continue-on-error: true
-        run: |
-          for u in https://hmscl.org.in/Page.aspx?slug=banned-firms http://bmsicl.gov.in/new/drugs/drug-procurement-status/; do
-            curl -s -o /dev/null --max-time 40 -A "s1d-labs scraper (https://github.com/s1d-labs)" -w "%{http_code} %{time_total}s $u\n" "$u" || echo "no answer $u"
-          done
+      # hmscl.org.in and bmsicl.gov.in did not answer GitHub's runners either (2026-11-14, 40 s timeouts): they run with proxy="IN".
       - uses: actions/upload-artifact@v6
         if: ${{ always() }}
         with:

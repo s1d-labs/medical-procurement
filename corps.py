@@ -22,8 +22,12 @@ BR_ROWS = {"home": 4, "rc-status": 2, "equipment-blacklist": 4, "blacklist": 10}
 BR_DOCS = {"rc": (6, 1), "orders": (87, 2)}         # rc: 6 rate contract files (about 1,600 rows); orders: 87 blacklist posts
 
 
-HMSCL_PROXY = "IN"     # decided below from the check workflow (GitHub runners) and myproxy runs, 2026-11-14
+# 2026-11-14: neither site answered GitHub's runners (check workflow: no answer in 40 s). HMSCL answers through the Indian
+# proxies (myproxy scrape-check passed). BMSICL refused in-05 (191.219.x, 6 tries) and in-07 (91.124.42.x) but answered 3 of
+# 3 other tries whose label was not shown, most likely 95.134.119.x (in-08 .. in-10): the pilot checks this.
+HMSCL_PROXY = "IN"
 BMSICL_PROXY = "IN"
+BMSICL_PROXY_ONLY = ["95.134.119."]
 
 
 def _items(site, mod, rows, docs_, rnd, prefix=""):
@@ -88,7 +92,7 @@ def projects(family, rnd):
             "probe": f"{family}:bmsicl.gov.in",
             "unit_label": "page or document shard", "record_label": "row or document",
             "threads": 1, "delay_ms": 2000, "max_workers": 1,
-            "proxy": BMSICL_PROXY,
+            "proxy": BMSICL_PROXY, "proxy_only": BMSICL_PROXY_ONLY,
             "items": _items("bmsicl", bmsicl, BR_ROWS, BR_DOCS, rnd, "bmsicl/"),
             "pilot": {f"{rnd}/bmsicl/page/blacklist-1", f"{rnd}/bmsicl/page/rc-status", f"{rnd}/bmsicl/docs/rc-00-of-1"},
         },
