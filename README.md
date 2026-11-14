@@ -47,7 +47,8 @@ Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in 
 - RMSC ban lists: 8 debarred firms and 101 banned products. 62 rows give NSQ as the reason. Most order PDFs are scans (`ocr-needed/`).
 - RMSC tenders: 1,368 drug, 2,588 equipment and 148 finance rows with about 4,000 PDFs.
 - Neither site publishes a list of NSQ batches. The NSQ results show only as the reason of a blacklist or ban entry.
-- tnmsc.tn.gov.in does not answer the GitHub runners (check workflow, 2026-11-14). The project uses an Indian proxy (`proxy="IN"`).
+- Neither site answers the GitHub runners (check workflow, 2026-11-14: every request timed out). Both answer from India.
+  Both projects use an Indian proxy (`proxy="IN"`). The check workflow cannot test them; use `myproxy run scrape-check`.
 
 ## Who won the tenders
 

@@ -103,4 +103,5 @@ def test_corp_projects_and_pilots():
         assert len(keys) == len(set(keys)) and p["pilot"] <= set(keys)
         assert {i["key"] for i in family.queue(p)} == p["pilot"]
         assert p["probe"] in {x["name"] for x in family.PROBES}
+        assert p["proxy"] == "IN"                  # neither site answers GitHub's runners
     assert len(ps["medical-procurement-rmsc"]["items"]) == 6 + sum(n for _, n in corps.RJ_DOCS.values())
