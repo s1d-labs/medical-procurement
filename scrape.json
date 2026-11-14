@@ -6,6 +6,7 @@
   ],
   "tasks": {
     "wbmsc": ["python", "wbmsc_task.py"],
-    "wayback": ["python", "wayback_task.py"]
+    "wayback": ["python", "wayback_task.py"],
+    "mpphscl": ["python", "mpphscl_task.py"]
   }
 }
