@@ -113,7 +113,7 @@ def projects(family, rnd):
             "probe": f"{family}:tgmsidc.telangana.gov.in",
             "unit_label": "page or document shard", "record_label": "row or document",
             "threads": 1, "delay_ms": 1500, "max_workers": 1,
-            "proxy": "IN",        # see PROXY_NOTE below
+            "proxy": "",          # direct: GitHub's runners got HTTP 200 in 2.4 s and scrape-check passed (check workflow, 2026-11-14)
             "items": _items("tgmsidc", tgmsidc, TG_ROWS, TG_DOCS, rnd),
             "pilot": {f"{rnd}/page/drugs-wing", f"{rnd}/docs/lists-00-of-1"},
         },
@@ -126,7 +126,9 @@ def projects(family, rnd):
             "probe": f"{family}:upmsc.in",
             "unit_label": "page or document shard", "record_label": "row or document",
             "threads": 1, "delay_ms": 1500, "max_workers": 2,
-            "proxy": "IN",        # see PROXY_NOTE below
+            # GitHub's runners got no answer in 30 s (check workflow, 2026-11-14). The team box (Indian IP) gets HTTP 200, but the
+            # proxy in-07 (91.124.42.x) gets "CONNECT 504": lend only the other two ranges (not tested yet; see Runs after setup).
+            "proxy": "IN", "proxy_only": ["191.219.", "95.134.119."],
             "items": _items("upmscl", upmscl, UP_ROWS, UP_DOCS, rnd),
             "pilot": {f"{rnd}/page/nsq", f"{rnd}/page/tenders", f"{rnd}/docs/nsq-orders-00-of-1", f"{rnd}/docs/results-00-of-5"},
         },
