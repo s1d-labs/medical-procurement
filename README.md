@@ -1,49 +1,59 @@
-# family-template
+# medical-procurement
 
-Start a new scraping family for the s1d-labs pool. A family is one kind of site (or one platform many sites share); the pool runs
-its code on members' GitHub Actions minutes. This template is a complete, working family for
-[books.toscrape.com](https://books.toscrape.com) (a public site made for scraping practice): copy it, then change it.
+This family scrapes the tenders, notices and documents of the state medical services corporations of India (planned source P17,
+with the blacklists of D04). The first site is the West Bengal Medical Services Corporation Ltd. (WBMSC, www.wbmsc.gov.in).
+Other corporations (TNMSC, RMSCL, GMSCL, KMSCL, BMSICL, MPPHSCL) will follow in this repo.
 
-## Make your family
+## Projects
 
-1. Ask the hub owner to **add the family** on [scrape.s1d.me/runners](https://scrape.s1d.me/runners) (name, what it scrapes, owner).
-   The hub creates `s1d-labs/<family>` from this template, names the family in `scrape.json`, and makes the owner admin
-   (with the GitHub account they added on home.s1d.me).
-2. Clone it: `gh repo clone s1d-labs/<family>`.
-3. In your repo:
-   - `scrape.json`: set `"family"` to the family name; list your tasks (one command each) and setup steps.
-   - `family.py`: your projects (one queue of work per site), their target hosts, the env your command needs, the queue items,
-     and the health checks.
-   - `crawl.py` (or whatever your tasks run): the scraper.
-   - `README.md`: replace this text with your family's own: what it scrapes, its projects and tasks, and how to run the check.
-     Delete `crawl.py`, `tests/pages/catalogue-page-1.html` and the example test when your own task replaces them.
-4. **Check it**: `scrape-check` in the repo (needs `pip install "scrape-hub-client @ git+https://github.com/s1d-labs/runner@sdk-stable#subdirectory=sdk"`).
-   It runs your setup and task against a local stand-in hub on 3 real items and says what works. The **check** workflow runs it
-   (and `tests/`) on every push.
-5. Run the **setup** workflow (Actions → setup → Run workflow). It registers the projects, puts them in the pool and registers
-   the health checks.
-6. The hub starts runs in members' accounts when the pool is on and there is work. Watch it on scrape.s1d.me.
+| Project | Task | Target | What it stores |
+|---|---|---|---|
+| `medical-procurement-wbmsc` | `wbmsc` | www.wbmsc.gov.in | One record for each row of the tender, notice, award and recruitment lists. One record for each version of each linked document. Raw pages and documents go to the bucket. |
+| `medical-procurement-wbmsc-wayback` | `wayback` | web.archive.org | Old versions of the WBMSC pages and documents from the Wayback Machine. |
 
-## What your code gets
+## Facts about the WBMSC site (2026-11-14)
 
-The pool worker ([s1d-labs/runner](https://github.com/s1d-labs/runner)) checks out this repo at `main`, runs the `setup` steps from
-`scrape.json`, and for each assignment runs the task's command here with:
+- Each list is one page with all rows since 2011. There is no pagination. The tender list has 7,276 rows and links 5,259 files.
+- The site gives each new file a random number from 1 to 9999. It reuses a number and overwrites the older file.
+  1,586 file names had two or more different tenders. About 2,000 older rows link to a newer, unrelated file.
+- The Wayback Machine has copies of 821 of these overwritten files, made before the overwrite.
+- The award list has 3 notices, all from 2011. The site does not show who won a tender.
+- The site has no robots.txt and no page with terms of use.
 
-| Variable | What |
+## Who won the tenders
+
+The winners are in other projects of the hub. This family does not scrape them again:
+
+- e-tenders on wbtenders.gov.in: project `gepnic-wbtenders` (bidders, bid status, winners);
+- GeM bids (`GEM/<year>/B/<number>`): the team database `gem`.
+
+The analysis joins them in the `ws_trideep` database by the NIT number (`nit`) and the GeM bid number (`gem_bid`).
+
+## Records
+
+| Record id | Meaning |
 |---|---|
-| `SCRAPE_POOL_PROJECT` | the project to work on |
-| `SCRAPE_JOB_INDEX`, `SCRAPE_TOTAL_JOBS` | this worker's slice |
-| `SCRAPE_MAX_HOURS` | how long the command may run |
-| `SCRAPE_HUB_URL` | the hub |
-| your project's `env` | e.g. `SITE` |
+| `tender:<hash>`, `notice:<hash>`, `award:<hash>`, `recruitment:<hash>` | A row of a list. The hash is of the row text and link, not of the file name. |
+| `doc:<section>/<file>:<sha256[:16]>` | One version of a linked file. A new version gets a new record. |
+| `missing:<section>/<file>:<round>` | A link that did not give the file. |
+| `page:<round>:<page>` | One snapshot of a page. |
+| `wb:<path>:<digest[:16]>` | One archived content from the Wayback Machine, with all its capture times. |
 
-Use `scrape_hub_client` (`HubClient`) to claim queue items, store records, upload files and report counters. Exit when there is
-nothing left; the worker then asks the hub for the next assignment.
+Bucket paths (in the project folder): `pages/<round>/`, `docs/<section>/<sha256>.<ext>`, `text/<sha256>.txt.gz`, and
+`ocr-needed/<section>/<sha256>.pdf` for scans with no text layer. OCR is off.
 
-## Rules (the full contract is in CLAUDE.md, written for people and for Claude Code)
+## Run again
 
-- **Be polite.** Use `hub.settings["threads"]` and `delay_ms`, idle while `hub.settings["paused"]`, and report `n_http` and
-  `t_http_s` for every request and `http_<code>` / `http_error` for failures: the hub throttles you from these.
-- **Files go through the hub** (`hub.upload_many`): it signs each upload into the family's bucket (500 GB per member) and stops at
-  the cap. Never put storage keys in this repo.
-- **Public data only**; read the site's terms first. See the team docs on home.s1d.me (Scraping rules).
+To get new tenders and changed documents, change `ROUND` in `family.py`, merge, and run the **setup** workflow.
+
+## Check
+
+```
+pip install -r requirements.txt pytest "scrape-hub-client @ git+https://github.com/s1d-labs/runner@sdk-stable#subdirectory=sdk"
+python -m pytest tests -q
+scrape-check --items 2
+python wbmsc_task.py --local docs tender 0 400 /tmp/out        # one small shard, no hub
+python wayback_task.py --local 'wbmsc.gov.in/*' 0 400 /tmp/out
+```
+
+The full scraper reference is in `CLAUDE.md`.
