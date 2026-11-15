@@ -89,7 +89,7 @@ def projects(family, rnd):
             "threads": 1, "delay_ms": 1500, "max_workers": 1,
             "proxy": HMSCL_PROXY,
             "items": _items("hmscl", hmscl, HR_ROWS, HR_DOCS, rnd, "hmscl/"),
-            "pilot": {f"{rnd}/hmscl/page/drugrc", f"{rnd}/hmscl/page/banned", f"{rnd}/hmscl/docs/orders-00-of-1"},
+            "pilot": None,        # pilot of 2026-11-15 passed: 428 drug RCs, 6 bans, 6 order PDFs
         },
         {
             "name": f"{family}-bmsicl",
@@ -101,6 +101,7 @@ def projects(family, rnd):
             "unit_label": "page or document shard", "record_label": "row or document",
             "threads": 1, "delay_ms": 2000, "max_workers": 1,
             "proxy": BMSICL_PROXY, "proxy_only": BMSICL_PROXY_ONLY,
+            "pool": False,        # out of the pool: 40 tries through proxies, "page did not load" (2026-11-15); the box reaches it
             "items": _items("bmsicl", bmsicl, BR_ROWS, BR_DOCS, rnd, "bmsicl/"),
             "pilot": {f"{rnd}/bmsicl/page/blacklist-1", f"{rnd}/bmsicl/page/rc-status", f"{rnd}/bmsicl/docs/rc-00-of-1"},
         },
@@ -115,7 +116,7 @@ def projects(family, rnd):
             "threads": 1, "delay_ms": 1500, "max_workers": 1,
             "proxy": "",          # direct: GitHub's runners got HTTP 200 in 2.4 s and scrape-check passed (check workflow, 2026-11-14)
             "items": _items("tgmsidc", tgmsidc, TG_ROWS, TG_DOCS, rnd),
-            "pilot": {f"{rnd}/page/drugs-wing", f"{rnd}/docs/lists-00-of-1"},
+            "pilot": None,        # pilot of 2026-11-15 passed: 522 medicine RCs, 446 surgical RCs, 57 product blacklist rows
         },
         {
             "name": f"{family}-upmscl",
@@ -129,6 +130,7 @@ def projects(family, rnd):
             # GitHub's runners got no answer in 30 s (check workflow, 2026-11-14). The team box (Indian IP) gets HTTP 200, but the
             # proxy in-07 (91.124.42.x) gets "CONNECT 504": lend only the other two ranges (not tested yet; see Runs after setup).
             "proxy": "IN", "proxy_only": ["191.219.", "95.134.119."],
+            "pool": False,        # out of the pool: 40 tries through proxies, "page did not load" (2026-11-15); the box reaches it
             "items": _items("upmscl", upmscl, UP_ROWS, UP_DOCS, rnd),
             "pilot": {f"{rnd}/page/nsq", f"{rnd}/page/tenders", f"{rnd}/docs/nsq-orders-00-of-1", f"{rnd}/docs/results-00-of-5"},
         },
