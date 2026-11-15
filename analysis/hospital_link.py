@@ -13,6 +13,10 @@ word that is in many facility names of the state (a district town) needs the sam
   hospital in the registry and no super speciality entry (WBMSC built new super speciality units in such towns, e.g.
   Suri SSH -> Suri District Hospital). Same town, often the same campus; check before treating it as the same facility.
 Any other type mismatch is not linked (a medical college is not the town's ESIC or taluk hospital).
+- confidence "pincode": no facility has the name word (the tender names the town, the registry the district: "Krishnagar
+  DH" -> "Nadia District Hospital"), and the tender's pincode has exactly one facility of the same hospital-level type
+  (super speciality, district, sub-divisional, general). Not for PHCs, rural hospitals or medical colleges (their pincode
+  in a tender is often another site's; a medical college is never renamed after its district).
 Candidates come from the same pincode first, then the same state. Locations without any hospital word, and tenders for
 the head office or the whole state, are not linked.
 
@@ -40,13 +44,27 @@ SPELL = {"burdwan": "bardhaman", "barddhaman": "bardhaman", "midnapore": "medini
          "koch": "cooch", "bihar": "behar", "paraganas": "parganas", "pargana": "parganas", "jalpaiguri": "jalpaiguri",
          "trivandrum": "thiruvananthapuram", "calicut": "kozhikode", "alleppey": "alappuzha", "trichur": "thrissur",
          "quilon": "kollam", "cochin": "kochi", "palghat": "palakkad", "cannanore": "kannur", "speciality": "speciality",
-         "specialty": "speciality", "centre": "centre", "center": "centre", "govt": "government", "collge": "college", "superspeciality": "super speciality", "superspecialty": "super speciality", "hosptal": "hospital"}
+         "specialty": "speciality", "centre": "centre", "center": "centre", "govt": "government", "collge": "college", "superspeciality": "super speciality", "superspecialty": "super speciality", "hosptal": "hospital",
+         # found by a fuzzy pass of unlinked names against registry names (15 Nov)
+         "chatna": "chhatna", "bashirhat": "basirhat", "chanchol": "chanchal", "arambag": "arambagh", "kakwdip": "kakdwip",
+         "serampur": "serampore", "shreerampore": "serampore", "chakdah": "chakdaha", "samtipur": "santipur",
+         "sagardidhi": "sagardighi", "pashkura": "panskura", "gamgarampur": "gangarampur", "gangarampure": "gangarampur",
+         "toofanganj": "tufanganj", "mednipur": "medinipur", "bagdah": "bagda", "brasat": "barasat",
+         "nileshwaram": "nileswaram", "nileshwar": "nileswaram", "aluk": "taluk", "governement": "government",
+         "govertment": "government", "goverment": "government", "govermant": "government"}
 TYPES = {"super", "district", "sub", "divisional", "state", "general", "medical", "college", "rural", "primary", "community",
          "health", "centre", "hospital", "hospitals", "government", "urban", "block", "and", "of", "the", "in", "at", "for",
          "unit", "care", "speciality", "multi", "new", "old", "building", "campus", "taluk", "headquarters", "institute",
          "west", "east", "north", "south", "central", "bengal", "office", "principal", "controller", "superintendent", "ms",
-         "cmoh", "covid", "colleges", "different", "various", "district", "memorial", "esic", "medicine", "school", "tropical"}
+         "cmoh", "covid", "colleges", "different", "various", "district", "memorial", "esic", "medicine", "school", "tropical",
+         # building words a title puts before the hospital name: "G plus 4 storied Arambagh SSH"
+         "plus", "storied", "bedded", "floor", "ward", "dept", "department", "two", "three", "four", "five", "six", "existing",
+         # departments a title names before the college: "Dept of Orthopaedics, RG Kar MCH"
+         "ophthalmology", "orthopaedics", "orthopedics", "ctvs", "dermatology", "respiratory", "cardiology", "neurology",
+         "paediatrics", "pediatrics", "gynaecology", "obstetrics", "surgery", "radiology", "anaesthesiology", "pathology",
+         "microbiology", "psychiatry", "nephrology", "urology", "oncology", "tertiary", "radiotherapy", "biochemistry"}
 TOWN_TYPES = {"district", "divisional", "general"}   # registry types a new super speciality unit of the same town may sit in
+PIN_TYPES = {"super", "district", "divisional", "general"}   # hospital-level types for the pincode fallback
 KEYTYPES = {"super", "district", "divisional", "medical", "rural", "primary", "community", "general", "esic", "state", "taluk"}
 HOSPITAL_WORDS = KEYTYPES | {"hospital", "college", "institute", "centre"}
 STATEWIDE = re.compile(r"^\s*(west bengal|kerala|tamil ?nadu|rajasthan|madhya pradesh|maharashtra|odisha|uttar pradesh|"
@@ -84,6 +102,25 @@ def parts(loc):
     return out or [loc]
 
 
+CUT = {"at", "of", "in", "for", "to", "under", "from", "inside", "within", "with", "on", "near"}
+
+
+def title_mentions(title):
+    """Hospitals a title names: '... CCU at Gangarampur SSH, Dakshin Dinajpur' -> ['gangarampur super speciality
+    hospital']. Each mention is the words before a 'hospital' or 'college', back to the nearest 'at', 'of', 'in' ..."""
+    ws, out = norm(title), []
+    for i, w in enumerate(ws):
+        if w in ("hospital", "college"):
+            j = i
+            while j > 0 and i - j < 6 and ws[j - 1] not in CUT and ws[j - 1] != "hospital" and \
+                    not (ws[j - 1] == "and" and j < i):       # "X and Y Hospital" stops; "College and Hospital" goes on
+                j -= 1
+            m = " ".join(ws[j:i + 1])
+            if content(m.split()) and not any(m in o for o in out):
+                out.append(m)
+    return out
+
+
 def link(tenders, facilities):
     by_pin, by_state, freq = defaultdict(list), defaultdict(list), defaultdict(Counter)
     for f in facilities:
@@ -93,34 +130,50 @@ def link(tenders, facilities):
         by_pin[f["pincode"]].append(f)
         by_state[st].append(f)
         freq[st].update(f["c"])
+    def match(t, loc, st):
+        tl = set(norm(loc))
+        if STATEWIDE.match(loc) or not (tl & HOSPITAL_WORDS):
+            return                                     # head office, whole state, or no hospital named
+        kinds = KEYTYPES & tl
+        names = [w for w in norm(loc) if w in content([w])]
+        if not names:
+            return
+        if not freq[st][names[0]] and len(names) > 1 and freq[st][names[0] + names[1]]:
+            names = [names[0] + names[1]] + names[2:]  # "Sambhu Nath Pandit" = "Sambhunath Pandit"
+        first = names[0]                               # the hospital's own place or name: "suri" in "Suri SSH, Birbhum"
+        pools = (("pincode", by_pin.get(t["pincode"], [])), ("state", by_state.get(st, [])))
+        if freq[st][first] > COMMON:                   # a district town in many names: same type, and only one such facility
+            same = [f for f in by_state.get(st, []) if first in f["c"] and kinds & f["n"]]
+            pools = (("state", same if len(same) == 1 else []),)
+        words = set(names)
+        for pool_name, pool in pools:
+            hits = [f for f in pool if first in f["c"]]
+            if hits:
+                best = max(hits, key=lambda f: (bool(kinds & f["n"]), len(words & f["c"]), len(tl & f["n"])))
+                if kinds & best["n"] or (not (kinds or KEYTYPES & best["n"]) and len(words) > 1 and words <= best["c"]):
+                    conf = "exact"                     # same type; or both only "hospital" and 2+ name words, all agree
+                elif "super" in kinds and TOWN_TYPES & best["n"] and "esic" not in best["n"]:
+                    conf = "town"
+                else:
+                    continue                           # other kind of facility here: try the next pool, else no link
+                yield best, pool_name, conf, len(words & best["c"])
+                return
+        big = kinds & PIN_TYPES                       # a PHC's pincode often has another PHC: no fallback there
+        same = [f for f in by_pin.get(t["pincode"], []) if big & f["n"]]
+        if not freq[st][first] and len(same) == 1:     # name in no facility: the registry calls it otherwise
+            yield same[0], "pincode", "pincode", 0
+
     for t in tenders:
         st = STATE_OF_CORP.get(t["corp"], "")
-        for loc in parts(t["location"] or ""):
-            tl = set(norm(loc))
-            if STATEWIDE.match(loc) or not (tl & HOSPITAL_WORDS):
-                continue                               # head office, whole state, or no hospital named
-            kinds = KEYTYPES & tl
-            names = [w for w in norm(loc) if w in content([w])]
-            if not names:
-                continue
-            first = names[0]                           # the hospital's own place or name: "suri" in "Suri SSH, Birbhum"
-            pools = (("pincode", by_pin.get(t["pincode"], [])), ("state", by_state.get(st, [])))
-            if freq[st][first] > COMMON:               # a district town in many names: same type, and only one such facility
-                same = [f for f in by_state.get(st, []) if first in f["c"] and kinds & f["n"]]
-                pools = (("state", same if len(same) == 1 else []),)
-            words = set(names)
-            for pool_name, pool in pools:
-                hits = [f for f in pool if first in f["c"]]
-                if hits:
-                    best = max(hits, key=lambda f: (bool(kinds & f["n"]), len(words & f["c"]), len(tl & f["n"])))
-                    if kinds & best["n"]:
-                        conf = "exact"
-                    elif "super" in kinds and TOWN_TYPES & best["n"] and "esic" not in best["n"]:
-                        conf = "town"
-                    else:
-                        continue                       # other kind of facility here: try the next pool, else no link
-                    yield t, best, pool_name, conf, len(words & best["c"])
-                    break
+        got = [m for loc in parts(t["location"] or "") for m in match(t, loc, st)]
+        if not got:                                    # location is only the district: the title often names the hospital
+            got = [(f, "title-" + p, c, sc) for loc in title_mentions(t["title"]) for f, p, c, sc in match(t, loc, st)]
+        seen = set()
+        for f, pool, conf, score in got:
+            if f["hfr_id"] not in seen:
+                seen.add(f["hfr_id"])
+                yield t, f, pool, conf, score
+
 
 def main(tpath, fpath, opath):
     tcols = ["corp", "tender_id", "location", "pincode", "title"]
@@ -141,20 +194,34 @@ def _selfcheck():
         ("Kalna SD and SS Hospital", "Purba Bardhaman", "713409"), ("Suri District Hospital", "Birbhum", "731101"),
         ("Bardhaman Medical College and Hospital", "Purba Bardhaman", "713104"),
         ("Nil Ratan Sircar Medical College", "Kolkata", "700014"), ("ESIC Hospital Udaipur", "Udaipur", "313001"),
-        ("Taluk Head Quarters Hospital Konni", "Pathanamthitta", "689691"), ("Nadia District Hospital", "Nadia", "741101")])]
+        ("Taluk Head Quarters Hospital Konni", "Pathanamthitta", "689691"), ("Nadia District Hospital", "Nadia", "741101"),
+        ("Chhatna Super Speciality Hospital", "Bankura", "722132"), ("Sambhunath Pandit Hospital", "Kolkata", "700020")])]
     fac += [dict(hfr_id=f"k{i}", hospital=f"Kolkata Clinic {i}", district="Kolkata", state="West Bengal", pincode="700001")
             for i in range(COMMON + 1)]
     ten = [dict(corp="WBMSC", tender_id=k, location=loc, pincode=pin, title="") for k, loc, pin in [
         ("a", "kalna SSH", "713409"), ("b", "Suri SSH, Birbhum", "731101"), ("c", "Burdwan Medical College", "713101"),
         ("d", "NRS MCH, Kolkata", "700014"), ("e", "MCH, KOLKATA", "700001"), ("f", "WEST BENGAL", "700091"),
         ("g", "Parel, Mumbai", "400012"), ("j", "MCH, Kolkata", "700014"), ("h", "RNT Medical College, Udaipur", "313001"),
-        ("i", "Govt. Medical College Konni", "689691"), ("k", "NSS Kalyani in Nadia District", "741235")]]
+        ("i", "Govt. Medical College Konni", "689691"), ("k", "NSS Kalyani in Nadia District", "741235"),
+        ("l", "krishnagar DH", "741101"), ("m", "Chatna SSH", "722132"), ("n", "Kalna Rural Hospital", "713409")]]
+    fac.append(dict(hfr_id="9", hospital="Composite Hospital BSF Kolkata", district="Kolkata", state="West Bengal", pincode="700020"))
+    ten.append(dict(corp="WBMSC", tender_id="q", location="Kolkata Police Hospital", pincode="700020", title=""))
+    ten.append(dict(corp="WBMSC", tender_id="p", location="Sambhu Nath Pandit Hospital", pincode="700020", title=""))
+    ten.append(dict(corp="WBMSC", tender_id="o", location="Purba Bardhaman", pincode="713101",
+                    title="Repair of lift at Burdwan Medical College and Hospital, Purba Bardhaman"))
     got = {t["tender_id"]: (f["hfr_id"], conf) for t, f, _, conf, _ in link(ten, fac)}
     assert [p.strip() for p in parts("Chanchol SSH, Jangipur SSH, Dumkol SSH")] == ["Chanchol SSH", "Jangipur SSH", "Dumkol SSH"]
     assert len(parts("Suri SSH, Birbhum")) == 1 and len(parts("Debra SSH and Belda SSH")) == 2
     assert len(parts("Medical College and Hospital, Kolkata")) == 1
+    assert title_mentions("CCU at Gangarampur SSH, Dakshin Dinajpur") == ["gangarampur super speciality hospital"]
+    assert title_mentions("works at Salboni SSH, Debra SSH")[1] == "debra super speciality hospital"
+    assert title_mentions("plant for Deen Dayal Hospital Varanasi and 200 Bedded MCH Wing")[1:] == []
+    assert title_mentions("lift at Burdwan Medical College and Hospital")[-1] == "bardhaman medical college and hospital"
     assert norm("R.N.T. Medical College")[0] == "rnt" and norm("M.R. Bangur SSH")[:2] == ["mr", "bangur"]
-    assert got == {"a": ("0", "exact"), "b": ("1", "town"), "c": ("2", "exact"), "d": ("3", "exact")}  # "MCH, Kolkata" names no hospital, got
+    assert got == {"a": ("0", "exact"), "b": ("1", "town"), "c": ("2", "exact"), "d": ("3", "exact"),
+                   "l": ("6", "pincode"), "m": ("7", "exact"),
+                   "o": ("2", "exact"), "p": ("8", "exact")}
+    # not linked: "n" (a rural hospital is not the SD hospital at its pincode), "e"/"j" ("MCH, Kolkata" names no hospital), "q" (police is not BSF)
 
 
 if __name__ == "__main__":
