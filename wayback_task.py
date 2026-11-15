@@ -23,6 +23,7 @@ import time
 from scrape_hub_client import HubClient, LocalHub, stop_flag, timed_get
 
 import docs
+import family
 import taskrun
 from taskrun import now, pause, time_up
 import wbmsc
@@ -126,6 +127,8 @@ def do_unit(hub, s, unit, site):
 
 def do_shard(hub, s, item):
     p = item["payload"]
+    if int(p["shards"]) == family.WAYBACK_SHARDS and int(p["shard"]) in family.WAYBACK_SPLIT:
+        return 0, None                                 # split into three keys of 72 (family.WAYBACK_SPLIT): nothing to do here
     rows = cdx_rows(hub, s, p["prefix"])
     if rows is None:
         return None, "CDX index did not load"
