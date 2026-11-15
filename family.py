@@ -54,6 +54,9 @@ def mpphscl_items():
 
 
 WAYBACK_SHARDS = 24       # ~5,100 distinct archived contents of wbmsc.gov.in (CDX, 2026-11-14)
+# Shards that ran past the 60-minute assignment again and again (15 Nov). Each is split in 3: shard k of 24 is shards k,
+# k+24, k+48 of 72 (the same hash). The task completes the old key at once; the three small keys do the work.
+WAYBACK_SPLIT = (2, 4, 11, 21)
 
 PROJECTS = [
     {
@@ -76,11 +79,14 @@ PROJECTS = [
         "env": {},
         "probe": f"{FAMILY}:web.archive.org",
         "unit_label": "capture shard", "record_label": "archived content",
-        "threads": 1, "delay_ms": 1500, "max_workers": 2,
+        "threads": 1, "delay_ms": 1500, "max_workers": 1,   # 1: leaves a web.archive.org slot to ppp-india-wayback
         "proxy": "",
         "items": [{"key": f"wbmsc/{k:02d}-of-{WAYBACK_SHARDS}",
                    "payload": {"prefix": "wbmsc.gov.in/*", "site": "wbmsc", "shard": k, "shards": WAYBACK_SHARDS, "expected": 210}}
-                  for k in range(WAYBACK_SHARDS)],
+                  for k in range(WAYBACK_SHARDS)] +
+                 [{"key": f"wbmsc/{j:02d}-of-{3 * WAYBACK_SHARDS}",
+                   "payload": {"prefix": "wbmsc.gov.in/*", "site": "wbmsc", "shard": j, "shards": 3 * WAYBACK_SHARDS, "expected": 70}}
+                  for k in WAYBACK_SPLIT for j in (k, k + WAYBACK_SHARDS, k + 2 * WAYBACK_SHARDS)],
     },
     {
         "name": f"{FAMILY}-mpphscl",
