@@ -111,4 +111,4 @@ def test_projects_and_pilots():
         assert p["proxy"] in ("", "IN") and p["threads"] == 1 and p["delay_ms"] >= 1500
         q = {i["key"] for i in family.queue(p)}
         assert q and q <= {i["key"] for i in p["items"]}
-    assert len({p["name"] for p in corps.projects("x", "r")}) == 6
+    assert len({p["name"] for p in corps.projects("x", "r")}) == 7

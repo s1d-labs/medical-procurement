@@ -1,11 +1,12 @@
 """Projects of the corporations served by corp_task.py: TNMSC (Tamil Nadu), RMSC (Rajasthan), HMSCL (Haryana), BMSICL (Bihar),
-TGMSIDC (Telangana) and UPMSCL (Uttar Pradesh). family.py adds them to PROJECTS.
+TGMSIDC (Telangana), UPMSCL (Uttar Pradesh) and KMSCL (Kerala). family.py adds them to PROJECTS.
 
 Each project has its own pilot list ("pilot"): while it is a set, Setup seeds only those keys. Set it to None after the first pool
 run looks right on scrape.s1d.me -> Runs, then run Setup again.
 """
 import bmsicl
 import hmscl
+import kmscl
 import rmsc
 import tgmsidc
 import tnmsc
@@ -28,6 +29,10 @@ TG_ROWS = {"drugs-wing": 7}
 TG_DOCS = {"lists": (7 + 1036, 1)}
 UP_ROWS = {"nsq": 41, "tenders": 858}
 UP_DOCS = {"nsq-orders": (41, 1), "results": (494, 5)}
+# Kerala (2026-11-16): 39 department pages link 653 running contract PDFs; the menu links 4 lists (2 blacklists with 5 entries,
+# the Karunya price list with 13,715 products, the no-bidder items).
+KL_ROWS = {"home": 4, "warehouses": 17, "contracts": 17}
+KL_DOCS = {"lists": (4 + 13715 + 5, 1), "contracts": (653, 6)}
 
 
 # 2026-11-14: neither site answered GitHub's runners (check workflow: no answer in 40 s). HMSCL answers through the Indian
@@ -134,6 +139,22 @@ def projects(family, rnd):
             "items": _items("upmscl", upmscl, UP_ROWS, UP_DOCS, rnd),
             "pilot": {f"{rnd}/page/nsq", f"{rnd}/page/tenders", f"{rnd}/docs/nsq-orders-00-of-1", f"{rnd}/docs/results-00-of-5"},
         },
+        {
+            "name": f"{family}-kmscl",
+            "title": "KMSCL (Kerala Medical Services Corporation): equipment running contracts, blacklists, Karunya price list",
+            "task": "kmscl",
+            "target": "kmscl.kerala.gov.in",
+            "env": {"SITE": kmscl.SITE},
+            "probe": f"{family}:kmscl.kerala.gov.in",
+            "unit_label": "page or document shard", "record_label": "row or document",
+            "threads": 1, "delay_ms": 1500, "max_workers": 1,
+            # the box (Mumbai) and proxy in-05 (191.219.x) got HTTP 200 (2026-11-16). GitHub's runners are not tested yet, and many
+            # .kerala.gov.in hosts refuse them.
+            "proxy": "IN",
+            "items": _items("kmscl", kmscl, KL_ROWS, KL_DOCS, rnd, "kmscl/"),
+            "pilot": {f"{rnd}/kmscl/page/home", f"{rnd}/kmscl/page/warehouses", f"{rnd}/kmscl/page/contracts-65",
+                      f"{rnd}/kmscl/docs/lists-00-of-1", f"{rnd}/kmscl/docs/contracts-00-of-6"},
+        },
     ]
 
 
@@ -147,4 +168,5 @@ def probes(family):
         {"name": f"{family}:bmsicl.gov.in", "url": bmsicl.page_url("rc-status"), "expect": "BMSICL"},
         {"name": f"{family}:tgmsidc.telangana.gov.in", "url": tgmsidc.page_url("drugs-wing"), "expect": "Rate Contract"},
         {"name": f"{family}:upmsc.in", "url": upmscl.page_url("nsq"), "expect": "Blacklist"},
+        {"name": f"{family}:kmscl.kerala.gov.in", "url": kmscl.page_url("warehouses"), "expect": "District Drug Warehouse"},
     ]

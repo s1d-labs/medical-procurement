@@ -13,6 +13,7 @@
     "hmscl": ["python", "corp_task.py", "hmscl"],
     "bmsicl": ["python", "corp_task.py", "bmsicl"],
     "tgmsidc": ["python", "corp_task.py", "tgmsidc"],
-    "upmscl": ["python", "corp_task.py", "upmscl"]
+    "upmscl": ["python", "corp_task.py", "upmscl"],
+    "kmscl": ["python", "corp_task.py", "kmscl"]
   }
 }
