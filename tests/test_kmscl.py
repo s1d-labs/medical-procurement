@@ -54,6 +54,9 @@ def test_contract_many_items_across_pages():
     first, eighth = d["items"][0], d["items"][7]
     assert first["qty"] == 15 and first["rate"] == 14000 and first["make"] == "H191-150-05/Hermann Medizintechnik Gmbh"
     assert eighth["item"] == "MICS stabilizer with interchangeable tips- plastic" and eighth["gst_pct"] == 12
+    glued = [p.replace("          plastic", "          plastic                     Item-wise Price Details", 1)
+             for p in layout("kmscl-rc-cardiac-set.txt")]          # seen live: the next page's title on a wrapped cell's line
+    assert kmscl.parse_contract(glued)[0][1]["items"][7]["item"] == "MICS stabilizer with interchangeable tips- plastic"
     cot = kmscl.parse_contract(layout("kmscl-rc-labour-cot.txt"))[0][1]
     assert [(i["item"], i["qty"], i["rate"]) for i in cot["items"]] == [("Multifunctional Labour Cot Type I", 186, 65637.5),
                                                                         ("Multifunctional Labour Cot Type II", 186, 62687.5)]

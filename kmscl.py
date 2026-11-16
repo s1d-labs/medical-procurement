@@ -139,6 +139,7 @@ def parse_contract(pages):
     for ln in text[start:stop].splitlines()[1:] if start >= 0 else []:
         if "Running Contract Notice" in ln:              # page footer
             continue
+        ln = ln.replace("Item-wise Price Details", "")    # the next page's title can share a line with a wrapped cell
         m = _ITEM.match(ln)
         if m:
             items.append({"sl": int(m.group("sl")), "item": m.group("name"), "make": None,
