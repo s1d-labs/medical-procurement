@@ -3,7 +3,10 @@ import os
 import time
 from datetime import datetime, timezone
 
+import ssl
+
 import requests
+from requests.adapters import HTTPAdapter
 from scrape_hub_client import ca_bundle, stop_flag, timed_get
 
 UA = "s1d-labs scraper (https://github.com/s1d-labs)"
@@ -20,10 +23,25 @@ def time_up():
     return STOP.is_set() or time.time() > DEADLINE
 
 
+# Hosts whose TLS certificate has expired (WBMSC's Let's Encrypt certificate ran out on 15 Nov 2026). For these only the
+# date check is skipped, as a browser does after "proceed anyway": the chain and the host name are still verified.
+EXPIRED_CERT_HOSTS = ("www.wbmsc.gov.in",)
+
+
+class NoExpiryCheck(HTTPAdapter):
+    def init_poolmanager(self, *a, **kw):
+        ctx = ssl.create_default_context(cafile=ca_bundle())
+        ctx.verify_flags |= 0x200000      # OpenSSL X509_V_FLAG_NO_CHECK_TIME
+        kw["ssl_context"] = ctx
+        return super().init_poolmanager(*a, **kw)
+
+
 def session():
     s = requests.Session()
     s.headers["User-Agent"] = UA
     s.verify = ca_bundle()
+    for host in EXPIRED_CERT_HOSTS:
+        s.mount(f"https://{host}", NoExpiryCheck())
     return s
 
 

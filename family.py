@@ -65,7 +65,9 @@ PROJECTS = [
         "task": "wbmsc",
         "target": "www.wbmsc.gov.in",
         "env": {"SITE": WBMSC},
-        "probe": f"{FAMILY}:www.wbmsc.gov.in",
+        # no health check while the site's certificate is expired (15 Nov 2026): the hub's probe refuses it and would hold
+        # the work. The task accepts it (taskrun.EXPIRED_CERT_HOSTS). Put the probe back when the site renews the certificate.
+        "probe": None,
         "unit_label": "page or document shard", "record_label": "row or document",
         "threads": 1, "delay_ms": 1000, "max_workers": 4,
         "proxy": "",          # direct: GitHub's runners reached the site (check workflow, 2026-11-14, 1.2 s per request)
@@ -142,6 +144,5 @@ def queue(project):
 
 # health checks the hub runs every minute; a project's work holds while its probe fails. Light pages only.
 PROBES = [
-    {"name": f"{FAMILY}:www.wbmsc.gov.in", "url": f"{WBMSC}/award-of-work.php", "expect": "West Bengal Medical Services Corporation"},
     {"name": f"{FAMILY}:web.archive.org", "url": "https://web.archive.org/", "expect": "Wayback Machine"},
 ] + corps.probes(FAMILY)
