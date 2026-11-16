@@ -20,7 +20,10 @@ Any other type mismatch is not linked (a medical college is not the town's ESIC 
 Candidates come from the same pincode first, then the same state. Locations without any hospital word, and tenders for
 the head office or the whole state, are not linked.
 
-Usage: python3 analysis/hospital_link.py TENDERS.csv HFR.csv OUT.csv
+Hospitals named in the title are linked too (pool "title-..."): the location is often only the district, or cut off
+("Baruipur SSH, Diamond Harbour SSH, Kakdwip" for a title that also names Kalna SSH).
+
+HFR.csv comes from analysis/hfr_input.sql. Usage: python3 analysis/hospital_link.py TENDERS.csv HFR.csv OUT.csv
 """
 import csv
 import re
@@ -35,7 +38,8 @@ ABBR = {"ssh": "super speciality hospital", "ssb": "super speciality hospital", 
         "uphc": "urban primary health centre", "thq": "taluk headquarters", "thqh": "taluk headquarters hospital",
         # hospitals known by their initials
         "nrs": "nil ratan sircar", "mjn": "maharaja jitendra narayan", "sskm": "seth sukhlal karnani memorial",
-        "ipgmer": "seth sukhlal karnani memorial", "cnmc": "calcutta national medical college", "rgkar": "r g kar"}
+        "ipgmer": "seth sukhlal karnani memorial", "cnmc": "calcutta national medical college", "rgkar": "r g kar",
+        "bsmc": "bankura sammilani medical college", "bsmch": "bankura sammilani medical college hospital"}
 SPELL = {"burdwan": "bardhaman", "barddhaman": "bardhaman", "midnapore": "medinipur", "midnapur": "medinipur",
          "mursidabad": "murshidabad", "domkol": "domkal", "bongoan": "bongaon", "calcutta": "kolkata", "hugli": "hooghly",
          "srirampur": "serampore", "sreerampur": "serampore", "borjora": "barjora", "berhampore": "baharampur",
@@ -51,7 +55,37 @@ SPELL = {"burdwan": "bardhaman", "barddhaman": "bardhaman", "midnapore": "medini
          "sagardidhi": "sagardighi", "pashkura": "panskura", "gamgarampur": "gangarampur", "gangarampure": "gangarampur",
          "toofanganj": "tufanganj", "mednipur": "medinipur", "bagdah": "bagda", "brasat": "barasat",
          "nileshwaram": "nileswaram", "nileshwar": "nileswaram", "aluk": "taluk", "governement": "government",
-         "govertment": "government", "goverment": "government", "govermant": "government"}
+         "govertment": "government", "goverment": "government", "govermant": "government",
+         # second pass (16 Nov): typos and sound-alikes of registry words (pore/pur, sh/s, double letters), old place names
+         "medinipore": "medinipur", "medinapore": "medinipur", "bisnupur": "bishnupur", "sandeskhali": "sandeshkhali",
+         "mrshidabad": "murshidabad", "murshidasbad": "murshidabad", "mushidabad": "murshidabad", "raghunatpur": "raghunathpur",
+         "sagardighu": "sagardighi", "searmpore": "serampore", "ulluberia": "uluberia", "ishlampur": "islampur",
+         "madhabanagar": "madhabnagar", "maldah": "malda", "raigang": "raiganj", "metiaburuz": "metiabruz",
+         "daimondharbour": "diamond harbour", "ferook": "feroke", "batheri": "bathery", "peroorkkada": "peroorkada",
+         "tvm": "thiruvananthapuram", "thiruvanathapuram": "thiruvananthapuram", "kasargod": "kasaragod",
+         "kasaragode": "kasaragod", "wynad": "wayanad", "chengalpet": "chengalpattu", "kanyakumari": "kanniyakumari",
+         "tiruvallur": "thiruvallur", "ghandhi": "gandhi", "pudukottai": "pudukkottai", "thiruvannamalai": "tiruvannamalai",
+         "villupuram": "viluppuram", "sivagangai": "sivaganga", "kanchipuram": "kancheepuram", "tuticorin": "thoothukudi",
+         "trichy": "tiruchirappalli", "tanjore": "thanjavur", "padmanabapuram": "padmanabhapuram",
+         "thiruvotteeswarar": "thiruvottrishwarar", "bareily": "bareilly", "manyavar": "manyawar", "kashiram": "kanshiram",
+         "allahabad": "prayagraj", "satelite": "satellite", "setelite": "satellite", "chittaurgarh": "chittorgarh",
+         "dhaulpur": "dholpur", "jalor": "jalore", "jhunjhunun": "jhunjhunu", "gurgaon": "gurugram", "mewat": "nuh",
+         "hyderbad": "hyderabad", "hydrabad": "hyderabad", "bangalore": "bengaluru", "mysore": "mysuru", "bombay": "mumbai",
+         "baroda": "vadodara", "poona": "pune",
+         "hospita": "hospital", "hospit": "hospital", "hiospital": "hospital", "hospitall": "hospital", "hosapital": "hospital",
+         "hopsital": "hospital", "hopital": "hospital", "hospitl": "hospital", "hsopital": "hospital", "hosptial": "hospital",
+         "hospitasl": "hospital", "hosital": "hospital", "hospitol": "hospital", "hospiral": "hospital", "hospitel": "hospital",
+         "hospitala": "hospital", "distric": "district", "disctrict": "district", "dristrict": "district", "distict": "district",
+         "disrict": "district", "districtt": "district", "distrit": "district", "dictric": "district", "collage": "college",
+         "colleg": "college", "specialit": "speciality", "specilaity": "speciality", "specility": "speciality",
+         "speciali": "speciality", "specilty": "speciality", "specialities": "speciality", "governm": "government",
+         "governme": "government", "governmen": "government", "govenment": "government", "governmet": "government",
+         "govrenment": "government", "governmant": "government", "govrnment": "government", "medocal": "medical",
+         "mredical": "medical", "medicalc": "medical", "muliti": "multi", "multispeciality": "multi speciality",
+         "multispecialty": "multi speciality", "healt": "health", "helth": "health", "helath": "health", "genral": "general",
+         "genaral": "general", "ganeral": "general", "gerneral": "general", "division": "divisional", "divisinal": "divisional",
+         "divitional": "divisional", "subdivisional": "sub divisional", "headquraters": "headquarters",
+         "headquaters": "headquarters", "headquarter": "headquarters", "thaluk": "taluk", "taulk": "taluk", "institut": "institute"}
 TYPES = {"super", "district", "sub", "divisional", "state", "general", "medical", "college", "rural", "primary", "community",
          "health", "centre", "hospital", "hospitals", "government", "urban", "block", "and", "of", "the", "in", "at", "for",
          "unit", "care", "speciality", "multi", "new", "old", "building", "campus", "taluk", "headquarters", "institute",
@@ -62,7 +96,11 @@ TYPES = {"super", "district", "sub", "divisional", "state", "general", "medical"
          # departments a title names before the college: "Dept of Orthopaedics, RG Kar MCH"
          "ophthalmology", "orthopaedics", "orthopedics", "ctvs", "dermatology", "respiratory", "cardiology", "neurology",
          "paediatrics", "pediatrics", "gynaecology", "obstetrics", "surgery", "radiology", "anaesthesiology", "pathology",
-         "microbiology", "psychiatry", "nephrology", "urology", "oncology", "tertiary", "radiotherapy", "biochemistry"}
+         "microbiology", "psychiatry", "nephrology", "urology", "oncology", "tertiary", "radiotherapy", "biochemistry",
+         "gastroenterology", "anesthesiology", "anaesthesia", "neurosurgery", "orthopaedic", "oncopathology", "forensic",
+         "vascular", "surgical", "blood", "bank", "ent", "bio", "chemistry", "disciplinary", "research", "academic", "complex",
+         # honorifics and state names are no hospital's own name: "Shree X District Hospital", "District HQ of Rajasthan"
+         "shree", "shri", "sri", "smt", "late", "rajasthan", "kerala", "tamil", "nadu", "tamilnadu", "pradesh"}
 TOWN_TYPES = {"district", "divisional", "general"}   # registry types a new super speciality unit of the same town may sit in
 PIN_TYPES = {"super", "district", "divisional", "general"}   # hospital-level types for the pincode fallback
 KEYTYPES = {"super", "district", "divisional", "medical", "rural", "primary", "community", "general", "esic", "state", "taluk"}
@@ -166,8 +204,8 @@ def link(tenders, facilities):
     for t in tenders:
         st = STATE_OF_CORP.get(t["corp"], "")
         got = [m for loc in parts(t["location"] or "") for m in match(t, loc, st)]
-        if not got:                                    # location is only the district: the title often names the hospital
-            got = [(f, "title-" + p, c, sc) for loc in title_mentions(t["title"]) for f, p, c, sc in match(t, loc, st)]
+        # the title names the hospital when the location is only the district, and names more when the location is cut off
+        got += [(f, "title-" + p, c, sc) for loc in title_mentions(t["title"]) for f, p, c, sc in match(t, loc, st)]
         seen = set()
         for f, pool, conf, score in got:
             if f["hfr_id"] not in seen:
@@ -209,6 +247,12 @@ def _selfcheck():
     ten.append(dict(corp="WBMSC", tender_id="p", location="Sambhu Nath Pandit Hospital", pincode="700020", title=""))
     ten.append(dict(corp="WBMSC", tender_id="o", location="Purba Bardhaman", pincode="713101",
                     title="Repair of lift at Burdwan Medical College and Hospital, Purba Bardhaman"))
+    fac += [dict(hfr_id=i, hospital=h, district="", state="West Bengal", pincode=p) for i, h, p in [
+        ("10", "Bsmch", "722101"), ("11", "Sandeshkhali RH", "743446"), ("12", "Behror District Hospital, Rajasthan", "301701"),
+        ("13", "Shree Ramkaran Joshi District Hospital", "303303")]]
+    ten += [dict(corp="WBMSC", tender_id=k, location=loc, pincode="700091", title=ti) for k, loc, ti in [
+        ("r", "WBMSCL", "Endoscope for Dept. of Gastroenterology, BSMC and Hospital, Bankura"), ("s", "Sandeskhali RH", ""),
+        ("t", "District Headquraters of Rajasthan", ""), ("u", "Shree Sunder Singh Bhandari Distric Hospital", "")]]
     got = {t["tender_id"]: (f["hfr_id"], conf) for t, f, _, conf, _ in link(ten, fac)}
     assert [p.strip() for p in parts("Chanchol SSH, Jangipur SSH, Dumkol SSH")] == ["Chanchol SSH", "Jangipur SSH", "Dumkol SSH"]
     assert len(parts("Suri SSH, Birbhum")) == 1 and len(parts("Debra SSH and Belda SSH")) == 2
@@ -220,8 +264,9 @@ def _selfcheck():
     assert norm("R.N.T. Medical College")[0] == "rnt" and norm("M.R. Bangur SSH")[:2] == ["mr", "bangur"]
     assert got == {"a": ("0", "exact"), "b": ("1", "town"), "c": ("2", "exact"), "d": ("3", "exact"),
                    "l": ("6", "pincode"), "m": ("7", "exact"),
-                   "o": ("2", "exact"), "p": ("8", "exact")}
+                   "o": ("2", "exact"), "p": ("8", "exact"), "r": ("10", "exact"), "s": ("11", "exact")}
     # not linked: "n" (a rural hospital is not the SD hospital at its pincode), "e"/"j" ("MCH, Kolkata" names no hospital), "q" (police is not BSF)
+    # "t" (a state name is no hospital's name), "u" (an honorific is no hospital's name)
 
 
 if __name__ == "__main__":
