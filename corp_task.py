@@ -1,4 +1,4 @@
-"""Tasks `tnmsc`, `rmsc`, `hmscl`, `bmsicl`, `tgmsidc` and `upmscl` (scrape.json): list pages and documents of a state medical
+"""Tasks `tnmsc`, `rmsc`, `hmscl`, `bmsicl`, `tgmsidc`, `upmscl` and `kmscl` (scrape.json): list pages and documents of a state medical
 services corporation.
 
     python corp_task.py tnmsc        (tnmsc.tn.gov.in, Tamil Nadu)
@@ -7,6 +7,7 @@ services corporation.
     python corp_task.py bmsicl       (bmsicl.gov.in, Bihar; HTTP only)
     python corp_task.py tgmsidc      (tgmsidc.telangana.gov.in, Telangana)
     python corp_task.py upmscl       (upmsc.in, Uttar Pradesh)
+    python corp_task.py kmscl        (kmscl.kerala.gov.in, Kerala)
 
 Queue items (family.py) have one of two kinds:
   page  {"site": "tnmsc", "page": "blacklist", "arg": null, "round": "2026-11"}
@@ -40,12 +41,13 @@ from taskrun import now, pause, time_up, session
 import bmsicl
 import hmscl
 import htmltables
+import kmscl
 import rmsc
 import tgmsidc
 import tnmsc
 import upmscl
 
-SITES = {"tnmsc": tnmsc, "rmsc": rmsc, "hmscl": hmscl, "bmsicl": bmsicl, "tgmsidc": tgmsidc, "upmscl": upmscl}
+SITES = {"tnmsc": tnmsc, "rmsc": rmsc, "hmscl": hmscl, "bmsicl": bmsicl, "tgmsidc": tgmsidc, "upmscl": upmscl, "kmscl": kmscl}
 PROJECT = os.environ.get("SCRAPE_POOL_PROJECT", "")
 _pages = {}                # (site, page, arg) -> (fetched at, text): a worker with several doc shards fetches each list once
 

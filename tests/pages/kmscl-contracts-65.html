@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Kerala Medical Services Corporation</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/icofont/icofont.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/venobox/venobox.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/css1/style.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/css1/custom.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/css1/simple-lightbox.css" rel="stylesheet">
+
+  <script>
+function getData(dte)
+	{ 
+		var values = $("#frmdashboardmain").serialize();
+		values = values+ '&lang='+ dte;				
+		$.ajax
+		({
+			type: "POST",
+			url: "https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/changelang",
+			data: values,
+			dataType: "html",
+			success: function(msg)
+			{  
+				window.location.assign("https://kmscl.kerala.gov.in/KMSCL/");
+			},
+			error: function(jqXHR, textStatus, errorThrown) 
+			{ 
+				//window.location.assign("https://kmscl.kerala.gov.in/KMSCL/");
+			}
+		});
+	}
+  </script>
+  
+</head>
+
+<body>
+<!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <i class="icofont-clock-time"></i> CIN : U24233KL2007SGC021616 
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="icofont-eye"></i> Visitors : <span data-toggle="counter-up">
+			1905887		</span>
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="icofont-phone"></i> 0471-2945600/46
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="btn-group lan" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="border-radius:25px">
+            Language
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a onClick="getData('EN')" class="dropdown-item" href="#">ENG</a>
+            <a onClick="getData('ML')" class="dropdown-item" href="#">MAL</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<style type="text/css">
+.dropdown-menu a:hover{
+  	background: #000099;
+  	color:#FFFFFF;
+}
+.drop-down:hover {
+	background: #33CC00;
+	color:#FFFFFF!important;
+	
+}
+.drop-down a:hover {
+	background: #33CC00;
+	color:#FFFFFF!important;
+}
+</style>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" xstyle="top: 0px;;">  
+    <div class="container d-flex ">
+
+      <a href="https://kmscl.kerala.gov.in/KMSCL/"  class="logo mr-auto"><img xstyle="height: 112px; width: 181px; max-height: 112px;" src="https://kmscl.kerala.gov.in/KMSCL/design/img/KMSCL-Logo.png" alt=""></a>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <h1 class="logo mr-auto"><a href="index.html">Medicio</a></h1> -->
+      <!-- <div class="count-box">         -->
+        <!-- <span data-toggle="counter-up">8999995</span>          -->
+      <!-- </div> -->
+     
+      <nav class="nav-menu d-none d-lg-block">
+     	<ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/index/22">Home</a><li class="drop-down"><a href>Organisation</a><ul><li class="drop-down"><a href>About Us</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/bodlist/25">Board of Directors</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/75">Who is Who</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contactlist/47">Contact Us</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/warehouselist/37">District Drug Warehouses</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/gallerylist/2/26">Gallery</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/faqlist/46">FAQ</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/55">Grievance Forum</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/karunyalist/38">Karunya Community Pharmacies</a></ul><li class="drop-down"><a href>Departments</a><ul><li class="drop-down"><a href>Community Pharmacy Services</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/65">About CPS</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/uploads/kcppricelist/kcppricelist140323.pdf">Karunya Medicine Price Details</a></ul><li class="drop-down"><a href>Essential Drugs Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/69">About ED Division</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/uploads/blacklisting/blacklistednov22.pdf"> Blacklisted Firms & Products</a><li><a target="" href="http://kmscl.kerala.gov.in/KMSCL/uploads/announcements/3610c4a2-No-Bidder_Items_-_2023-24.pdf">No bidder Items</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/76">SD/ EMD refund and TDS deduction details</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/design/img/KMSCL-Logo.png">KMSCL Logo</a></ul><li class="drop-down"><a href>Equipment Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/53">About Equipment Divsion</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54">Running Contract Details</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/80">BEMP Programme</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/71">Available list of equipment</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/72">Documents for Downloads</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/77">SD/ EMD refund details</a></ul><li class="drop-down"><a href>Human Resource Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/59">Organogram </a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/58">Hierarchy</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/56">Careers</a></ul><li class="drop-down"><a href>Kerala Emergency Medical Services Project</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/50">KANIV 108 Ambulance Project</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/51">MOBILE MEDICAL CLINICS</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/52">MOBILE MEDICAL SURVEILLANCE UNIT (MMSU)</a></ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/36">Projects Division</a><li class="drop-down"><a href>Quality Control Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/68">About QC Division</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/uploads/blacklisting/QCblacklisting.pdf">Blacklisted Items & Firms</a></ul><li class=""><a target="0" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/48">Supply Chain Management</a></ul><li class="drop-down"><a href>Tender & Notices</a><ul><li class="drop-down"><a href>Essential Drugs Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/34">ED Tenders</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/35">ED Notices</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/94">COMPENDIUM OF ESSENTIAL DRUG LIST</a></ul><li class="drop-down"><a href>Equipment Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/45">EP Tenders</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/60">EP Notices</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/95">COMPENDIUM OF EQUIPMENT</a></ul><li class="drop-down"><a href>Administration</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/64">Admin. Tenders & Notices</a></ul><li class="drop-down"><a href>Quality Control</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/62">QC Tenders & Notices</a></ul><li class="drop-down"><a href>Karunya Pharmacy Services</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/79">Karunya Quotations & Notices</a></ul><li class="drop-down"><a href>Information Technology</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/84">IT Tenders & Notices</a></ul><li class="drop-down"><a href>Project Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/82">Proj. Tenders & Notices</a></ul></ul><li class="drop-down"><a href>Softwares</a><ul><li><a target="_blank" href="http://ddms.kmscl.kerala.gov.in/">DDMS</a><li><a target="_blank" href="https://ems.kmscl.kerala.gov.in/ems/">EMS</a><li><a target="_blank" href="https://ddfs.kmscl.kerala.gov.in/">DDFS</a><li><a target="_blank" href="https://hrapps.kmscl.kerala.gov.in/">HR Management System</a><li><a target="_blank" href="https://cyrixbemp.com/new_dashboard/production/index.php">BEMP</a></ul><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/43">RTI</a><li><a target="_blank" href="https://health.kerala.gov.in/">KERALA HEALTH</a>      </nav>
+
+    </div>
+  </header><!-- End Header --> 
+				<!-- End Page Header -->
+				<!-- Begin Page Content -->
+				
+				<main id="main">
+<br/><br/><br/><br/>
+   <!-- ======= About Us Section ======= -->
+   <section class="kar">
+        <div class="baner">
+                <div class="container ">
+                    <h1 data-aos="fade-up">Equipment  Division</h1>
+                </div>
+        </div> 
+        <div class="container ">
+
+
+            <div class="row mx-0" id="wrapper">
+                <div class="col-md-3">
+                    <div class="side">
+                        <ul class="nav">
+										<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/65"> Rental Reagent Contract & Reagent Contract</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/9">Anaesthesia</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/72">Animal House Dept</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/69">Biochemistry</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/12">Blood Bank</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/13">Cardiology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/67">Cardiovascular and Thoracic Surgery [CVTS]</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/15">Dental</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/16">Dermatology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/17">ENT</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/18">Forensic Medicine</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/19">Gastroenterology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/20">General</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/68">General Surgery</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/22">Gynaecology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/23">Hospital Furniture</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/24">Laboratory - General</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/25">Laboratory - Specialty</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/26">Microbiology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/70">Molecular Diagnosis</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/27">Neonatology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/28">Nephrology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/29">Neurology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/30">Neurosurgery</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/71">Oncology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/31">Operation Theatre Equipments</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/32">Ophthalmology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/33">Orthopedics</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/34">Paediatrics</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/35">Pathology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/36">Physical Medicine & Rehabilitation</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/73">Physiology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/66">Pulmonary Medicine</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/38">Radiodiagnosis</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/39">Radiology</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/63">REAGENTS</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/40">Respiratory Medicine Equipments</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/41">Skill Lab</a>
+				</li> 
+
+      				<li class="nav-item">
+					<a class="nav-link scroll" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54/42">Urology</a>
+				</li> 
+
+                                  <!-- <li class="nav-item active">
+                                <a class="nav-link scroll" href="#one">One</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll" href="#two">Two</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll" href="#three">Three</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link scroll" href="#four">Four</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="jumbotron-fluid" id="one">
+                        <span class="dis"> Rental Reagent Contract & Reagent Contract</span>
+                        <div class="accordion" id="accordionExample">
+                                
+
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Computerized Radiography Model B- Rate for CR Films                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/698ae41c-Lr_Computerized_Radiography_model_B_-Care_Stream_Film_Rate.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Fully automated CLA analyzer reagent on rental basis                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/4e45755a-fully_automated_CLA_Analyser_reagent_on_rental_basis_compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Fully Automated CLIA Analyzer Reagents on Rental Basis                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/f838fe8b-fully_automated_CLIA_analyser_reagent_on_rental_basis_compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagent for Automated Blood Culture System                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/4e1b1a43-RCDetails_Reagent_for_Automated_Blood_Culture_System._compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagent for Fully automated biochemistry analyser-TRANSASIA                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/8d98915c-Reagent_for_Fully_automated_biochemistry_analyser-TRANSASIA_compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        reagent for hematology analyser (5 Part) model B                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/d8c29943-reagent_for_hematology_analyser_(5_Part)_model_B.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagent for Hematology Analyser 3 Part -Type B                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/15d6c999-RCDetails__Reagent_for_Hematology_Analyser_3_Part_-Type_B_compressed_(1).pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagent Rental Contract - Fully Automated Immuno hematology Analyser Model B                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/d1f0b3c2-Reagent_Rental_Contract_-_Fully_Automated_Immuno_hematology_Analyser_Model_B_(1)_compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagent Rental Contract - Fully Automated Immuno hematology Analyser Model B                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/e6a7534c-RCDetails_-__Reagent_Rental_Contract_-_Fully_Automated_Immuno_hematology_Analyser_Model_B_compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagents 3 Part Hematology Analyzer (Bc 3000 Plus) Agappe                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/d826ecb2-Reagents_3_Part_Hematology_Analyzer_(Bc_3000_Plus)_II_Agappe_compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagents For Fully Automated Biochemistry Analyser Model A (BS 390)                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/9fe36945-BS_430__Agappae_(1).pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagents for Hematology Analyzer (5 part) model B                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/d8e44a47-RCDetails_-__Reagents_for_Hematology_Analyzer_(5_part)_model_B_compressed_(1).pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                
+                <div class="w-100 list-box">
+                    <div class="mr-3">  
+                        <img src="https://kmscl.kerala.gov.in/KMSCL/design/img/pdf.svg" class="pdfim">
+                    </div>
+                    <div class="media1">
+                        <h6>
+                        Reagents for the HPLC Analyser trype B                        </h6>
+                        <p class="mb-0">
+                                                    </p>
+                    </div>
+                    <div class="ml-3">
+                        <a href="https://kmscl.kerala.gov.in/KMSCL/uploads/contract/c37cc454-RCDetails_Reagents_for_the_HPLC_Analyser_trype_B_compressed.pdf" target="_blank">
+                            <button class="down">Show</button>
+                        </a>
+                    </div>
+                </div>
+                                 
+                                 
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section><!-- End About Us Section -->
+
+ 
+ </main><!-- End #main -->
+				<!-- End Page Content -->
+				<!-- Begin Page Footer -->
+				<!-- ======= Footer ======= -->
+<footer id="footer" style="background: #4347a0; color: #ffffff;">
+    <div class="footer-top" style="background: #4347a0; color: #ffffff;">
+       <div class="container" style="background: #4347a0; color: #ffffff;">
+        <div class="row">
+
+          <!--<div class="col-lg-6 col-md-6" style="text-align: center">
+              <img  src="https://kmscl.kerala.gov.in/KMSCL/design/img/KMSCL-Logo.png" alt="" style="width: 210px;">
+          </div> -->
+
+          <div class="col-lg-3 col-md-6 footer-links" >
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php">Home</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="#">Careers</a></li>
+			  <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/faqlist/46">Frequently Asked Questions</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/43">Right to information act</a></li>
+              <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Departments</h4>
+            <ul>
+              <li style="width:280px"><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://health.kerala.gov.in/" target="_blank">Health & Family Welfare Department </a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://dhs.kerala.gov.in/" target="_blank">Directorate of Health Services</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="http://www.dme.kerala.gov.in/" target="_blank">Directorate of Medical Education</a></li>
+			  <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://dc.kerala.gov.in/" target="_blank">Drugs Control Department</a></li>
+			   <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://arogyakeralam.gov.in/" target="_blank">National Health Mission</a></li>
+
+            </ul>
+          </div>
+		  
+		  <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Softwares</h4>
+            <ul>
+              <li style="width:280px"><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="http://ddms.kmscl.kerala.gov.in/" target="_blank">Drug Distribution Management System</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://ems.kmscl.kerala.gov.in/" target="_blank">Equipment Management System</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://ddfs.kmscl.kerala.gov.in/" target="_blank">Digital Document Filing System</a></li>
+			  <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://hrapps.kmscl.kerala.gov.in/" target="_blank">HR Management System</a></li>
+			   <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="#" target="_blank">Attendence Monitoring System</a></li>
+
+            </ul>
+          </div>
+		  
+		  
+		  <div class="col-lg-3 col-md-6 footer-links">
+            <h4>About Us</h4>
+            <ul>
+				<li style="width:280px"><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contactlist/47">Contact Us</a></li>
+				<li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/warehouselist/37">District Drug Warehouses</a></li>
+				<li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/karunyalist/38">Karunya Community Pharamcy Outlets</a></li>
+				<li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/55">Grievances</a></li>
+            </ul>
+          </div>
+
+          <!-- <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>  -->
+
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <div class="copyright">
+        &copy; Copyright <strong><span>@2020 KMSCL</span></strong>. All Rights Reserved&nbsp;|&nbsp;
+        <span> Designed & Maintained by <a style="color: #ffffff;" href="#">KMSCL</a></span>
+      </div>
+      
+    </div>
+  </footer><!-- End Footer -->
+   
+  <div id="preloader"><div class="pre"></div></div>
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+<!-- Vendor JS Files -->
+
+<script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/jquery/jquery.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/jquery.easing/jquery.easing.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/php-email-form/validate.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/waypoints/jquery.waypoints.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/counterup/counterup.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/owl.carousel/owl.carousel.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/venobox/venobox.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/aos/aos.js"></script>
+  <script type="text/javascript" src="https://kmscl.kerala.gov.in/KMSCL/design/js/plugins/tinymce/tinymce.min.js"></script>
+  <!-- Template Main JS File -->
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/js1/main.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/js1/simple-lightbox.js"></script>
+
+  <script>
+        (function () {
+            var $gallery = new SimpleLightbox('.gallery a', {});
+        })();
+    </script>
+
+</body>
+
+</html>

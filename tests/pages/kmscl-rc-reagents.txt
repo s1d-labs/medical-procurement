@@ -1,0 +1,229 @@
+                                                                  Running Contract Details
+
+   Equipment Name                                  Reagents For Fully Automated Biochemistry Analyser Model A (BS430)
+
+   Running Contract Valid Till                     18-01-2028
+
+   Tender Ref No                                   KMSCL/EP/T467/49A3/2022
+
+   Tendered Quantity                               1
+
+   Supplier Name                                   M/s Agappe Diagnostics Ltd
+
+   GST No                                          32AACCA3940Q1ZL
+
+   Installation & Delivery Period                  8 Week(s)
+
+   Up-time / PM vist                               0% & 0 Visits per year
+
+   Warranty period                                 0 Years
+
+
+                                                                       Supplier`s Details
+
+                                Address                                                                     Contact Details
+
+   Corporate Office/Plant                                                   Contact Person                 [removed]
+  Agappe Hills                                                              Phone                           [removed]
+  Pattimattom P.O
+  Ernakulam - 683 562                                                       Mobile No                      [removed]
+
+                                                                            Email                          [removed]
+
+
+                                                                    Item-wise Price Details
+
+   #                              Item Details                                      Unit Rate                Service Charges                 Grand Total
+                                                                              (Incl.all taxes & charges)      (Through KMSCL)
+
+   1       Reagents For Fully Automated Biochemistry                                                 0                            0                            0
+          Analyser Model A (BS430)                                                          Incl.GST :0%
+
+
+
+   2       Urea U.V 4 x 30 / 2 x 16 mL                                                        747.04                         55.09                      802.13
+           Model & Make : 580 Test                                                         Incl.GST :12%
+
+   3       Creatinine 4 x 35 / 2 x 18 mL                                                      282.43                         20.83                      303.26
+           Model & Make : 580 Test                                                         Incl.GST :12%
+
+   4       Glucose Hexokinase 4 x 35/2 x 18 mL                                                  1540                       113.58                      1653.58
+           Model & Make : 550Test                                                          Incl.GST :12%
+
+   5       Cholesterol 4 x 35 mL                                                              588.67                         43.41                      632.08
+           Model & Make : 584Test                                                          Incl.GST :12%
+
+   6       HDL - C Direct 2 x 30 / 2 x 10 mL                                                1320.48                          97.39                     1417.87
+           Model & Make : 262Test                                                          Incl.GST :12%
+
+
+
+EP division                                                        Running Contract Notice                                                Page 1/3                                                                        Item-wise Price Details
+
+   7       LDL - C Direct 1 x 30 / 1 x 10 mL                                                       1227.52                           90.53                        1318.05
+           Model & Make : 137 Test                                                               Incl.GST :12%
+
+   8       Triglycerides 4 x 35 mL                                                                 1370.88                           101.1                        1471.98
+           Model & Make : 612Test                                                                Incl.GST :12%
+
+   9       Uric Acid 2 x 35 mL                                                                        487.2                          35.93                         523.13
+           Model & Make : 290 Test                                                               Incl.GST :12%
+
+   10      Total Protein 4 x 30 mL                                                                  288.96                           21.31                         310.27
+           Model & Make : 516 Test                                                               Incl.GST :12%
+
+   11      Albumin 4 x 30 mL                                                                        288.96                           21.31                         310.27
+           Model & Make : 516 Test                                                               Incl.GST :12%
+
+   12      SGOT 4 x 35 / 2 x 18 mL                                                                  715.68                           52.78                         768.46
+           Model & Make : 710 Test                                                               Incl.GST :12%
+
+   13      SGPT 4 x 35 / 2 x 18 mL                                                                  715.68                           52.78                         768.46
+           Model & Make : 710Test                                                                Incl.GST :12%
+
+   14      Alkaline Phosphatase 2 x 30 / 2 x 8 mL                                                   362.88                           26.76                         389.64
+           Model & Make : 324 Test                                                               Incl.GST :12%
+
+   15      Bilirubin Total-Tab 4 x 35 / 2 x 10 mL                                                  1091.33                           80.49                        1171.82
+           Model & Make : 812 Test                                                               Incl.GST :12%
+
+   16      Bilirubin Direct 4 x 30 / 2 x 8 mL                                                         873.6                          64.43                         938.03
+           Model & Make : 650 Test                                                               Incl.GST :12%
+
+   17      Calcium (Arsenazo) 2 x 35 mL                                                             376.99                             27.8                        404.79
+           Model & Make : 306 Test                                                               Incl.GST :12%
+
+   18      Phosphorous 1 x 30 mL                                                                    180.19                           13.29                         193.48
+           Model & Make : 134 Test                                                               Incl.GST :12%
+
+   19      Amylase 2 x 30 mL                                                                       2009.28                          148.18                        2157.46
+           Model & Make : 276 Test                                                               Incl.GST :12%
+
+   20      Lipase 1x23/1x7mL                                                                           1344                          99.12                        1443.12
+           Model & Make : 100 Test                                                               Incl.GST :12%
+
+   21      CK â€“ NAC 1 x 30 / 1 x 8 mL                                                            2681.28                          197.74                        2879.02
+           Model & Make : 133 Test                                                               Incl.GST :12%
+
+   22      Enzymatic Creatinine 2 x 35 /2 x 12 mL                                                   2665.6                          196.59                        2862.19
+           Model & Make : 340 Test                                                               Incl.GST :12%
+
+   23      Gamma GT 1 x 30 / 1 x 8 mL                                                               819.28                           60.42                           879.7
+           Model & Make : 133 Test                                                               Incl.GST :12%
+
+   24      LDH - P 1 x 30 / 1 x 8 mL                                                                595.84                           43.94                         639.78
+           Model & Make : 133 Test                                                               Incl.GST :12%
+
+   25      Magnesium 1 x 30 mL                                                                      293.31                           21.63                         314.94
+           Model & Make : 119 Test                                                               Incl.GST :12%
+
+   26      ASO 1 x 20 / 1 x 11 mL                                                                   1814.4                          133.81                        1948.21
+           Model & Make : 90 Test                                                                Incl.GST :12%
+
+   27      CRP 1 x 20 / 1 x 8 mL                                                                    1612.8                          118.94                        1731.74
+           Model & Make : 96 Test                                                                Incl.GST :12%
+
+
+
+EP division                                                             Running Contract Notice                                                    Page 2/3                                                                            Item-wise Price Details
+
+         28      HbA1c Direct 1 x 30/1x10/2x63 mL                                                        6048                        446.04                       6494.04
+                 Model & Make : 120 Test                                                            Incl.GST :12%
+
+         29      Microalbumin 1 x 23 / 1 x 5.5 mL                                                        3920                          289.1                       4209.1
+                 Model & Make : 100 Test                                                            Incl.GST :12%
+
+         30      RF 1 x 20 / 1 x 8 mL                                                                1874.88                         138.27                       2013.15
+                 Model & Make : 93 Test                                                             Incl.GST :12%
+
+                                                                                                    38137.16                       2812.62                      40949.78
+
+
+
+                                                                      Other terms & conditions
+
+      1. The supplier shall execute an agreement with the purchaser as per tender conditions (agreement format is given in the tender
+      document).
+
+      2. The supplier shall submit performance security amounting to 5.00% of the value of the supply order.
+
+      3. The labour & comprehensive charges of equipment after the completion of warranty period is finalized by KMSCL as mentioned
+      above.
+
+      4. Since discount rate is not applicable for equipment under Running Contract of KMSCL, purchase/supply order can be issued directly
+      to supplier at the given rate with tax & other charges (exclusive of KMSCL service charges).
+
+      5. If purchase/supply order is issued directly to the supplier, KMSCL service charge need not be paid. But the copy of the said order
+      may be forwarded to KMSCL for information.
+
+                                                                        Technical Specification
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      EP division                                                          Running Contract Notice                                                  Page 3/3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Powered by TCPDF (www.tcpdf.org)
