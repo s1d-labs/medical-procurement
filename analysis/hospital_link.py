@@ -20,7 +20,10 @@ Any other type mismatch is not linked (a medical college is not the town's ESIC 
 Candidates come from the same pincode first, then the same state. Locations without any hospital word, and tenders for
 the head office or the whole state, are not linked.
 
-Usage: python3 analysis/hospital_link.py TENDERS.csv HFR.csv OUT.csv
+Hospitals named in the title are linked too (pool "title-..."): the location is often only the district, or cut off
+("Baruipur SSH, Diamond Harbour SSH, Kakdwip" for a title that also names Kalna SSH).
+
+HFR.csv comes from analysis/hfr_input.sql. Usage: python3 analysis/hospital_link.py TENDERS.csv HFR.csv OUT.csv
 """
 import csv
 import re
@@ -201,8 +204,8 @@ def link(tenders, facilities):
     for t in tenders:
         st = STATE_OF_CORP.get(t["corp"], "")
         got = [m for loc in parts(t["location"] or "") for m in match(t, loc, st)]
-        if not got:                                    # location is only the district: the title often names the hospital
-            got = [(f, "title-" + p, c, sc) for loc in title_mentions(t["title"]) for f, p, c, sc in match(t, loc, st)]
+        # the title names the hospital when the location is only the district, and names more when the location is cut off
+        got += [(f, "title-" + p, c, sc) for loc in title_mentions(t["title"]) for f, p, c, sc in match(t, loc, st)]
         seen = set()
         for f, pool, conf, score in got:
             if f["hfr_id"] not in seen:
