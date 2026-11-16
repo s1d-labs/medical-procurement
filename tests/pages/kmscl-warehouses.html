@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Kerala Medical Services Corporation</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/icofont/icofont.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/animate.css/animate.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/venobox/venobox.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/css1/style.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/css1/custom.css" rel="stylesheet">
+  <link href="https://kmscl.kerala.gov.in/KMSCL/design/css1/simple-lightbox.css" rel="stylesheet">
+
+  <script>
+function getData(dte)
+	{ 
+		var values = $("#frmdashboardmain").serialize();
+		values = values+ '&lang='+ dte;				
+		$.ajax
+		({
+			type: "POST",
+			url: "https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/changelang",
+			data: values,
+			dataType: "html",
+			success: function(msg)
+			{  
+				window.location.assign("https://kmscl.kerala.gov.in/KMSCL/");
+			},
+			error: function(jqXHR, textStatus, errorThrown) 
+			{ 
+				//window.location.assign("https://kmscl.kerala.gov.in/KMSCL/");
+			}
+		});
+	}
+  </script>
+  
+</head>
+
+<body>
+<!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <i class="icofont-clock-time"></i> CIN : U24233KL2007SGC021616 
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="icofont-eye"></i> Visitors : <span data-toggle="counter-up">
+			1905887		</span>
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="icofont-phone"></i> 0471-2945600/46
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="btn-group lan" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="border-radius:25px">
+            Language
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a onClick="getData('EN')" class="dropdown-item" href="#">ENG</a>
+            <a onClick="getData('ML')" class="dropdown-item" href="#">MAL</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<style type="text/css">
+.dropdown-menu a:hover{
+  	background: #000099;
+  	color:#FFFFFF;
+}
+.drop-down:hover {
+	background: #33CC00;
+	color:#FFFFFF!important;
+	
+}
+.drop-down a:hover {
+	background: #33CC00;
+	color:#FFFFFF!important;
+}
+</style>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" xstyle="top: 0px;;">  
+    <div class="container d-flex ">
+
+      <a href="https://kmscl.kerala.gov.in/KMSCL/"  class="logo mr-auto"><img xstyle="height: 112px; width: 181px; max-height: 112px;" src="https://kmscl.kerala.gov.in/KMSCL/design/img/KMSCL-Logo.png" alt=""></a>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <h1 class="logo mr-auto"><a href="index.html">Medicio</a></h1> -->
+      <!-- <div class="count-box">         -->
+        <!-- <span data-toggle="counter-up">8999995</span>          -->
+      <!-- </div> -->
+     
+      <nav class="nav-menu d-none d-lg-block">
+     	<ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/index/22">Home</a><li class="drop-down"><a href>Organisation</a><ul><li class="drop-down"><a href>About Us</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/bodlist/25">Board of Directors</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/75">Who is Who</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contactlist/47">Contact Us</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/warehouselist/37">District Drug Warehouses</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/gallerylist/2/26">Gallery</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/faqlist/46">FAQ</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/55">Grievance Forum</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/karunyalist/38">Karunya Community Pharmacies</a></ul><li class="drop-down"><a href>Departments</a><ul><li class="drop-down"><a href>Community Pharmacy Services</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/65">About CPS</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/uploads/kcppricelist/kcppricelist140323.pdf">Karunya Medicine Price Details</a></ul><li class="drop-down"><a href>Essential Drugs Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/69">About ED Division</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/uploads/blacklisting/blacklistednov22.pdf"> Blacklisted Firms & Products</a><li><a target="" href="http://kmscl.kerala.gov.in/KMSCL/uploads/announcements/3610c4a2-No-Bidder_Items_-_2023-24.pdf">No bidder Items</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/76">SD/ EMD refund and TDS deduction details</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/design/img/KMSCL-Logo.png">KMSCL Logo</a></ul><li class="drop-down"><a href>Equipment Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/53">About Equipment Divsion</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contractslist/8/54">Running Contract Details</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/80">BEMP Programme</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/71">Available list of equipment</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/72">Documents for Downloads</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/77">SD/ EMD refund details</a></ul><li class="drop-down"><a href>Human Resource Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/59">Organogram </a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/58">Hierarchy</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/56">Careers</a></ul><li class="drop-down"><a href>Kerala Emergency Medical Services Project</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/50">KANIV 108 Ambulance Project</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/51">MOBILE MEDICAL CLINICS</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/52">MOBILE MEDICAL SURVEILLANCE UNIT (MMSU)</a></ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/36">Projects Division</a><li class="drop-down"><a href>Quality Control Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/68">About QC Division</a><li><a target="_blank" href="http://kmscl.kerala.gov.in/KMSCL/uploads/blacklisting/QCblacklisting.pdf">Blacklisted Items & Firms</a></ul><li class=""><a target="0" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/48">Supply Chain Management</a></ul><li class="drop-down"><a href>Tender & Notices</a><ul><li class="drop-down"><a href>Essential Drugs Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/34">ED Tenders</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/35">ED Notices</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/94">COMPENDIUM OF ESSENTIAL DRUG LIST</a></ul><li class="drop-down"><a href>Equipment Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/45">EP Tenders</a><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/60">EP Notices</a><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/95">COMPENDIUM OF EQUIPMENT</a></ul><li class="drop-down"><a href>Administration</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/64">Admin. Tenders & Notices</a></ul><li class="drop-down"><a href>Quality Control</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/62">QC Tenders & Notices</a></ul><li class="drop-down"><a href>Karunya Pharmacy Services</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/79">Karunya Quotations & Notices</a></ul><li class="drop-down"><a href>Information Technology</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/84">IT Tenders & Notices</a></ul><li class="drop-down"><a href>Project Division</a><ul><li class=""><a target="" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/82">Proj. Tenders & Notices</a></ul></ul><li class="drop-down"><a href>Softwares</a><ul><li><a target="_blank" href="http://ddms.kmscl.kerala.gov.in/">DDMS</a><li><a target="_blank" href="https://ems.kmscl.kerala.gov.in/ems/">EMS</a><li><a target="_blank" href="https://ddfs.kmscl.kerala.gov.in/">DDFS</a><li><a target="_blank" href="https://hrapps.kmscl.kerala.gov.in/">HR Management System</a><li><a target="_blank" href="https://cyrixbemp.com/new_dashboard/production/index.php">BEMP</a></ul><li class=""><a target="self" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/43">RTI</a><li><a target="_blank" href="https://health.kerala.gov.in/">KERALA HEALTH</a>      </nav>
+
+    </div>
+  </header><!-- End Header -->				<!-- End Page Header -->	
+				<!-- Begin Page Content -->
+				
+				<main id="main">
+
+<br/><br/><br/><br/>
+   <!-- ======= About Us Section ======= -->
+   <section id="about" class="about section-bg">
+	   <div class="baner">
+		   <div class="container ">
+			   	<h1 data-aos="fade-up" class="pt-3">
+			   	District Drug Warehouses			  	</h1>
+			  
+		   </div>
+   </div>
+	 <div class="container" data-aos="fade-up">
+	 <ul class="timeline">
+ 
+			  
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">TVM</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>DMO Compound<br>
+				  Near Eye Hospital <br>
+				  Thiruvananthapuram 695037</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0471 2470222</label>
+				<label><i class="icofont-phone"></i>9496003900</label>
+				<label><i class="icofont-email"></i> mgrtvm.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">KLM</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>State Warehousing Corporation <br>
+				  Karicode, Kollam<br>
+				  Kollam  691005</strong>
+				</p>
+				<label><i class="icofont-phone"></i>NOT AVAILABLE</label>
+				<label><i class="icofont-phone"></i>9496004500</label>
+				<label><i class="icofont-email"></i> mgrklm.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">TVM</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse II</h4>
+				<p>
+				  <strong>KINFRA, <br>
+				  Menamkulam<br>
+				  Kazhakuttom</strong>
+				</p>
+				<label><i class="icofont-phone"></i>NOT AVAILABLE</label>
+				<label><i class="icofont-phone"></i>9447065063</label>
+				<label><i class="icofont-email"></i> mgrkinfra.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">PTA</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>xv/556(6), 556(7) & 556(8) K.P.Road, <br>
+				  Near Malabar Gold, Kannamkode<br>
+				  Adoor (Pathanamthitta) 691523</strong>
+				</p>
+				<label><i class="icofont-phone"></i>04734-223442</label>
+				<label><i class="icofont-phone"></i>9496004600</label>
+				<label><i class="icofont-email"></i> mgrpta.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">ALP</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong> Near Nursing College,<br>
+				   Vandanam P O, Ambalappuzha<br>
+				  Alappuzha 688001</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0477-2282302</label>
+				<label><i class="icofont-phone"></i>9496004700</label>
+				<label><i class="icofont-email"></i> mgralp.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">KTM</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse </h4>
+				<p>
+				  <strong>Behind GOVT.HSS<br>
+				  Arpookkara,Near Govt.Medical College<br>
+				  Kottayam 686008</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0481-2562401</label>
+				<label><i class="icofont-phone"></i>9496004800</label>
+				<label><i class="icofont-email"></i> mgrktm.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">IDK</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>Near Idukki Govt.Medical College<br>
+				  Cheruthoni P O<br>
+				  Painavu, Idukki</strong>
+				</p>
+				<label><i class="icofont-phone"></i>04862-232228</label>
+				<label><i class="icofont-phone"></i>9496004900</label>
+				<label><i class="icofont-email"></i> mgridk.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">EKM</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>Udyogamadal <br>
+				  Near St. Joseph Hospital<br>
+				  Ernakulam 683501</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0484-2555009</label>
+				<label><i class="icofont-phone"></i>9496005400</label>
+				<label><i class="icofont-email"></i> mgrekm.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">TSR</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse </h4>
+				<p>
+				  <strong>Central Ware Housing Corporation<br>
+				  Kuriachira P O<br>
+				  Thrissur 680006</strong>
+				</p>
+				<label><i class="icofont-phone"></i>NOT AVAILABLE</label>
+				<label><i class="icofont-phone"></i>NOT AVAILABLE</label>
+				<label><i class="icofont-email"></i> mrgtsr.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">TSR</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>High Road<br>
+				  Opposite Police Officer's Quarters<br>
+				  Thrissur 680001</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0487-2423369</label>
+				<label><i class="icofont-phone"></i>9447967413</label>
+				<label><i class="icofont-email"></i> mgrtsr.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">PKD</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>District Hospital Compound<br>
+				  Court Road<br>
+				  Palakkad 678001</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0491-2533336</label>
+				<label><i class="icofont-phone"></i>9496006200</label>
+				<label><i class="icofont-email"></i> mgrpkd.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">MLP</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>Kerala State Warehousing Corporation Compound<br>
+				  Chernni, Manjeri<br>
+				  Malappuram 676123</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0483-2760744</label>
+				<label><i class="icofont-phone"></i>9496005800</label>
+				<label><i class="icofont-email"></i> mgrmpm.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">MLP</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>Near Railway Station<br>
+				  Over Bridge, Tirur P O<br>
+				  Malappuram 676101</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0494-2426759</label>
+				<label><i class="icofont-phone"></i>9496005800</label>
+				<label><i class="icofont-email"></i> mgrtirur.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">KKD</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>Karuvannur P O<br>
+				  Naduvannur Via, Kuttiady Highway<br>
+				  Kozhikode 673614</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0496-2653930</label>
+				<label><i class="icofont-phone"></i>9496006400</label>
+				<label><i class="icofont-email"></i> mgrkkd.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">WYD</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>State Warehouse Corporation Building<br>
+				  Near Fathima Hospital, Pinangode Road, <br>
+				  Kalpetta, Wayanad 673121</strong>
+				</p>
+				<label><i class="icofont-phone"></i>04936-202898</label>
+				<label><i class="icofont-phone"></i>9496006500</label>
+				<label><i class="icofont-email"></i> mgrwyd.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li class="timeline-inverted"  data-aos="fade-right">  
+
+			<div class="tl-circ">KNR</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>Harichandra Weaving Mill's Compound (HWM)<br>
+				  Near Lakshmanan Kada Bus Stop, Thana<br>
+				  Kakkad Road (Land Mark), Kannur 670002</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0497-2705046</label>
+				<label><i class="icofont-phone"></i>9496006700</label>
+				<label><i class="icofont-email"></i> mgrknr.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		 <li  data-aos="fade-left">  
+
+			<div class="tl-circ">KZD</div>
+			<div class="timeline-panel">
+			  <div class="tl-heading">
+				<h4>District Drug Warehouse</h4>
+				<p>
+				  <strong>Near Old District Hospital Building<br>
+				  Fort Road, Hosdurg, Kanjangad<br>
+				  Kasargode 671315</strong>
+				</p>
+				<label><i class="icofont-phone"></i>0467-2206464</label>
+				<label><i class="icofont-phone"></i>9496006900</label>
+				<label><i class="icofont-email"></i> mgrkzd.kmscl@kerala.gov.in</label>
+			  </div>
+			</div>
+		  </li>
+ 
+		          
+		 
+
+		 
+	</ul>
+	 </div>
+   </section><!-- End About Us Section -->
+
+ 
+ </main><!-- End #main -->
+				<!-- End Page Content -->
+				<!-- Begin Page Footer -->
+				<!-- ======= Footer ======= -->
+<footer id="footer" style="background: #4347a0; color: #ffffff;">
+    <div class="footer-top" style="background: #4347a0; color: #ffffff;">
+       <div class="container" style="background: #4347a0; color: #ffffff;">
+        <div class="row">
+
+          <!--<div class="col-lg-6 col-md-6" style="text-align: center">
+              <img  src="https://kmscl.kerala.gov.in/KMSCL/design/img/KMSCL-Logo.png" alt="" style="width: 210px;">
+          </div> -->
+
+          <div class="col-lg-3 col-md-6 footer-links" >
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php">Home</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="#">Careers</a></li>
+			  <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/faqlist/46">Frequently Asked Questions</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/43">Right to information act</a></li>
+              <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Departments</h4>
+            <ul>
+              <li style="width:280px"><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://health.kerala.gov.in/" target="_blank">Health & Family Welfare Department </a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://dhs.kerala.gov.in/" target="_blank">Directorate of Health Services</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="http://www.dme.kerala.gov.in/" target="_blank">Directorate of Medical Education</a></li>
+			  <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://dc.kerala.gov.in/" target="_blank">Drugs Control Department</a></li>
+			   <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://arogyakeralam.gov.in/" target="_blank">National Health Mission</a></li>
+
+            </ul>
+          </div>
+		  
+		  <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Softwares</h4>
+            <ul>
+              <li style="width:280px"><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="http://ddms.kmscl.kerala.gov.in/" target="_blank">Drug Distribution Management System</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://ems.kmscl.kerala.gov.in/" target="_blank">Equipment Management System</a></li>
+              <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://ddfs.kmscl.kerala.gov.in/" target="_blank">Digital Document Filing System</a></li>
+			  <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://hrapps.kmscl.kerala.gov.in/" target="_blank">HR Management System</a></li>
+			   <li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="#" target="_blank">Attendence Monitoring System</a></li>
+
+            </ul>
+          </div>
+		  
+		  
+		  <div class="col-lg-3 col-md-6 footer-links">
+            <h4>About Us</h4>
+            <ul>
+				<li style="width:280px"><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/contactlist/47">Contact Us</a></li>
+				<li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/warehouselist/37">District Drug Warehouses</a></li>
+				<li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/karunyalist/38">Karunya Community Pharamcy Outlets</a></li>
+				<li><i class="bx bx-chevron-right" style="color: #ffffff;"></i> <a style="color: #ffffff;" href="https://kmscl.kerala.gov.in/KMSCL/index.php/ckmscl/menucontentview/55">Grievances</a></li>
+            </ul>
+          </div>
+
+          <!-- <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>  -->
+
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <div class="copyright">
+        &copy; Copyright <strong><span>@2020 KMSCL</span></strong>. All Rights Reserved&nbsp;|&nbsp;
+        <span> Designed & Maintained by <a style="color: #ffffff;" href="#">KMSCL</a></span>
+      </div>
+      
+    </div>
+  </footer><!-- End Footer -->
+   
+  <div id="preloader"><div class="pre"></div></div>
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+<!-- Vendor JS Files -->
+
+<script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/jquery/jquery.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/jquery.easing/jquery.easing.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/php-email-form/validate.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/waypoints/jquery.waypoints.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/counterup/counterup.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/owl.carousel/owl.carousel.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/venobox/venobox.min.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/vendor1/aos/aos.js"></script>
+  <script type="text/javascript" src="https://kmscl.kerala.gov.in/KMSCL/design/js/plugins/tinymce/tinymce.min.js"></script>
+  <!-- Template Main JS File -->
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/js1/main.js"></script>
+  <script src="https://kmscl.kerala.gov.in/KMSCL/design/js1/simple-lightbox.js"></script>
+
+  <script>
+        (function () {
+            var $gallery = new SimpleLightbox('.gallery a', {});
+        })();
+    </script>
+
+</body>
+
+</html>

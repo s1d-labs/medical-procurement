@@ -1,0 +1,549 @@
+                                                                 Running Contract Details
+
+   Equipment Name                                  MINIMAL INVASIVE CARDIAC SURGERY SET TYPE B
+
+   Running Contract Valid Till                     17-11-2025
+
+   Tender Ref No                                   KMSCL/EP/T494/1194Y1/2023
+
+   Tendered Quantity                               Item wise mentioned in below
+
+   Supplier Name                                   M/s Major Surgical Company
+
+   GST No                                          07APTPS6890L1ZO
+
+   Installation & Delivery Period                  8 Week(s)
+
+   Up-time / PM vist                               95% & 0 Visits per year
+
+   Warranty period                                 3 Years
+
+
+                                                                      Supplier`s Details
+
+                                Address                                                                     Contact Details
+
+   1568 - Bhagirath Palace                                                 Contact Person                 [removed]
+  Chandni Chowk                                                            Phone                           [removed]
+  Delhi-110 006
+                                                                           Mobile No                      [removed]
+
+                                                                           Email                          [removed]
+
+
+                                                                   Item-wise Price Details
+
+   #                         Item Details                            Tendered               Unit Rate            Service Charges              Grand Total
+                                                                        Qty               (Incl.all taxes &       (Through KMSCL)
+                                                                                             charges)
+
+   1       Vascular clamp femoral straight                               15                         14000                    1032.5                   15032.5
+           Model & Make : H191-150-05/Hermann                                                    Incl.GST :12%
+          Medizintechnik Gmbh
+
+   2       Vascular clamp femoral angled 60 degree                       15                         14000                    1032.5                   15032.5
+           Model & Make : H191-150-10/Hermann                                                    Incl.GST :12%
+          Medizintechnik Gmbh
+
+   3       Bulldog clamp 5 cm angled debakey                             50                           5040                     371.7                   5411.7
+           Model & Make : H130-20085/Hermann Medizintechnik                                      Incl.GST :12%
+          Gmbh
+
+   4       Bulldog clamp 10 cm angled debakey                            25                           5040                     371.7                   5411.7
+           Model & Make : H130-20105/Hermann Medizintechnik                                      Incl.GST :12%
+          Gmbh
+
+   5       Flexible side biter clamp                                     5                          17696                   1305.08                 19001.08
+           Model & Make : H112-52364/Hermann Medizintechnik                                      Incl.GST :12%
+          Gmbh
+
+
+
+
+
+
+EP division                                                        Running Contract Notice                                               Page 1/8                                                                       Item-wise Price Details
+
+   6       Flexible cross clamp                                               5                            29680                     2188.9                    31868.9
+           Model & Make : H118-52314/Hermann Medizintechnik                                            Incl.GST :12%
+          Gmbh
+
+   7       Applicator for flexible clamp                                      5                            36400                     2684.5                    39084.5
+           Model & Make : H118-12514/Hermann Medizintechnik                                            Incl.GST :12%
+          Gmbh
+
+   8       MICS stabilizer with interchangeable tips-                        15                          140000                       10325                     150325
+          plastic                                                                                      Incl.GST :12%
+
+           Model & Make : H118-29014/Hermann Medizintechnik
+          Gmbh
+
+   9       Sucker tip for MICS stabilizer                                    10                            39200                        2891                      42091
+           Model & Make : H118-39684/Hermann Medizintechnik                                            Incl.GST :12%
+          Gmbh
+
+  10       Universal arm table mounted for                                    5                          420000                       30975                     450975
+          stabilizer/instrument/telescope                                                              Incl.GST :12%
+
+           Model & Make : H130-101-103/Hermann
+          Medizintechnik Gmbh
+
+  11       MICS retractor table mounted with 2 blade                          5                          364000                       26845                     390845
+           Model & Make : H132-121-122/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  12       Mitral holder set complete including                               5                          364000                       26845                     390845
+          holding rod and 6 different blades                                                           Incl.GST :12%
+           Model & Make : H112-101-132/Hermann
+          Medizintechnik Gmbh
+
+  13       Nerve and vessel hook 30cm                                        10                            10640                       784.7                   11424.7
+           Model & Make : H112-211-122/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  14       Suture catcher 30 cm                                               5                            10640                       784.7                   11424.7
+           Model & Make : H112-211-130/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  15       D,Amico Suction instrument 5mm, 47.5cm                            10                            24080                     1775.9                    25855.9
+          curved tip                                                                                   Incl.GST :12%
+           Model & Make : H123-211-350/Hermann
+          Medizintechnik Gmbh
+
+  16       Scalpel handle 36cm                                               10                             3584                     264.32                    3848.32
+           Model & Make : H123-211-360/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  17       Cardioplegia needle 31cm                                           5                            14000                     1032.5                    15032.5
+           Model & Make : H123-311-115/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  18       Magnetic finder                                                    5                            14000                     1032.5                    15032.5
+           Model & Make : H123-311-125/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  19       knot pusher                                                        5                            14000                     1032.5                    15032.5
+           Model & Make : H123-311-125/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  20       knot pusher V shaped                                               5                            18480                     1362.9                    19842.9
+           Model & Make : H123-311-135/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+
+
+EP division                                                            Running Contract Notice                                                   Page 2/8                                                                        Item-wise Price Details
+
+  21       Chitwood clamp 1x2 jaw 40cm                                        5                            84000                        6195                      90195
+           Model & Make : H123-104-240/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  22       Chitwood clamp 2x3 jaw 40 cm                                       5                            84000                        6195                      90195
+           Model & Make : H123-104-242/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  23       Harken debakey clamp slider 30cm                                   5                            84000                        6195                      90195
+           Model & Make : H113-411-110/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  24       Mixter slider forceps slider 30cm                                  5                            84000                        6195                      90195
+           Model & Make : H113-901-110/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  25       Glassman-Allis slider forceps                                      5                            84000                        6195                      90195
+           Model & Make : H113-411-112/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  26       Forestor slider forceps                                           10                            84000                        6195                      90195
+           Model & Make : H122-136-193/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  27       Duval debakey slider                                              10                            84000                        6195                      90195
+           Model & Make : H113-411-113/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  28       Statinsky Debakey Slider                                           5                            84000                        6195                      90195
+           Model & Make : H111-17120/Hermann Medizintechnik                                            Incl.GST :12%
+          Gmbh
+
+  29       Slider needle holder stout                                         5                            84000                        6195                      90195
+           Model & Make : H123-156-495/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  30       Slider needle holder fine                                          5                            84000                        6195                      90195
+           Model & Make : H123-156-395/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  31       Slider metzenbaum scissors curved                                 10                            84000                        6195                      90195
+           Model & Make : H122-135-139/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  32       Spring action scissors curved                                      5                           100800                        7434                     108234
+           Model & Make : H123-013-110/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  33       Spring action needle holder                                        5                           100800                        7434                     108234
+           Model & Make : H116-113-254/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  34       Spring action debakey forceps straight                            15                           100800                        7434                     108234
+           Model & Make : H123-114-110/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+  35       Spring action grasper straight                                     5                           100800                        7434                     108234
+           Model & Make : H123-115-112Hermann                                                          Incl.GST :12%
+          Medizintechnik Gmbh
+
+  36       Spring action rougher serratted straight                           5                           100800                        7434                     108234
+           Model & Make : H123-125-161/Hermann                                                         Incl.GST :12%
+          Medizintechnik Gmbh
+
+
+
+
+EP division                                                            Running Contract Notice                                                    Page 3/8                                                                    Item-wise Price Details
+
+  37       Spring action knot pusher                                       5                         100800                       7434                   108234
+           Model & Make : H123-116-113/Hermann                                                    Incl.GST :12%
+          Medizintechnik Gmbh
+
+  38       Spring action needle holder straight                            5                         100800                       7434                   108234
+          without lock                                                                            Incl.GST :12%
+
+           Model & Make : H103-154-120/Hermann
+          Medizintechnik Gmbh
+
+  39       Spring action potts scissor 45 degree                          10                         100800                       7434                   108234
+           Model & Make : H113-013-114/Hermann                                                    Incl.GST :12%
+          Medizintechnik Gmbh
+
+  40       Spring action needle holder straight with                      10                         100800                       7434                   108234
+          lock                                                                                    Incl.GST :12%
+
+           Model & Make : H103-154-130/Hermann
+          Medizintechnik Gmbh
+
+  41       MICS retractor system for CABG                                  5                         431200                      31801                   463001
+           Model & Make : H123-152-145/Hermann                                                    Incl.GST :12%
+          Medizintechnik Gmbh
+
+  42       Clip Applicator small                                           5                          84000                       6195                     90195
+           Model & Make : H30-533-881 P/E/Hermann                                                 Incl.GST :12%
+          Medizintechnik Gmbh
+
+  43       Clip Applicator medium                                          5                          84000                       6195                     90195
+           Model & Make : H30-133-882 P/E/Hermann                                                 Incl.GST :12%
+          Medizintechnik Gmbh
+
+                                                                                                   3988880                   294179.9                 4283059.9
+
+
+
+                                                              Other terms & conditions
+
+1. The supplier shall execute an agreement with the purchaser as per tender conditions (agreement format is given in the tender
+document).
+
+2. The supplier shall submit performance security amounting to 5.00% of the value of the supply order.
+
+3. The labour & comprehensive charges of equipment after the completion of warranty period is finalized by KMSCL as mentioned
+above.
+
+4. Since discount rate is not applicable for equipment under Running Contract of KMSCL, purchase/supply order can be issued directly
+to supplier at the given rate with tax & other charges (exclusive of KMSCL service charges).
+
+5. If purchase/supply order is issued directly to the supplier, KMSCL service charge need not be paid. But the copy of the said order
+may be forwarded to KMSCL for information.
+
+                                                                Technical Specification
+
+ Equipment :Vascular clamp femoral straight
+
+
+Equipment: Minimal Invasive Cardiac Surgery Set Type B
+
+       1.Vascular clamp femoral straight- 3 Nos
+
+ Equipment :Vascular clamp femoral angled 60 degree
+
+
+EP division                                                         Running Contract Notice                                                Page 4/8Vascular clamp femoral angled 60 degree- 3 Nos
+
+ Equipment :Bulldog clamp 5 cm angled debakey
+
+
+      1. Bulldog clamp 5 cm angled debakey - 10 Nos
+
+ Equipment :Bulldog clamp 10 cm angled debakey
+
+
+      1. Bulldog clamp 10 cm angled debakey- 5 Nos
+
+ Equipment :Flexible side biter clamp
+
+
+      1. Flexible side biter clamp - 1 No
+
+ Equipment :Flexible cross clamp
+
+
+      1. Flexible cross clamp -1 No
+
+ Equipment :Applicator for flexible clamp
+
+
+      1. Applicator for flexible clamp -1 No
+
+ Equipment :MICS stabilizer with interchangeable tips- plastic
+
+
+      1. MICS stabilizer with interchangeable tips- plastic -3 Nos
+
+ Equipment :Sucker tip for MICS stabilizer
+
+
+      1. Sucker tip for MICS stabilizer -2 Nos
+
+ Equipment :Universal arm table mounted for stabilizer/instrument/telescope
+
+
+      1. Universal arm table mounted for stabilizer/instrument/telescope -1 No
+
+ Equipment :MICS retractor table mounted with 2 blade
+
+
+      1. MICS retractor table mounted with 2 blades -1 No
+
+ Equipment :Mitral holder set complete including holding rod and 6 different blades
+
+
+      1. Mitral holder set complete including holding rod and 6 different blades -1 No
+
+ Equipment :Nerve and vessel hook 30cm
+
+
+      1. Nerve and vessel hook 30cm -2 Nos
+
+ Equipment :Suture catcher 30 cm
+
+
+
+
+
+EP division                                                       Running Contract Notice                                              Page 5/8      1. Suture catcher 30 cm -1 No
+
+ Equipment :D,Amico Suction instrument 5mm, 47.5cm curved tip
+
+
+      1. D,Amico Suction instrument 5mm, 47.5cm curved tip -2 Nos
+
+ Equipment :Scalpel handle 36cm
+
+
+      1. Scalpel handle 36cm -2 Nos
+
+ Equipment :Cardioplegia needle 31cm
+
+
+      1. Cardioplegia needle 31cm -1 No
+
+ Equipment :Magnetic finder
+
+
+      1. Magnetic finder -1 No
+
+ Equipment :knot pusher
+
+
+      1. knot pusher  -1 No
+
+ Equipment :knot pusher V shaped
+
+
+      1. knot pusher V shaped -1 Nos
+
+ Equipment :Chitwood clamp 1x2 jaw 40cm
+
+
+      1.  Chitwood clamp 1x2 jaw 40cm-1 No
+
+ Equipment :Chitwood clamp 2x3 jaw 40 cm
+
+
+      1. Chitwood clamp 2x3 jaw 40 cm-1 No
+
+ Equipment :Harken debakey clamp slider 30cm
+
+
+      1. Harken debakey clamp slider 30cm -1 No
+
+ Equipment :Mixter slider forceps slider 30cm
+
+
+      1. Mixter slider forceps slider 30cm -1 No
+
+ Equipment :Glassman-Allis slider forceps
+
+
+      1. Glassman-Allis slider forceps-1 No
+
+ Equipment :Forestor slider forceps
+
+
+
+
+
+EP division                                                     Running Contract Notice                                            Page 6/8      1. Forestor slider forceps -2 Nos
+
+ Equipment :Duval debakey slider
+
+
+      1. Duval debakey slider -2 Nos
+
+ Equipment :Statinsky Debakey Slider
+
+
+      1. Statinsky Debakey Slider -1 No
+
+ Equipment :Slider needle holder stout
+
+
+      1. Slider needle holder stout -1 No
+
+ Equipment :Slider needle holder fine
+
+
+      1. Slider needle holder fine -1 No
+
+ Equipment :Slider metzenbaum scissors curved
+
+
+      1. Slider metzenbaum scissors curved -2 Nos
+
+ Equipment :Spring action scissors curved
+
+
+      1. Spring action scissors curved--1 No
+
+ Equipment :Spring action needle holder
+
+
+      1.  Spring action needle holder -1 No
+
+ Equipment :Spring action debakey forceps straight
+
+
+      1. Spring action debakey forceps straight--3 Nos
+
+ Equipment :Spring action grasper straight
+
+
+      1. Spring action grasper straight -1 No
+
+ Equipment :Spring action rougher serratted straight
+
+
+      1. Spring action rougher serratted straight--1 No
+
+ Equipment :Spring action knot pusher
+
+
+      1. Spring action knot pusher -1 Nos
+
+ Equipment :Spring action needle holder straight without lock
+
+
+
+
+
+EP division                                                        Running Contract Notice                                              Page 7/8             1. Spring action needle holder straight without lock -1 No
+
+        Equipment :Spring action potts scissor 45 degree
+
+
+             1. Spring action potts scissor  45 degree- -2 Nos
+
+        Equipment :Spring action needle holder straight with lock
+
+
+             1. Spring action needle holder straight with lock--2 Nos
+
+        Equipment :MICS retractor system for CABG
+
+
+             1. MICS retractor system for CABG- -1 No
+
+        Equipment :Clip Applicator small
+
+
+             1. Clip Applicator small – 1 No
+
+        Equipment :Clip Applicator medium
+
+
+             1. Clip Applicator medium – 1 No
+
+       Specification:
+
+             a. Optimum Weight
+             b. Perfect balance
+             c. Adjustable Jaw and tip opening according to user’s preference for less fatigue
+             d. Should be made from surgical stainless steel
+             e. Flush system for better cleaning purpose
+             f. Should have solid construction and optimized surfaces for maximum durability
+             g. The entire set must be from a single manufacturer or reputed distributor
+             h. The bidder shall offer all the items mentioned in the technical Specification, failing which the offered bid will not be consider
+
+       Note: If CDSCO (Central Drugs Standard Control Organization) certification is required for the import and marketing of the
+       equipment, then the same shall be submitted along with the technical bid
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      EP division                                                           Running Contract Notice                                                  Page 8/8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Powered by TCPDF (www.tcpdf.org)
