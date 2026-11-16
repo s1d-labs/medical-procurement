@@ -101,10 +101,10 @@ def test_price_list():
     assert glued["unit"] == "NUMBERS" and glued["product"].endswith("KRITIKA - ED") and glued["mrp"] == 4.7
 
 
-def test_project_is_a_proxy_pilot():
+def test_project_full_queue_through_proxy():
     p = next(p for p in family.PROJECTS if p["name"] == "medical-procurement-kmscl")
     keys = {i["key"] for i in p["items"]}
     assert len(keys) == len(p["items"]) == 2 + len(kmscl.DEPTS) + sum(n for _, n in corps.KL_DOCS.values())
-    assert p["pilot"] <= keys and {i["key"] for i in family.queue(p)} == p["pilot"] and len(p["pilot"]) <= 5
+    assert p["pilot"] is None and {i["key"] for i in family.queue(p)} == keys
     assert p["proxy"] == "IN" and p["threads"] == 1 and p["delay_ms"] >= 1000
     assert p["probe"] in {x["name"] for x in family.PROBES}
