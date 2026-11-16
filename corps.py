@@ -152,8 +152,7 @@ def projects(family, rnd):
             # .kerala.gov.in hosts refuse them.
             "proxy": "IN",
             "items": _items("kmscl", kmscl, KL_ROWS, KL_DOCS, rnd, "kmscl/"),
-            "pilot": {f"{rnd}/kmscl/page/home", f"{rnd}/kmscl/page/warehouses", f"{rnd}/kmscl/page/contracts-65",
-                      f"{rnd}/kmscl/docs/lists-00-of-1", f"{rnd}/kmscl/docs/contracts-00-of-6"},
+            "pilot": None,        # pilot of 2026-11-17 passed: 110 contracts, 5 blacklist entries, 13,715 prices, 17 warehouses
         },
     ]
 
