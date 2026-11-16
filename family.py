@@ -67,7 +67,8 @@ PROJECTS = [
         "env": {"SITE": WBMSC},
         # no health check while the site's certificate is expired (15 Nov 2026): the hub's probe refuses it and would hold
         # the work. The task accepts it (taskrun.EXPIRED_CERT_HOSTS). Put the probe back when the site renews the certificate.
-        "probe": None,
+        # "" clears the probe on the hub (None leaves the old one in place).
+        "probe": "",
         "unit_label": "page or document shard", "record_label": "row or document",
         "threads": 1, "delay_ms": 1000, "max_workers": 4,
         "proxy": "",          # direct: GitHub's runners reached the site (check workflow, 2026-11-14, 1.2 s per request)
