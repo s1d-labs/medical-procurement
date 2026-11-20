@@ -105,7 +105,8 @@ PROJECTS = [
         # India only: GitHub's runners got no answer (check workflow, 2026-11-14: both items timed out); the box in Mumbai and an
         # Indian proxy reached it. The task's TLS context also works through HTTPS_PROXY.
         "proxy": "IN",
-        "pool": True,         # back in the pool (17 Nov): the box and an Indian proxy get HTTP 200 with legacy renegotiation
+        "pool": False,        # out again (20 Nov): the pilot failed 40 times on the pool; through a proxy the site answers 200, then
+                              # 500, then 403 within minutes (rate limit or firewall). Try again later with a slower first item.
         "items": mpphscl_items(),
     },
 ]
